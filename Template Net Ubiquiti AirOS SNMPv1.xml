@@ -10,25 +10,20 @@
         <template>
             <template>Template Net Ubiquiti AirOS SNMPv1</template>
             <name>Template Net Ubiquiti AirOS SNMPv1</name>
-            <description>Template Net Ubiquiti AirOS version: 0.11&#13;
+            <description>Template Net Ubiquiti AirOS version: 0.12&#13;
 MIBs used:&#13;
 FROGFOOT-RESOURCES-MIB&#13;
 IEEE802dot11-MIB&#13;
-&#13;
 Known Issues:&#13;
 description : UBNT unifi reports speed: like IF-MIB::ifSpeed.1 = Gauge32: 4294967295 for all interfaces&#13;
 version : Firmware: BZ.ar7240.v3.7.51.6230.170322.1513&#13;
-device : UBNT UAP-LR&#13;
-description : UBNT AirMax(NanoStation, NanoBridge etc) reports ifSpeed: as 0 for VLAN and wireless(ath0) interfaces&#13;
+device : UBNT UAP-LRdescription : UBNT AirMax(NanoStation, NanoBridge etc) reports ifSpeed: as 0 for VLAN and wireless(ath0) interfaces&#13;
 version : Firmware: XW.ar934x.v5.6-beta4.22359.140521.1836&#13;
-device : NanoStation M5&#13;
-description : UBNT AirMax(NanoStation, NanoBridge etc) reports always return ifType: as ethernet(6) even for wifi,vlans and other types&#13;
+device : NanoStation M5description : UBNT AirMax(NanoStation, NanoBridge etc) reports always return ifType: as ethernet(6) even for wifi,vlans and other types&#13;
 version : Firmware: XW.ar934x.v5.6-beta4.22359.140521.1836&#13;
-device : NanoStation M5&#13;
-description : ifXTable is not provided in IF-MIB. So Interfaces Simple Template is used instead&#13;
+device : NanoStation M5description : ifXTable is not provided in IF-MIB. So Interfaces Simple Template is used instead&#13;
 version : all above&#13;
-device : NanoStation, UAP-LR&#13;
-</description>
+device : NanoStation, UAP-LR</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -75,8 +70,7 @@ device : NanoStation, UAP-LR&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FROGFOOT-RESOURCES-MIB&#13;
-5 minute load average of processor load.&#13;
-</description>
+5 minute load average of processor load.</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -118,8 +112,7 @@ device : NanoStation, UAP-LR&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: IEEE802dot11-MIB&#13;
-Printable string used to identify the manufacturer's product version of the resource. Maximum string length is 128 octets.&#13;
-</description>
+Printable string used to identify the manufacturer's product version of the resource. Maximum string length is 128 octets.</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -161,8 +154,7 @@ Printable string used to identify the manufacturer's product version of the reso
                     <privatekey/>
                     <port/>
                     <description>MIB: IEEE802dot11-MIB&#13;
-A printable string used to identify the manufacturer's product name of the resource. Maximum string length is 128 octets.&#13;
-</description>
+A printable string used to identify the manufacturer's product name of the resource. Maximum string length is 128 octets.</description>
                     <inventory_link>29</inventory_link>
                     <applications>
                         <application>
@@ -203,9 +195,7 @@ A printable string used to identify the manufacturer's product name of the resou
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: FROGFOOT-RESOURCES-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: FROGFOOT-RESOURCES-MIB</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -251,8 +241,7 @@ A printable string used to identify the manufacturer's product name of the resou
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Memory utilization in %&#13;
-</description>
+                    <description>Memory utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -294,8 +283,7 @@ A printable string used to identify the manufacturer's product name of the resou
                     <privatekey/>
                     <port/>
                     <description>MIB: FROGFOOT-RESOURCES-MIB&#13;
-Total memory in Bytes&#13;
-</description>
+Total memory in Bytes</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -365,8 +353,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -382,8 +369,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>

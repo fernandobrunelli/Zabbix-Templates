@@ -10,10 +10,9 @@
         <template>
             <template>Template Module Cisco CISCO-ENVMON-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-ENVMON-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-ENVMON-MIB version: 0.11&#13;
+            <description>Template Cisco CISCO-ENVMON-MIB version: 0.12&#13;
 MIBs used:&#13;
-CISCO-ENVMON-MIB&#13;
-</description>
+CISCO-ENVMON-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -92,9 +91,7 @@ CISCO-ENVMON-MIB&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: CISCO-ENVMON-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: CISCO-ENVMON-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -194,9 +191,7 @@ Please check the fan unit</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: CISCO-ENVMON-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: CISCO-ENVMON-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -267,8 +262,7 @@ Please check the power supply unit for errors</description>
                     </filter>
                     <lifetime>30d</lifetime>
                     <description>Discovery of ciscoEnvMonTemperatureTable (ciscoEnvMonTemperatureDescr), a table of ambient temperature status&#13;
-                 maintained by the environmental monitor.&#13;
-</description>
+maintained by the environmental monitor.</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>{#SNMPVALUE}: Temperature status</name>
@@ -299,8 +293,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: CISCO-ENVMON-MIB&#13;
-The current state of the test point being instrumented.&#13;
-</description>
+The current state of the test point being instrumented.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -328,7 +321,7 @@ The current state of the test point being instrumented.&#13;
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -345,8 +338,7 @@ The current state of the test point being instrumented.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: CISCO-ENVMON-MIB&#13;
-The current measurement of the test point being instrumented.&#13;
-</description>
+The current measurement of the test point being instrumented.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -422,8 +414,7 @@ or&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

@@ -10,7 +10,7 @@
         <template>
             <template>Template Net Brocade_Foundry Nonstackable SNMPv2</template>
             <name>Template Net Brocade_Foundry Nonstackable SNMPv2</name>
-            <description>Template Net Brocade_Foundry Nonstackable version: 0.11&#13;
+            <description>Template Net Brocade_Foundry Nonstackable version: 0.12&#13;
 Overview: For devices(old Foundry devices, MLXe and so on) that doesn't support Stackable SNMP Tables: snChasFan2Table, snChasPwrSupply2Table,snAgentTemp2Table -&#13;
 FOUNDRY-SN-AGENT-MIB::snChasFanTable, snChasPwrSupplyTable,snAgentTempTable are used instead.&#13;
 For example:&#13;
@@ -19,8 +19,7 @@ snChasFan2Table is not supported on  on the NetIron devices.&#13;
 snAgentTemp2Table is not supported on old versions of MLXe&#13;
 &#13;
 MIBs used:&#13;
-FOUNDRY-SN-AGENT-MIB&#13;
-</description>
+FOUNDRY-SN-AGENT-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -70,8 +69,7 @@ FOUNDRY-SN-AGENT-MIB&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-The version of the running software in the form'major.minor.maintenance[letters]'&#13;
-</description>
+The version of the running software in the form'major.minor.maintenance[letters]'</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -112,9 +110,7 @@ The version of the running software in the form'major.minor.maintenance[letters]
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: FOUNDRY-SN-AGENT-MIB</description>
                     <inventory_link>8</inventory_link>
                     <applications>
                         <application>
@@ -226,9 +222,7 @@ The version of the running software in the form'major.minor.maintenance[letters]
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: FOUNDRY-SN-AGENT-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -328,9 +322,7 @@ Please check the fan unit</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: FOUNDRY-SN-AGENT-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -414,7 +406,7 @@ Please check the power supply unit for errors</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -433,8 +425,7 @@ Please check the power supply unit for errors</description>
                             <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
 Temperature of the chassis. Each unit is 0.5 degrees Celcius.&#13;
 Only management module built with temperature sensor hardware is applicable.&#13;
-For those non-applicable management module, it returns no-such-name.&#13;
-</description>
+For those non-applicable management module, it returns no-such-name.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -505,8 +496,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -561,7 +551,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -578,8 +568,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <privatekey/>
                             <port/>
                             <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-Temperature of the sensor represented by this row. Each unit is 0.5 degrees Celsius.&#13;
-</description>
+Temperature of the sensor represented by this row. Each unit is 0.5 degrees Celsius.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -650,8 +639,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

@@ -10,18 +10,16 @@
         <template>
             <template>Template Net Brocade_Foundry Stackable SNMPv2</template>
             <name>Template Net Brocade_Foundry Stackable SNMPv2</name>
-            <description>Template Brocade_Foundry Stackable version: 0.11&#13;
+            <description>Template Brocade_Foundry Stackable version: 0.12&#13;
 Overview: For devices(most of the IronWare Brocade devices) that support Stackable SNMP Tables in FOUNDRY-SN-AGENT-MIB: snChasFan2Table, snChasPwrSupply2Table,snAgentTemp2Table - so objects from all Stack members are provided.&#13;
 &#13;
 MIBs used:&#13;
 FOUNDRY-SN-AGENT-MIB&#13;
 FOUNDRY-SN-STACKING-MIB&#13;
-&#13;
 Known Issues:&#13;
 description : Correct fan(returns fan status as 'other(1)' and temperature (returns 0) for the non-master Switches are not available in SNMP&#13;
 version : Version 08.0.40b and above&#13;
-device : ICX 7750 in stack&#13;
-</description>
+device : ICX 7750 in stack</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -71,8 +69,7 @@ device : ICX 7750 in stack&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-The version of the running software in the form 'major.minor.maintenance[letters]'&#13;
-</description>
+The version of the running software in the form 'major.minor.maintenance[letters]'</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -148,8 +145,7 @@ The version of the running software in the form 'major.minor.maintenance[letters
                             <privatekey/>
                             <port/>
                             <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-The serial number of the chassis for each unit. If the serial number is unknown or unavailable then the value should be a zero length string.&#13;
-</description>
+The serial number of the chassis for each unit. If the serial number is unknown or unavailable then the value should be a zero length string.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -247,9 +243,7 @@ Device serial number has changed. Ack to close</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: FOUNDRY-SN-AGENT-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -349,9 +343,7 @@ Please check the fan unit</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: FOUNDRY-SN-AGENT-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -452,8 +444,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: FOUNDRY-SN-STACKING-MIB&#13;
-A description of the configured/active system type for each unit.&#13;
-</description>
+A description of the configured/active system type for each unit.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -517,7 +508,7 @@ A description of the configured/active system type for each unit.&#13;
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -534,8 +525,7 @@ A description of the configured/active system type for each unit.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: FOUNDRY-SN-AGENT-MIB&#13;
-Temperature of the sensor represented by this row. Each unit is 0.5 degrees Celsius.&#13;
-</description>
+Temperature of the sensor represented by this row. Each unit is 0.5 degrees Celsius.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -606,8 +596,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

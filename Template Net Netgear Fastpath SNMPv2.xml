@@ -10,13 +10,12 @@
         <template>
             <template>Template Net Netgear Fastpath SNMPv2</template>
             <name>Template Net Netgear Fastpath SNMPv2</name>
-            <description>Template Net Netgear Fastpath version: 0.11&#13;
+            <description>Template Net Netgear Fastpath version: 0.12&#13;
 Overview: https://kb.netgear.com/24352/MIBs-for-Smart-switches&#13;
 &#13;
 MIBs used:&#13;
 FASTPATH-SWITCHING-MIB&#13;
-FASTPATH-BOXSERVICES-PRIVATE-MIB&#13;
-</description>
+FASTPATH-BOXSERVICES-PRIVATE-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -72,8 +71,7 @@ FASTPATH-BOXSERVICES-PRIVATE-MIB&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FASTPATH-SWITCHING-MIB&#13;
-CPU utilization in %&#13;
-</description>
+CPU utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -120,9 +118,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: FASTPATH-SWITCHING-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: FASTPATH-SWITCHING-MIB</description>
                     <inventory_link>29</inventory_link>
                     <applications>
                         <application>
@@ -164,8 +160,7 @@ CPU utilization in %&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FASTPATH-SWITCHING-MIB&#13;
-Serial number of the switch&#13;
-</description>
+Serial number of the switch</description>
                     <inventory_link>8</inventory_link>
                     <applications>
                         <application>
@@ -207,8 +202,7 @@ Serial number of the switch&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FASTPATH-SWITCHING-MIB&#13;
-Operating System running on this unit&#13;
-</description>
+Operating System running on this unit</description>
                     <inventory_link>5</inventory_link>
                     <applications>
                         <application>
@@ -250,8 +244,7 @@ Operating System running on this unit&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FASTPATH-SWITCHING-MIB&#13;
-The total memory freed for utilization.&#13;
-</description>
+The total memory freed for utilization.</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -292,8 +285,7 @@ The total memory freed for utilization.&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Memory utilization in %&#13;
-</description>
+                    <description>Memory utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -335,8 +327,7 @@ The total memory freed for utilization.&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: FASTPATH-SWITCHING-MIB&#13;
- The total Memory allocated for the tasks&#13;
-</description>
+ The total Memory allocated for the tasks</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -412,8 +403,7 @@ The total memory freed for utilization.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: FASTPATH-BOXSERVICES-PRIVATE-MIB&#13;
-The status of fan&#13;
-</description>
+The status of fan</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -514,8 +504,7 @@ Please check the fan unit</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: FASTPATH-BOXSERVICES-PRIVATE-MIB&#13;
-The status of power supply&#13;
-</description>
+The status of power supply</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -616,8 +605,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: FASTPATH-BOXSERVICES-PRIVATE-MIB&#13;
-The state of temperature sensor&#13;
-</description>
+The state of temperature sensor</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -645,7 +633,7 @@ The state of temperature sensor&#13;
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -662,8 +650,7 @@ The state of temperature sensor&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: FASTPATH-BOXSERVICES-PRIVATE-MIB&#13;
-The temperature value reported by sensor&#13;
-</description>
+The temperature value reported by sensor</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -735,8 +722,7 @@ or&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -834,8 +820,7 @@ Device serial number has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -851,8 +836,7 @@ Device serial number has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>

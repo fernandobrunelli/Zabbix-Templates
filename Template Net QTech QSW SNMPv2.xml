@@ -10,11 +10,10 @@
         <template>
             <template>Template Net QTech QSW SNMPv2</template>
             <name>Template Net QTech QSW SNMPv2</name>
-            <description>Template Net QTech QSW version: 0.11&#13;
+            <description>Template Net QTech QSW version: 0.12&#13;
 MIBs used:&#13;
 QTECH-MIB&#13;
-ENTITY-MIB&#13;
-</description>
+ENTITY-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -61,8 +60,7 @@ ENTITY-MIB&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: QTECH-MIB&#13;
-CPU utilization in %&#13;
-</description>
+CPU utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -103,9 +101,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: ENTITY-MIB</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -146,9 +142,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: ENTITY-MIB</description>
                     <inventory_link>29</inventory_link>
                     <applications>
                         <application>
@@ -189,9 +183,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: ENTITY-MIB</description>
                     <inventory_link>8</inventory_link>
                     <applications>
                         <application>
@@ -232,9 +224,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: ENTITY-MIB</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -275,9 +265,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: QTECH-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: QTECH-MIB</description>
                     <inventory_link>5</inventory_link>
                     <applications>
                         <application>
@@ -318,8 +306,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>Memory utilization in %&#13;
-</description>
+                    <description>Memory utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -361,8 +348,7 @@ CPU utilization in %&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: QTECH-MIB&#13;
-Total memory in Bytes&#13;
-</description>
+Total memory in Bytes</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -404,8 +390,7 @@ Total memory in Bytes&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: QTECH-MIB&#13;
-Used memory in Bytes&#13;
-</description>
+Used memory in Bytes</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -518,8 +503,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -535,8 +519,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>

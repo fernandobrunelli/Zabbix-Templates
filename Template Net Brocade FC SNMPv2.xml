@@ -10,16 +10,14 @@
         <template>
             <template>Template Net Brocade FC SNMPv2</template>
             <name>Template Net Brocade FC SNMPv2</name>
-            <description>Template Net Brocade FC version: 0.11&#13;
+            <description>Template Net Brocade FC version: 0.12&#13;
 MIBs used:&#13;
 SW-MIB&#13;
 ENTITY-MIB&#13;
-&#13;
 Known Issues:&#13;
 description : no IF-MIB::ifAlias is available&#13;
 version : v6.3.1c and v7.0.0c&#13;
-device : SW5480&#13;
-</description>
+device : SW5480</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -75,8 +73,7 @@ device : SW5480&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: SW-MIB&#13;
-System's CPU usage.&#13;
-</description>
+System's CPU usage.</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -117,9 +114,7 @@ System's CPU usage.&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: SW-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: SW-MIB</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -160,9 +155,7 @@ System's CPU usage.&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: SW-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: SW-MIB</description>
                     <inventory_link>8</inventory_link>
                     <applications>
                         <application>
@@ -208,8 +201,7 @@ The current operational status of the switch.The states are as follow:&#13;
 online(1) means the switch is accessible by an external  Fibre Channel port&#13;
 offline(2) means the switch is not accessible&#13;
 testing(3) means the switch is in a built-in test mode and is not accessible by an external Fibre Channel port&#13;
-faulty(4) means the switch is not operational.&#13;
-</description>
+faulty(4) means the switch is not operational.</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -253,8 +245,7 @@ faulty(4) means the switch is not operational.&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: SW-MIB&#13;
-Memory utilization in %&#13;
-</description>
+Memory utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -336,9 +327,7 @@ Memory utilization in %&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -429,9 +418,7 @@ Memory utilization in %&#13;
 &#13;
       The current value (reading) of the sensor.&#13;
       The value, -2147483648, represents an unknown quantity.&#13;
-  The fan value will be in RPM(revolution per minute)&#13;
-      &#13;
-</description>
+  The fan value will be in RPM(revolution per minute)</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -473,9 +460,7 @@ Memory utilization in %&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: SW-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: SW-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -582,9 +567,7 @@ Please check the fan unit</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: SW-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: SW-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -692,8 +675,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: SW-MIB&#13;
-Temperature status of testpoint: {#SENSOR_INFO}&#13;
-</description>
+Temperature status of testpoint: {#SENSOR_INFO}</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -721,7 +703,7 @@ Temperature status of testpoint: {#SENSOR_INFO}&#13;
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -738,8 +720,7 @@ Temperature status of testpoint: {#SENSOR_INFO}&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: SW-MIB&#13;
-Temperature readings of testpoint: {#SENSOR_INFO}&#13;
-</description>
+Temperature readings of testpoint: {#SENSOR_INFO}</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -807,8 +788,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -939,8 +919,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
@@ -956,8 +935,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>

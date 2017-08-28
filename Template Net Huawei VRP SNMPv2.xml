@@ -10,14 +10,13 @@
         <template>
             <template>Template Net Huawei VRP SNMPv2</template>
             <name>Template Net Huawei VRP SNMPv2</name>
-            <description>Template Net Huawei VRP version: 0.11&#13;
+            <description>Template Net Huawei VRP version: 0.12&#13;
 Overview: Reference: https://www.slideshare.net/Huanetwork/huawei-s5700-naming-conventions-and-port-numbering-conventions&#13;
 Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?contentId=KB1000090234&#13;
 &#13;
 MIBs used:&#13;
 HUAWEI-ENTITY-EXTENT-MIB&#13;
-ENTITY-MIB&#13;
-</description>
+ENTITY-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -102,9 +101,7 @@ ENTITY-MIB&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: HUAWEI-ENTITY-EXTENT-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: HUAWEI-ENTITY-EXTENT-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -211,9 +208,7 @@ Please check the fan unit</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -284,7 +279,7 @@ Please check the fan unit</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -301,8 +296,7 @@ Please check the fan unit</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: HUAWEI-ENTITY-EXTENT-MIB&#13;
-The temperature for the {#SNMPVALUE}.&#13;
-</description>
+The temperature for the {#SNMPVALUE}.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -346,8 +340,7 @@ The temperature for the {#SNMPVALUE}.&#13;
                             <port/>
                             <description>MIB: HUAWEI-ENTITY-EXTENT-MIB&#13;
 The CPU usage for this entity. Generally, the CPU usage will calculate the overall CPU usage on the entity, and itis not sensible with the number of CPU on the entity.&#13;
-Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?contentId=KB1000090234&#13;
-</description>
+Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?contentId=KB1000090234</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -389,9 +382,7 @@ Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?c
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -433,9 +424,7 @@ Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?c
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -477,9 +466,7 @@ Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?c
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -523,8 +510,7 @@ Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?c
                             <port/>
                             <description>MIB: HUAWEI-ENTITY-EXTENT-MIB&#13;
 The memory usage for the entity. This object indicates what percent of memory are used.&#13;
-Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?contentId=KB1000090234&#13;
-</description>
+Reference: http://support.huawei.com/enterprise/KnowledgebaseReadAction.action?contentId=KB1000090234</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -567,8 +553,7 @@ Device serial number has changed. Ack to close</description>
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -584,8 +569,7 @@ Device serial number has changed. Ack to close</description>
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -641,8 +625,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

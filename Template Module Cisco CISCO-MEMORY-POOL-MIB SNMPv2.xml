@@ -10,10 +10,9 @@
         <template>
             <template>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.11&#13;
+            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.12&#13;
 MIBs used:&#13;
-CISCO-MEMORY-POOL-MIB&#13;
-</description>
+CISCO-MEMORY-POOL-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -89,8 +88,7 @@ CISCO-MEMORY-POOL-MIB&#13;
                             <port/>
                             <description>MIB: CISCO-MEMORY-POOL-MIB&#13;
 Indicates the number of bytes from the memory pool that are currently unused on the managed device. Note that the sum of ciscoMemoryPoolUsed and ciscoMemoryPoolFree is the total amount of memory in the pool&#13;
-Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15216-contiguous-memory.html&#13;
-</description>
+Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15216-contiguous-memory.html</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -132,8 +130,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>Memory utilization in %&#13;
-</description>
+                            <description>Memory utilization in %</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -177,8 +174,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <port/>
                             <description>MIB: CISCO-MEMORY-POOL-MIB&#13;
 Indicates the number of bytes from the memory pool that are currently in use by applications on the managed device.&#13;
-Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15216-contiguous-memory.html&#13;
-</description>
+Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15216-contiguous-memory.html</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -204,8 +200,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

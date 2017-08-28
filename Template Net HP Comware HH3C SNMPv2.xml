@@ -10,19 +10,17 @@
         <template>
             <template>Template Net HP Comware HH3C SNMPv2</template>
             <name>Template Net HP Comware HH3C SNMPv2</name>
-            <description>Template Net HP Comware (HH3C) version: 0.11&#13;
+            <description>Template Net HP Comware (HH3C) version: 0.12&#13;
 Overview: http://certifiedgeek.weebly.com/blog/hp-comware-snmp-mib-for-cpu-memory-and-temperature&#13;
 http://www.h3c.com.hk/products___solutions/technology/system_management/configuration_example/200912/656451_57_0.htm&#13;
 &#13;
 MIBs used:&#13;
 HH3C-ENTITY-EXT-MIB&#13;
 ENTITY-MIB&#13;
-&#13;
 Known Issues:&#13;
 description : No temperature sensors. All entities of them return 0 for HH3C-ENTITY-EXT-MIB::hh3cEntityExtTemperature&#13;
 version : 1910-48 Switch Software Version 5.20.99, Release 1116 Copyright(c)2010-2016 Hewlett Packard Enterprise Development LP&#13;
-device : HP 1910-48&#13;
-</description>
+device : HP 1910-48</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -117,9 +115,7 @@ device : HP 1910-48&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -161,9 +157,7 @@ device : HP 1910-48&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -205,9 +199,7 @@ device : HP 1910-48&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -249,9 +241,7 @@ device : HP 1910-48&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -293,9 +283,7 @@ device : HP 1910-48&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: ENTITY-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -419,8 +407,7 @@ Firmware version has changed. Ack to close</description>
                             <port/>
                             <description>MIB: HH3C-ENTITY-EXT-MIB&#13;
 Indicate the error state of this entity object.&#13;
-fanError(41) means that the fan stops working.&#13;
-</description>
+fanError(41) means that the fan stops working.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -536,8 +523,7 @@ Please check the fan unit</description>
                             <description>MIB: HH3C-ENTITY-EXT-MIB&#13;
 The CPU usage for this entity. Generally, the CPU usage&#13;
 will calculate the overall CPU usage on the entity, and it&#13;
-is not sensible with the number of CPU on the entity&#13;
-</description>
+is not sensible with the number of CPU on the entity</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -581,8 +567,7 @@ is not sensible with the number of CPU on the entity&#13;
                             <port/>
                             <description>MIB: HH3C-ENTITY-EXT-MIB&#13;
 The memory usage for the entity. This object indicates what&#13;
-percent of memory are used.&#13;
-</description>
+percent of memory are used.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -608,8 +593,7 @@ percent of memory are used.&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -625,8 +609,7 @@ percent of memory are used.&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -772,8 +755,7 @@ percent of memory are used.&#13;
                             <description>MIB: HH3C-ENTITY-EXT-MIB&#13;
 Indicate the error state of this entity object.&#13;
 psuError(51) means that the Power Supply Unit is in the state of fault.&#13;
-rpsError(61) means the Redundant Power Supply is in the state of fault.&#13;
-</description>
+rpsError(61) means the Redundant Power Supply is in the state of fault.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -876,7 +858,7 @@ Please check the power supply unit for errors</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -893,8 +875,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: HH3C-ENTITY-EXT-MIB&#13;
-The temperature for the {#SNMPVALUE}.&#13;
-</description>
+The temperature for the {#SNMPVALUE}.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -960,8 +941,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

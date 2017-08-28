@@ -10,12 +10,11 @@
         <template>
             <template>Template Net Juniper SNMPv2</template>
             <name>Template Net Juniper SNMPv2</name>
-            <description>Template Net Juniper version: 0.11&#13;
+            <description>Template Net Juniper version: 0.12&#13;
 MIBs used:&#13;
 JUNIPER-MIB&#13;
 JUNIPER-ALARM-MIB&#13;
-SNMPv2-MIB&#13;
-</description>
+SNMPv2-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -71,8 +70,7 @@ SNMPv2-MIB&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: JUNIPER-MIB&#13;
-The name, model, or detailed description of the box,indicating which product the box is about, for example 'M40'.&#13;
-</description>
+The name, model, or detailed description of the box,indicating which product the box is about, for example 'M40'.</description>
                     <inventory_link>29</inventory_link>
                     <applications>
                         <application>
@@ -114,8 +112,7 @@ The name, model, or detailed description of the box,indicating which product the
                     <privatekey/>
                     <port/>
                     <description>MIB: JUNIPER-MIB&#13;
-The serial number of this subject, blank if unknown or unavailable.&#13;
-</description>
+The serial number of this subject, blank if unknown or unavailable.</description>
                     <inventory_link>8</inventory_link>
                     <applications>
                         <application>
@@ -165,8 +162,7 @@ threshold is being exceeded.&#13;
 &#13;
 This red alarm state could be turned off by the&#13;
 ACO/LT (Alarm Cut Off / Lamp Test) button on the&#13;
-front panel module.&#13;
-</description>
+front panel module.</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -209,9 +205,7 @@ front panel module.&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: SNMPv2-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: SNMPv2-MIB</description>
                     <inventory_link>5</inventory_link>
                     <applications>
                         <application>
@@ -302,8 +296,7 @@ http://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB17526&amp;actp=sear
                             <port/>
                             <description>MIB: JUNIPER-MIB&#13;
 The CPU Load Average over the last 5 minutes Here it will be shown as percentage valueZero if unavailable or inapplicable.&#13;
-Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX%20SNMP%20Monitoring%20Guide_v1.1.pdf&#13;
-</description>
+Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX%20SNMP%20Monitoring%20Guide_v1.1.pdf</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -347,8 +340,7 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <port/>
                             <description>MIB: JUNIPER-MIB&#13;
 The buffer pool utilization in percentage of this subject.  Zero if unavailable or inapplicable.&#13;
-Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX%20SNMP%20Monitoring%20Guide_v1.1.pdf&#13;
-</description>
+Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX%20SNMP%20Monitoring%20Guide_v1.1.pdf</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -374,8 +366,7 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -391,8 +382,7 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -528,9 +518,7 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: JUNIPER-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: JUNIPER-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -632,8 +620,7 @@ Please check the fan unit</description>
                             <port/>
                             <description>MIB: JUNIPER-MIB&#13;
 If they are using DC power supplies there is a a known issue on PR 1064039 where the fans do not detect the temperature correctly and fail to cool the power supply causing the shutdown to occur.&#13;
-This is fixed in Junos 13.3R7 https://forums.juniper.net/t5/Routing/PEM-0-not-OK-MX104/m-p/289644#M14122&#13;
-</description>
+This is fixed in Junos 13.3R7 https://forums.juniper.net/t5/Routing/PEM-0-not-OK-MX104/m-p/289644#M14122</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -725,7 +712,7 @@ http://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB17526&amp;actp=sear
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -742,8 +729,7 @@ http://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB17526&amp;actp=sear
                             <privatekey/>
                             <port/>
                             <description>MIB: JUNIPER-MIB&#13;
-The temperature in Celsius (degrees C) of {#SENSOR_INFO}&#13;
-</description>
+The temperature in Celsius (degrees C) of {#SENSOR_INFO}</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -809,8 +795,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

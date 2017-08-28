@@ -10,10 +10,9 @@
         <template>
             <template>Template Module Cisco CISCO-PROCESS-MIB IOS later to 12.0_3_T and prior to 12.2_3.5 SNMPv2</template>
             <name>Template Module Cisco CISCO-PROCESS-MIB IOS later to 12.0_3_T and prior to 12.2_3.5 SNMPv2</name>
-            <description>Template Cisco CISCO-PROCESS-MIB IOS later to 12.0_3_T and prior to 12.2_3.5 version: 0.11&#13;
+            <description>Template Cisco CISCO-PROCESS-MIB IOS later to 12.0_3_T and prior to 12.2_3.5 version: 0.12&#13;
 MIBs used:&#13;
-CISCO-PROCESS-MIB&#13;
-</description>
+CISCO-PROCESS-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -92,12 +91,11 @@ CISCO-PROCESS-MIB&#13;
                             <port/>
                             <description>MIB: CISCO-PROCESS-MIB&#13;
 The overall CPU busy percentage in the last 5 minute&#13;
-period. This object deprecates the avgBusy5 object from &#13;
+period. This object deprecates the avgBusy5 object from&#13;
 the OLD-CISCO-SYSTEM-MIB. This object is deprecated&#13;
-by cpmCPUTotal5minRev which has the changed range &#13;
+by cpmCPUTotal5minRev which has the changed range&#13;
 of value (0..100)&#13;
-Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15215-collect-cpu-util-snmp.html&#13;
-</description>
+Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15215-collect-cpu-util-snmp.html</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -123,8 +121,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

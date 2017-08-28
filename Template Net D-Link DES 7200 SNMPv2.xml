@@ -10,14 +10,13 @@
         <template>
             <template>Template Net D-Link DES 7200 SNMPv2</template>
             <name>Template Net D-Link DES 7200 SNMPv2</name>
-            <description>Template D-Link DES 7200 version: 0.11&#13;
+            <description>Template D-Link DES 7200 version: 0.12&#13;
 MIBs used:&#13;
 MY-PROCESS-MIB&#13;
 MY-MEMORY-MIB&#13;
 MY-SYSTEM-MIB&#13;
 SNMPv2-MIB&#13;
-ENTITY-MIB&#13;
-</description>
+ENTITY-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -73,8 +72,7 @@ ENTITY-MIB&#13;
                     <privatekey/>
                     <port/>
                     <description>MIB: MY-PROCESS-MIB&#13;
-CPU utilization in %&#13;
-</description>
+CPU utilization in %</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -115,9 +113,7 @@ CPU utilization in %&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: ENTITY-MIB</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -161,8 +157,7 @@ CPU utilization in %&#13;
                     <description>MIB: SNMPv2-MIB&#13;
 A textual description of the entity.  This value should&#13;
 include the full name and version identification of the system's hardware type, software operating-system, and&#13;
-networking software.&#13;
-</description>
+networking software.</description>
                     <inventory_link>29</inventory_link>
                     <applications>
                         <application>
@@ -203,9 +198,7 @@ networking software.&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: ENTITY-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: ENTITY-MIB</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -246,9 +239,7 @@ networking software.&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: MY-SYSTEM-MIB&#13;
-&#13;
-</description>
+                    <description>MIB: MY-SYSTEM-MIB</description>
                     <inventory_link>5</inventory_link>
                     <applications>
                         <application>
@@ -323,9 +314,7 @@ networking software.&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: MY-SYSTEM-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: MY-SYSTEM-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -426,8 +415,7 @@ Please check the fan unit</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: MY-MEMORY-MIB&#13;
-This is the memory pool utilization currently.&#13;
-</description>
+This is the memory pool utilization currently.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -453,8 +441,7 @@ This is the memory pool utilization currently.&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -558,9 +545,7 @@ This is the memory pool utilization currently.&#13;
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: MY-SYSTEM-MIB&#13;
-&#13;
-</description>
+                            <description>MIB: MY-SYSTEM-MIB</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -644,7 +629,7 @@ Please check the power supply unit for errors</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -661,8 +646,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: MY-SYSTEM-MIB&#13;
-Return the current temperature of the FastSwitch.The temperature display is not supported for the current temperature returns to 0.&#13;
-</description>
+Return the current temperature of the FastSwitch.The temperature display is not supported for the current temperature returns to 0.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -728,8 +712,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -819,8 +802,7 @@ Firmware version has changed. Ack to close</description>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>

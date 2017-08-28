@@ -10,10 +10,9 @@
         <template>
             <template>Template Net Dell Force S-Series SNMPv2</template>
             <name>Template Net Dell Force S-Series SNMPv2</name>
-            <description>Template Dell Force S-Series version: 0.11&#13;
+            <description>Template Dell Force S-Series version: 0.12&#13;
 MIBs used:&#13;
-F10-S-SERIES-CHASSIS-MIB&#13;
-</description>
+F10-S-SERIES-CHASSIS-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>
@@ -102,8 +101,7 @@ F10-S-SERIES-CHASSIS-MIB&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-The status of the fan tray {#SNMPVALUE}.&#13;
-</description>
+The status of the fan tray {#SNMPVALUE}.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -204,8 +202,7 @@ Please check the fan unit</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-CPU utilization in percentage for last 1 minute.&#13;
-</description>
+CPU utilization in percentage for last 1 minute.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -248,8 +245,7 @@ CPU utilization in percentage for last 1 minute.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-Total memory usage in percentage.&#13;
-</description>
+Total memory usage in percentage.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -275,8 +271,7 @@ Total memory usage in percentage.&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -292,8 +287,7 @@ Total memory usage in percentage.&#13;
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
@@ -430,8 +424,7 @@ Total memory usage in percentage.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-The status of the power supply {#SNMPVALUE}&#13;
-</description>
+The status of the power supply {#SNMPVALUE}</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -515,7 +508,7 @@ Please check the power supply unit for errors</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°С</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -532,8 +525,7 @@ Please check the power supply unit for errors</description>
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-The temperature of the unit.&#13;
-</description>
+The temperature of the unit.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -576,8 +568,7 @@ The temperature of the unit.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-The plugged-in model ID for this unit.&#13;
-</description>
+The plugged-in model ID for this unit.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -620,8 +611,7 @@ The plugged-in model ID for this unit.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-The unit's serial number.&#13;
-</description>
+The unit's serial number.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -664,8 +654,7 @@ The unit's serial number.&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-The unit manufacturer's product revision&#13;
-</description>
+The unit manufacturer's product revision</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -708,8 +697,7 @@ The unit manufacturer's product revision&#13;
                             <privatekey/>
                             <port/>
                             <description>MIB: F10-S-SERIES-CHASSIS-MIB&#13;
-Current code version of this unit.&#13;
-</description>
+Current code version of this unit.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -792,8 +780,7 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>

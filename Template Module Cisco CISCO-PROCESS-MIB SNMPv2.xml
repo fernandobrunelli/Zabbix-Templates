@@ -10,10 +10,9 @@
         <template>
             <template>Template Module Cisco CISCO-PROCESS-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-PROCESS-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-PROCESS-MIB version: 0.11&#13;
+            <description>Template Cisco CISCO-PROCESS-MIB version: 0.12&#13;
 MIBs used:&#13;
-CISCO-PROCESS-MIB&#13;
-</description>
+CISCO-PROCESS-MIB</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -92,8 +91,7 @@ CISCO-PROCESS-MIB&#13;
                             <port/>
                             <description>MIB: CISCO-PROCESS-MIB&#13;
 The cpmCPUTotal5minRev MIB object provides a more accurate view of the performance of the router over time than the MIB objects cpmCPUTotal1minRev and cpmCPUTotal5secRev . These MIB objects are not accurate because they look at CPU at one minute and five second intervals, respectively. These MIBs enable you to monitor the trends and plan the capacity of your network. The recommended baseline rising threshold for cpmCPUTotal5minRev is 90 percent. Depending on the platform, some routers that run at 90 percent, for example, 2500s, can exhibit performance degradation versus a high-end router, for example, the 7500 series, which can operate fine.&#13;
-Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15215-collect-cpu-util-snmp.html&#13;
-</description>
+Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15215-collect-cpu-util-snmp.html</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -119,8 +117,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-</description>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
