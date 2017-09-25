@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Generic SNMPv2</template>
             <name>Template Module Generic SNMPv2</name>
-            <description>Template Module Generic version: 0.12&#13;
+            <description>Template Module Generic version: 0.13&#13;
 MIBs used:&#13;
 SNMPv2-MIB</description>
             <groups>

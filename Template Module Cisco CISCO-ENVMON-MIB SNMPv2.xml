@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco CISCO-ENVMON-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-ENVMON-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-ENVMON-MIB version: 0.12&#13;
+            <description>Template Cisco CISCO-ENVMON-MIB version: 0.13&#13;
 MIBs used:&#13;
 CISCO-ENVMON-MIB</description>
             <groups>
@@ -321,7 +321,7 @@ The current state of the test point being instrumented.</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>°С</units>
+                            <units>Â°Ð¡</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>

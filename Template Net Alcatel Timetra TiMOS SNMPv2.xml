@@ -10,7 +10,7 @@
         <template>
             <template>Template Net Alcatel Timetra TiMOS SNMPv2</template>
             <name>Template Net Alcatel Timetra TiMOS SNMPv2</name>
-            <description>Template Net Alcatel Timetra TiMOS version: 0.12&#13;
+            <description>Template Net Alcatel Timetra TiMOS version: 0.13&#13;
 MIBs used:&#13;
 TIMETRA-SYSTEM-MIB&#13;
 SNMPv2-MIB&#13;
@@ -575,7 +575,7 @@ Please check the fan unit</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>°С</units>
+                            <units>Â°Ð¡</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>

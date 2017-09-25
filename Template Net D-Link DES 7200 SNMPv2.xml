@@ -10,7 +10,7 @@
         <template>
             <template>Template Net D-Link DES 7200 SNMPv2</template>
             <name>Template Net D-Link DES 7200 SNMPv2</name>
-            <description>Template D-Link DES 7200 version: 0.12&#13;
+            <description>Template D-Link DES 7200 version: 0.13&#13;
 MIBs used:&#13;
 MY-PROCESS-MIB&#13;
 MY-MEMORY-MIB&#13;
@@ -629,7 +629,7 @@ Please check the power supply unit for errors</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>°С</units>
+                            <units>Â°Ð¡</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>

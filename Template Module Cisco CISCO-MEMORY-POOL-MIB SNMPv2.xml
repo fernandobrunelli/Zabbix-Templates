@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.12&#13;
+            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.13&#13;
 MIBs used:&#13;
 CISCO-MEMORY-POOL-MIB</description>
             <groups>

@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Interfaces SNMPv2</template>
             <name>Template Module Interfaces SNMPv2</name>
-            <description>Template Interfaces version: 0.12&#13;
+            <description>Template Interfaces version: 0.13&#13;
 MIBs used:&#13;
 IF-MIB</description>
             <groups>
@@ -29,7 +29,7 @@ IF-MIB</description>
                     <name>Network Interfaces Discovery</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.8,{#IFADMINSTATUS},1.3.6.1.2.1.2.2.1.7,{#IFALIAS},1.3.6.1.2.1.31.1.1.1.18,{#IFNAME},1.3.6.1.2.1.31.1.1.1.1,{#IFDESCR},.1.3.6.1.2.1.2.2.1.2,{#IFTYPE},.1.3.6.1.2.1.2.2.1.3]</snmp_oid>
+                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.2.1.2.2.1.8,{#IFADMINSTATUS},1.3.6.1.2.1.2.2.1.7,{#IFALIAS},1.3.6.1.2.1.31.1.1.1.18,{#IFNAME},1.3.6.1.2.1.31.1.1.1.1,{#IFDESCR},1.3.6.1.2.1.2.2.1.2,{#IFTYPE},1.3.6.1.2.1.2.2.1.3]</snmp_oid>
                     <key>net.if.discovery</key>
                     <delay>3600</delay>
                     <status>0</status>
@@ -74,7 +74,7 @@ IF-MIB</description>
                             <name>Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.2.2.1.13.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.in.discards[ifInDiscards.{#SNMPINDEX}]</key>
                             <delay>300</delay>
                             <history>1w</history>
@@ -126,7 +126,7 @@ and at other times as indicated by the value of ifCounterDiscontinuityTime.</des
                             <name>Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.2.2.1.14.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.in.errors[ifInErrors.{#SNMPINDEX}]</key>
                             <delay>300</delay>
                             <history>1w</history>
@@ -174,7 +174,7 @@ For packet-oriented interfaces, the number of inbound packets that contained err
                             <name>Interface {#IFNAME}({#IFALIAS}): Bits received</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.31.1.1.1.6.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.in[ifHCInOctets.{#SNMPINDEX}]</key>
                             <delay>180</delay>
                             <history>30d</history>
@@ -226,7 +226,7 @@ The total number of octets received on the interface,including framing character
                             <name>Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.2.2.1.19.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.out.discards[ifOutDiscards.{#SNMPINDEX}]</key>
                             <delay>300</delay>
                             <history>1w</history>
@@ -278,7 +278,7 @@ and at other times as indicated by the value of ifCounterDiscontinuityTime.</des
                             <name>Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.2.2.1.20.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.out.errors[ifOutErrors.{#SNMPINDEX}]</key>
                             <delay>300</delay>
                             <history>1w</history>
@@ -326,7 +326,7 @@ For packet-oriented interfaces, the number of outbound packets that contained er
                             <name>Interface {#IFNAME}({#IFALIAS}): Bits sent</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.31.1.1.1.10.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.out[ifHCOutOctets.{#SNMPINDEX}]</key>
                             <delay>180</delay>
                             <history>30d</history>
@@ -378,7 +378,7 @@ The total number of octets transmitted out of the interface, including framing c
                             <name>Interface {#IFNAME}({#IFALIAS}): Speed</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.speed[ifHighSpeed.{#SNMPINDEX}]</key>
                             <delay>300</delay>
                             <history>1w</history>
@@ -426,7 +426,7 @@ An estimate of the interface's current bandwidth in units of 1,000,000 bits per 
                             <name>Interface {#IFNAME}({#IFALIAS}): Operational status</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.2.2.1.8.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.status[ifOperStatus.{#SNMPINDEX}]</key>
                             <delay>60</delay>
                             <history>14d</history>
@@ -477,7 +477,7 @@ The current operational state of the interface.&#13;
                             <name>Interface {#IFNAME}({#IFALIAS}): Interface type</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>.1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}</snmp_oid>
+                            <snmp_oid>1.3.6.1.2.1.2.2.1.3.{#SNMPINDEX}</snmp_oid>
                             <key>net.if.type[ifType.{#SNMPINDEX}]</key>
                             <delay>3600</delay>
                             <history>1w</history>
@@ -558,10 +558,11 @@ This Ethernet connection has transitioned down from its known maximum speed. Thi
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Module Interfaces SNMPv2:net.if.in[ifHCInOctets.{#SNMPINDEX}].avg(15m)}&gt;({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()} or&#13;
-{Template Module Interfaces SNMPv2:net.if.out[ifHCOutOctets.{#SNMPINDEX}].avg(15m)}&gt;({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()}</expression>
+                            <expression>({Template Module Interfaces SNMPv2:net.if.in[ifHCInOctets.{#SNMPINDEX}].avg(15m)}&gt;({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()} or&#13;
+{Template Module Interfaces SNMPv2:net.if.out[ifHCOutOctets.{#SNMPINDEX}].avg(15m)}&gt;({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()}) and&#13;
+{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()}&gt;0</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Module Interfaces SNMPv2:net.if.in[ifHCInOctets.{#SNMPINDEX}].avg(15m)}&lt;(({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}-3)/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()} or&#13;
+                            <recovery_expression>{Template Module Interfaces SNMPv2:net.if.in[ifHCInOctets.{#SNMPINDEX}].avg(15m)}&lt;(({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}-3)/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()} and&#13;
 {Template Module Interfaces SNMPv2:net.if.out[ifHCOutOctets.{#SNMPINDEX}].avg(15m)}&lt;(({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}-3)/100)*{Template Module Interfaces SNMPv2:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()}</recovery_expression>
                             <name>Interface {#IFNAME}({#IFALIAS}): High bandwidth usage &gt;{$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}%</name>
                             <correlation_mode>0</correlation_mode>
