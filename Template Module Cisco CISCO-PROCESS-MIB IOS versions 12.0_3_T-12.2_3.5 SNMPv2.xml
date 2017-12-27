@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco CISCO-PROCESS-MIB IOS versions 12.0_3_T-12.2_3.5 SNMPv2</template>
             <name>Template Module Cisco CISCO-PROCESS-MIB IOS versions 12.0_3_T-12.2_3.5 SNMPv2</name>
-            <description>Template Module Cisco CISCO-PROCESS-MIB IOS versions 12.0_3_T-12.2_3.5 version: 0.13&#13;
+            <description>Template Module Cisco CISCO-PROCESS-MIB IOS versions 12.0_3_T-12.2_3.5 version: 0.14&#13;
 MIBs used:&#13;
 CISCO-PROCESS-MIB</description>
             <groups>
@@ -56,10 +56,10 @@ CISCO-PROCESS-MIB</description>
                     </filter>
                     <lifetime>30d</lifetime>
                     <description>If your IOS device has several CPUs, you must use CISCO-PROCESS-MIB and its object cpmCPUTotal5minRev from the table called cpmCPUTotalTable ,&#13;
-                     indexed with cpmCPUTotalIndex .&#13;
-                     This table allows CISCO-PROCESS-MIB to keep CPU statistics for different physical entities in the router,&#13;
-                     like different CPU chips, group of CPUs, or CPUs in different modules/cards.&#13;
-                     In case of a single CPU, cpmCPUTotalTable has only one entry.</description>
+indexed with cpmCPUTotalIndex .&#13;
+This table allows CISCO-PROCESS-MIB to keep CPU statistics for different physical entities in the router,&#13;
+like different CPU chips, group of CPUs, or CPUs in different modules/cards.&#13;
+In case of a single CPU, cpmCPUTotalTable has only one entry.</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>{#SNMPVALUE}: CPU utilization</name>

@@ -10,7 +10,7 @@
         <template>
             <template>Template Net Extreme EXOS SNMPv2</template>
             <name>Template Net Extreme EXOS SNMPv2</name>
-            <description>Template Extreme EXOS version: 0.13&#13;
+            <description>Template Extreme EXOS version: 0.14&#13;
 MIBs used:&#13;
 EXTREME-SOFTWARE-MONITOR-MIB&#13;
 EXTREME-SYSTEM-MIB&#13;
@@ -97,7 +97,7 @@ Temperature status of testpoint: Device</description>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units>Â°Ð¡</units>
+                    <units>°C</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -463,9 +463,9 @@ The speed (RPM) of a cooling fan in the fantray {#SNMPVALUE}</description>
                             <key>sensor.fan.status[extremeFanOperational.{#SNMPINDEX}]</key>
                             <delay>180</delay>
                             <history>14d</history>
-                            <trends>0</trends>
+                            <trends>0d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -503,7 +503,7 @@ Operational status of a cooling fan.</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net Extreme EXOS SNMPv2:sensor.fan.status[extremeFanOperational.{#SNMPINDEX}].last(0)}={$FAN_CRIT_STATUS}</expression>
+                            <expression>{Template Net Extreme EXOS SNMPv2:sensor.fan.status[extremeFanOperational.{#SNMPINDEX}].count(#1,{$FAN_CRIT_STATUS},eq)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Fan {#SNMPVALUE}: Fan is in critical state</name>
@@ -790,9 +790,9 @@ Total amount of DRAM in Kbytes in the system.</description>
                             <key>sensor.psu.status[extremePowerSupplyStatus.{#SNMPINDEX}]</key>
                             <delay>180</delay>
                             <history>14d</history>
-                            <trends>0</trends>
+                            <trends>0d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -830,7 +830,7 @@ Status of the power supply {#SNMPVALUE}</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net Extreme EXOS SNMPv2:sensor.psu.status[extremePowerSupplyStatus.{#SNMPINDEX}].last(0)}={$PSU_CRIT_STATUS}</expression>
+                            <expression>{Template Net Extreme EXOS SNMPv2:sensor.psu.status[extremePowerSupplyStatus.{#SNMPINDEX}].count(#1,{$PSU_CRIT_STATUS},eq)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>PSU {#SNMPVALUE}: Power supply is in critical state</name>
@@ -863,20 +863,12 @@ Please check the power supply unit for errors</description>
                     <value>2</value>
                 </macro>
                 <macro>
-                    <macro>{$FAN_OK_STATUS}</macro>
-                    <value>1</value>
-                </macro>
-                <macro>
                     <macro>{$MEMORY_UTIL_MAX}</macro>
                     <value>90</value>
                 </macro>
                 <macro>
                     <macro>{$PSU_CRIT_STATUS}</macro>
                     <value>3</value>
-                </macro>
-                <macro>
-                    <macro>{$PSU_OK_STATUS}</macro>
-                    <value>2</value>
                 </macro>
                 <macro>
                     <macro>{$STORAGE_UTIL_CRIT}</macro>

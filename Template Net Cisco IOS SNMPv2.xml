@@ -10,7 +10,7 @@
         <template>
             <template>Template Net Cisco IOS SNMPv2</template>
             <name>Template Net Cisco IOS SNMPv2</name>
-            <description>Template Cisco IOS Software releases 12.2(3.5) or later version: 0.13&#13;
+            <description>Template Cisco IOS Software releases 12.2(3.5) or later version: 0.14&#13;
 Known Issues:&#13;
 description : no if(in|out)(Errors|Discards) are available for vlan ifType&#13;
 version : IOS for example: 12.1(22)EA11, 15.4(3)M2&#13;

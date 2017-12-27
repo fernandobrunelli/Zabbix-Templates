@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco OLD-CISCO-CPU-MIB SNMPv2</template>
             <name>Template Module Cisco OLD-CISCO-CPU-MIB SNMPv2</name>
-            <description>Template Cisco OLD-CISCO-CPU-MIB version: 0.13&#13;
+            <description>Template Cisco OLD-CISCO-CPU-MIB version: 0.14&#13;
 MIBs used:&#13;
 OLD-CISCO-CPU-MIB</description>
             <groups>

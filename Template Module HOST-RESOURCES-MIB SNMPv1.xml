@@ -10,7 +10,7 @@
         <template>
             <template>Template Module HOST-RESOURCES-MIB SNMPv1</template>
             <name>Template Module HOST-RESOURCES-MIB SNMPv1</name>
-            <description>HOST-RESOURCES-MIB: CPU, Memory and Storage version: 0.13&#13;
+            <description>HOST-RESOURCES-MIB: CPU, Memory and Storage version: 0.14&#13;
 MIBs used:&#13;
 HOST-RESOURCES-MIB</description>
             <groups>
@@ -410,8 +410,8 @@ The amount of the storage represented by this entry that is allocated, in units 
                             <port/>
                             <description>MIB: HOST-RESOURCES-MIB&#13;
 The size, in bytes, of the data objects allocated from this pool.&#13;
-   If this entry is monitoring sectors, blocks, buffers, or packets, for example,&#13;
-   this number will commonly be greater than one.  Otherwise this number will typically be one.</description>
+If this entry is monitoring sectors, blocks, buffers, or packets, for example,&#13;
+this number will commonly be greater than one.  Otherwise this number will typically be one.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>

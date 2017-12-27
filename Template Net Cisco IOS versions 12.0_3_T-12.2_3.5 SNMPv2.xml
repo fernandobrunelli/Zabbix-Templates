@@ -10,7 +10,7 @@
         <template>
             <template>Template Net Cisco IOS versions 12.0_3_T-12.2_3.5 SNMPv2</template>
             <name>Template Net Cisco IOS versions 12.0_3_T-12.2_3.5 SNMPv2</name>
-            <description>Cisco IOS Software releases later to 12.0(3)T and prior to 12.2(3.5) version: 0.13</description>
+            <description>Cisco IOS Software releases later to 12.0(3)T and prior to 12.2(3.5) version: 0.14</description>
             <groups>
                 <group>
                     <name>Templates/Network Devices</name>

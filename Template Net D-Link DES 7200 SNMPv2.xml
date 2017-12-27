@@ -10,7 +10,7 @@
         <template>
             <template>Template Net D-Link DES 7200 SNMPv2</template>
             <name>Template Net D-Link DES 7200 SNMPv2</name>
-            <description>Template D-Link DES 7200 version: 0.13&#13;
+            <description>Template D-Link DES 7200 version: 0.14&#13;
 MIBs used:&#13;
 MY-PROCESS-MIB&#13;
 MY-MEMORY-MIB&#13;
@@ -294,9 +294,9 @@ networking software.</description>
                             <key>sensor.fan.status[mySystemFanIsNormal.{#SNMPINDEX}]</key>
                             <delay>180</delay>
                             <history>14d</history>
-                            <trends>0</trends>
+                            <trends>0d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -333,7 +333,7 @@ networking software.</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net D-Link DES 7200 SNMPv2:sensor.fan.status[mySystemFanIsNormal.{#SNMPINDEX}].last(0)}={$FAN_CRIT_STATUS}</expression>
+                            <expression>{Template Net D-Link DES 7200 SNMPv2:sensor.fan.status[mySystemFanIsNormal.{#SNMPINDEX}].count(#1,{$FAN_CRIT_STATUS},eq)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{#SNMPVALUE}: Fan is in critical state</name>
@@ -525,9 +525,9 @@ This is the memory pool utilization currently.</description>
                             <key>sensor.psu.status[mySystemElectricalSourceIsNormal.{#SNMPINDEX}]</key>
                             <delay>180</delay>
                             <history>14d</history>
-                            <trends>0</trends>
+                            <trends>0d</trends>
                             <status>0</status>
-                            <value_type>1</value_type>
+                            <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -564,7 +564,7 @@ This is the memory pool utilization currently.</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net D-Link DES 7200 SNMPv2:sensor.psu.status[mySystemElectricalSourceIsNormal.{#SNMPINDEX}].last(0)}={$PSU_CRIT_STATUS}</expression>
+                            <expression>{Template Net D-Link DES 7200 SNMPv2:sensor.psu.status[mySystemElectricalSourceIsNormal.{#SNMPINDEX}].count(#1,{$PSU_CRIT_STATUS},eq)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{#SNMPVALUE}: Power supply is in critical state</name>
@@ -629,7 +629,7 @@ Please check the power supply unit for errors</description>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units>Â°Ð¡</units>
+                            <units>°C</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>

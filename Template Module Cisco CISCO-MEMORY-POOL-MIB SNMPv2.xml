@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.13&#13;
+            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.14&#13;
 MIBs used:&#13;
 CISCO-MEMORY-POOL-MIB</description>
             <groups>
@@ -56,7 +56,7 @@ CISCO-MEMORY-POOL-MIB</description>
                     </filter>
                     <lifetime>30d</lifetime>
                     <description>Discovery of ciscoMemoryPoolTable, a table of memory pool monitoring entries.&#13;
-                http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15216-contiguous-memory.html</description>
+http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-snmp/15216-contiguous-memory.html</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>{#SNMPVALUE}: Available memory</name>

@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Brocade_Foundry Performance SNMPv2</template>
             <name>Template Module Brocade_Foundry Performance SNMPv2</name>
-            <description>Template Module Brocade_Foundry Performance version: 0.13&#13;
+            <description>Template Module Brocade_Foundry Performance version: 0.14&#13;
 MIBs used:&#13;
 FOUNDRY-SN-AGENT-MIB</description>
             <groups>

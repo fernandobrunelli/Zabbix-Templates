@@ -10,7 +10,7 @@
         <template>
             <template>Template Net Ubiquiti AirOS SNMPv1</template>
             <name>Template Net Ubiquiti AirOS SNMPv1</name>
-            <description>Template Net Ubiquiti AirOS version: 0.13&#13;
+            <description>Template Net Ubiquiti AirOS version: 0.14&#13;
 MIBs used:&#13;
 FROGFOOT-RESOURCES-MIB&#13;
 IEEE802dot11-MIB&#13;

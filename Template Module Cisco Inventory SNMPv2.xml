@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco Inventory SNMPv2</template>
             <name>Template Module Cisco Inventory SNMPv2</name>
-            <description>Template Cisco Inventory version: 0.13&#13;
+            <description>Template Cisco Inventory version: 0.14&#13;
 MIBs used:&#13;
 ENTITY-MIB&#13;
 SNMPv2-MIB</description>
