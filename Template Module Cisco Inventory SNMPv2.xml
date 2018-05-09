@@ -147,7 +147,7 @@ SNMPv2-MIB</description>
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>Version (.+), RELEASE&#13;
+                            <params>Version (.+), RELEASE
 \1</params>
                         </step>
                     </preprocessing>

@@ -83,7 +83,7 @@ CPU utilization in %</description>
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>60 Secs \( ([0-9\.]+)%\).+300 Secs&#13;
+                            <params>60 Secs \( ([0-9\.]+)%\).+300 Secs
 \1</params>
                         </step>
                     </preprocessing>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-
     <groups>
         <group>
             <name>Templates/Network Devices</name>

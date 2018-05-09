@@ -217,7 +217,7 @@ front panel module.</description>
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>kernel (JUNOS [0-9a-zA-Z\.]+)&#13;
+                            <params>kernel (JUNOS [0-9a-zA-Z\.]+)
 \1</params>
                         </step>
                     </preprocessing>

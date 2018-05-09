@@ -120,7 +120,7 @@ The value of sgiCpuUsage indicates the current CPU utilization for the system.</
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>^(\w|-|\.|/)+ (\w|-|\.|/)+ (.+) Copyright&#13;
+                            <params>^(\w|-|\.|/)+ (\w|-|\.|/)+ (.+) Copyright
 \3</params>
                         </step>
                     </preprocessing>
@@ -167,7 +167,7 @@ The value of sgiCpuUsage indicates the current CPU utilization for the system.</
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>^((\w|-|\.|/)+)&#13;
+                            <params>^((\w|-|\.|/)+)
 \1</params>
                         </step>
                     </preprocessing>

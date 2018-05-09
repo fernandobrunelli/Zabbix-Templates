@@ -73,7 +73,7 @@ ICS-CHASSIS-MIB</description>
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>Firmware Version: ([0-9.]+),&#13;
+                            <params>Firmware Version: ([0-9.]+),
 \1</params>
                         </step>
                     </preprocessing>
@@ -120,7 +120,7 @@ ICS-CHASSIS-MIB</description>
                     <preprocessing>
                         <step>
                             <type>5</type>
-                            <params>(.+) - Firmware&#13;
+                            <params>(.+) - Firmware
 \1</params>
                         </step>
                     </preprocessing>
