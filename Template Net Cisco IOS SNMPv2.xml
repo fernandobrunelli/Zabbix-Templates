@@ -1,59 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
-            <name>Templates/Network Devices</name>
+            <name>Templates/Network devices</name>
         </group>
     </groups>
     <templates>
         <template>
             <template>Template Net Cisco IOS SNMPv2</template>
             <name>Template Net Cisco IOS SNMPv2</name>
-            <description>Template Cisco IOS Software releases 12.2(3.5) or later version: 0.14&#13;
+            <description>Template Cisco IOS Software releases 12.2(3.5) or later version: 0.15&#13;
 Known Issues:&#13;
 description : no if(in|out)(Errors|Discards) are available for vlan ifType&#13;
 version : IOS for example: 12.1(22)EA11, 15.4(3)M2&#13;
 device : C2911, C7600</description>
             <groups>
                 <group>
-                    <name>Templates/Network Devices</name>
+                    <name>Templates/Network devices</name>
                 </group>
             </groups>
             <applications/>
             <items/>
             <discovery_rules/>
             <httptests/>
-            <macros>
-                <macro>
-                    <macro>{$CPU_UTIL_MAX}</macro>
-                    <value>90</value>
-                </macro>
-                <macro>
-                    <macro>{$MEMORY_UTIL_MAX}</macro>
-                    <value>90</value>
-                </macro>
-                <macro>
-                    <macro>{$STORAGE_UTIL_CRIT}</macro>
-                    <value>90</value>
-                </macro>
-                <macro>
-                    <macro>{$STORAGE_UTIL_WARN}</macro>
-                    <value>80</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_CRIT}</macro>
-                    <value>60</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_CRIT_LOW}</macro>
-                    <value>5</value>
-                </macro>
-                <macro>
-                    <macro>{$TEMP_WARN}</macro>
-                    <value>50</value>
-                </macro>
-            </macros>
+            <macros/>
             <templates>
                 <template>
                     <name>Template Module Cisco CISCO-ENVMON-MIB SNMPv2</name>

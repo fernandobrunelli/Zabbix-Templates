@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Generic SNMPv1</template>
             <name>Template Module Generic SNMPv1</name>
-            <description>Template Module Generic version: 0.14&#13;
+            <description>Template Module Generic version: 0.15&#13;
 MIBs used:&#13;
 SNMPv2-MIB</description>
             <groups>
@@ -30,8 +30,8 @@ SNMPv2-MIB</description>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>snmptrap.fallback</key>
-                    <delay>300</delay>
-                    <history>14d</history>
+                    <delay>5m</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>2</value_type>
@@ -63,6 +63,24 @@ SNMPv2-MIB</description>
                     <logtimefmt>hh:mm:sszyyyy/MM/dd</logtimefmt>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -71,8 +89,8 @@ SNMPv2-MIB</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.4.0</snmp_oid>
                     <key>system.contact</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -105,6 +123,24 @@ The textual identification of the contact person for this managed node, together
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -113,8 +149,8 @@ The textual identification of the contact person for this managed node, together
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.1.0</snmp_oid>
                     <key>system.descr</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -149,6 +185,24 @@ networking software.</description>
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -157,8 +211,8 @@ networking software.</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.6.0</snmp_oid>
                     <key>system.location</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -191,6 +245,24 @@ The physical location of this node (e.g., `telephone closet, 3rd floor').  If th
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -199,8 +271,8 @@ The physical location of this node (e.g., `telephone closet, 3rd floor').  If th
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.5.0</snmp_oid>
                     <key>system.name</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -233,6 +305,24 @@ An administratively-assigned name for this managed node.By convention, this is t
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -241,8 +331,8 @@ An administratively-assigned name for this managed node.By convention, this is t
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.2.0</snmp_oid>
                     <key>system.objectid</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -275,6 +365,24 @@ The vendor's authoritative identification of the network management subsystem co
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -282,9 +390,9 @@ The vendor's authoritative identification of the network management subsystem co
                     <type>1</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.3.0</snmp_oid>
-                    <key>system.uptime</key>
-                    <delay>30</delay>
-                    <history>14d</history>
+                    <key>system.uptime[sysUpTime]</key>
+                    <delay>30s</delay>
+                    <history>2w</history>
                     <trends>0d</trends>
                     <status>0</status>
                     <value_type>3</value_type>
@@ -322,6 +430,24 @@ The time (in hundredths of a second) since the network management portion of the
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -330,8 +456,8 @@ The time (in hundredths of a second) since the network management portion of the
                     <snmp_community/>
                     <snmp_oid/>
                     <key>zabbix[host,snmp,available]</key>
-                    <delay>60</delay>
-                    <history>14d</history>
+                    <delay>1m</delay>
+                    <history>2w</history>
                     <trends>0d</trends>
                     <status>0</status>
                     <value_type>3</value_type>
@@ -365,6 +491,24 @@ The time (in hundredths of a second) since the network management portion of the
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
@@ -409,7 +553,7 @@ SNMP is not available for polling. Please check device connectivity and SNMP set
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Module Generic SNMPv1:system.uptime.last()}&lt;10m</expression>
+            <expression>{Template Module Generic SNMPv1:system.uptime[sysUpTime].last()}&lt;10m</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>{HOST.NAME} has been restarted</name>

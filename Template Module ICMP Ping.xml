@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -10,7 +10,7 @@
         <template>
             <template>Template Module ICMP Ping</template>
             <name>Template Module ICMP Ping</name>
-            <description>Template Module ICMP Ping version: 0.14</description>
+            <description>Template Module ICMP Ping version: 0.15</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -28,7 +28,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>icmpping</key>
-                    <delay>60</delay>
+                    <delay>1m</delay>
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
@@ -63,6 +63,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -71,7 +89,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>icmppingloss</key>
-                    <delay>60</delay>
+                    <delay>1m</delay>
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
@@ -104,6 +122,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -112,7 +148,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>icmppingsec</key>
-                    <delay>60</delay>
+                    <delay>1m</delay>
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
@@ -145,6 +181,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
@@ -175,7 +229,7 @@
             <url/>
             <status>0</status>
             <priority>2</priority>
-            <description/>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies>
@@ -197,7 +251,7 @@
             <url/>
             <status>0</status>
             <priority>2</priority>
-            <description/>
+            <description>Last value: {ITEM.LASTVALUE1}.</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies>

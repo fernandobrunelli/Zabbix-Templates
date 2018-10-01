@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
-            <name>Templates/Network Devices</name>
+            <name>Templates/Network devices</name>
         </group>
     </groups>
     <templates>
         <template>
             <template>Template Net Juniper SNMPv2</template>
             <name>Template Net Juniper SNMPv2</name>
-            <description>Template Net Juniper version: 0.14&#13;
+            <description>Template Net Juniper version: 0.15&#13;
 MIBs used:&#13;
-JUNIPER-MIB&#13;
 JUNIPER-ALARM-MIB&#13;
+JUNIPER-MIB&#13;
 SNMPv2-MIB</description>
             <groups>
                 <group>
-                    <name>Templates/Network Devices</name>
+                    <name>Templates/Network devices</name>
                 </group>
             </groups>
             <applications>
@@ -34,7 +34,7 @@ SNMPv2-MIB</description>
                     <name>Memory</name>
                 </application>
                 <application>
-                    <name>Power Supply</name>
+                    <name>Power supply</name>
                 </application>
                 <application>
                     <name>Temperature</name>
@@ -47,8 +47,8 @@ SNMPv2-MIB</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.4.1.2636.3.1.2.0</snmp_oid>
                     <key>system.hw.model</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -81,6 +81,24 @@ The name, model, or detailed description of the box,indicating which product the
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -89,8 +107,8 @@ The name, model, or detailed description of the box,indicating which product the
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.4.1.2636.3.1.3.0</snmp_oid>
                     <key>system.hw.serialnumber</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -123,6 +141,24 @@ The serial number of this subject, blank if unknown or unavailable.</description
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -131,8 +167,8 @@ The serial number of this subject, blank if unknown or unavailable.</description
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.4.1.2636.3.4.2.3.1.0</snmp_oid>
                     <key>system.status[jnxRedAlarmState.0]</key>
-                    <delay>30</delay>
-                    <history>14d</history>
+                    <delay>30s</delay>
+                    <history>2w</history>
                     <trends>0d</trends>
                     <status>0</status>
                     <value_type>3</value_type>
@@ -175,6 +211,24 @@ front panel module.</description>
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -183,8 +237,8 @@ front panel module.</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>1.3.6.1.2.1.1.1.0</snmp_oid>
                     <key>system.sw.os</key>
-                    <delay>3600</delay>
-                    <history>14d</history>
+                    <delay>1h</delay>
+                    <history>2w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>1</value_type>
@@ -222,6 +276,24 @@ front panel module.</description>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
@@ -232,7 +304,7 @@ front panel module.</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2636.3.1.13.1.5]</snmp_oid>
                     <key>jnxOperatingTable.discovery</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -272,7 +344,7 @@ http://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB17526&amp;actp=sear
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.2636.3.1.13.1.21.{#SNMPINDEX}</snmp_oid>
                             <key>system.cpu.util[jnxOperating5MinLoadAvg.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -307,8 +379,26 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>{#SNMPVALUE}: Memory utilization</name>
@@ -316,7 +406,7 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.2636.3.1.13.1.11.{#SNMPINDEX}</snmp_oid>
                             <key>vm.memory.pused[jnxOperatingBuffer.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -351,8 +441,26 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -457,6 +565,23 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                     </graph_prototypes>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
                     <name>FAN Discovery</name>
@@ -464,7 +589,7 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2636.3.1.13.1.5.4]</snmp_oid>
                     <key>jnxOperatingTable.discovery.fans</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -496,8 +621,8 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.2636.3.1.13.1.6.4.{#SNMPINDEX}</snmp_oid>
                             <key>sensor.fan.status[jnxOperatingState.4.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
-                            <history>14d</history>
+                            <delay>3m</delay>
+                            <history>2w</history>
                             <trends>0d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -531,8 +656,26 @@ Reference: http://kb.juniper.net/library/CUSTOMERSERVICE/GLOBAL_JTAC/BK26199/SRX
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -557,6 +700,23 @@ Please check the fan unit</description>
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
                     <name>PSU Discovery</name>
@@ -564,7 +724,7 @@ Please check the fan unit</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2636.3.1.13.1.5.2]</snmp_oid>
                     <key>jnxOperatingTable.discovery.psu</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -596,8 +756,8 @@ Please check the fan unit</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.2636.3.1.13.1.6.2.{#SNMPINDEX}</snmp_oid>
                             <key>sensor.psu.status[jnxOperatingState.2.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
-                            <history>14d</history>
+                            <delay>3m</delay>
+                            <history>2w</history>
                             <trends>0d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -624,7 +784,7 @@ This is fixed in Junos 13.3R7 https://forums.juniper.net/t5/Routing/PEM-0-not-OK
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Power Supply</name>
+                                    <name>Power supply</name>
                                 </application>
                             </applications>
                             <valuemap>
@@ -633,8 +793,26 @@ This is fixed in Junos 13.3R7 https://forums.juniper.net/t5/Routing/PEM-0-not-OK
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -659,6 +837,23 @@ Please check the power supply unit for errors</description>
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
                     <name>Temperature discovery</name>
@@ -666,7 +861,7 @@ Please check the power supply unit for errors</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2636.3.1.13.1.7,{#SENSOR_INFO},1.3.6.1.4.1.2636.3.1.13.1.5]</snmp_oid>
                     <key>jnxOperatingTable.discovery.temp</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -706,7 +901,7 @@ http://kb.juniper.net/InfoCenter/index?page=content&amp;id=KB17526&amp;actp=sear
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.2636.3.1.13.1.7.{#SNMPINDEX}</snmp_oid>
                             <key>sensor.temp.value[jnxOperatingTemp.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -740,8 +935,26 @@ The temperature in Celsius (degrees C) of {#SENSOR_INFO}</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -805,6 +1018,23 @@ This trigger uses temperature sensor values as well as temperature sensor status
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
@@ -828,14 +1058,6 @@ This trigger uses temperature sensor values as well as temperature sensor status
                 <macro>
                     <macro>{$PSU_CRIT_STATUS}</macro>
                     <value>6</value>
-                </macro>
-                <macro>
-                    <macro>{$STORAGE_UTIL_CRIT}</macro>
-                    <value>90</value>
-                </macro>
-                <macro>
-                    <macro>{$STORAGE_UTIL_WARN}</macro>
-                    <value>80</value>
                 </macro>
                 <macro>
                     <macro>{$TEMP_CRIT}</macro>
@@ -891,7 +1113,7 @@ Device serial number has changed. Ack to close</description>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Net Juniper SNMPv2:system.status[jnxRedAlarmState.0].last(0)}={$HEALTH_CRIT_STATUS}</expression>
+            <expression>{Template Net Juniper SNMPv2:system.status[jnxRedAlarmState.0].count(#1,{$HEALTH_CRIT_STATUS},eq)}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>System status is in critical state</name>

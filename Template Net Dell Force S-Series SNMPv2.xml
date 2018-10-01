@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
-            <name>Templates/Network Devices</name>
+            <name>Templates/Network devices</name>
         </group>
     </groups>
     <templates>
         <template>
             <template>Template Net Dell Force S-Series SNMPv2</template>
             <name>Template Net Dell Force S-Series SNMPv2</name>
-            <description>Template Dell Force S-Series version: 0.14&#13;
+            <description>Template Dell Force S-Series version: 0.15&#13;
 MIBs used:&#13;
 F10-S-SERIES-CHASSIS-MIB</description>
             <groups>
                 <group>
-                    <name>Templates/Network Devices</name>
+                    <name>Templates/Network devices</name>
                 </group>
             </groups>
             <applications>
@@ -32,7 +32,7 @@ F10-S-SERIES-CHASSIS-MIB</description>
                     <name>Memory</name>
                 </application>
                 <application>
-                    <name>Power Supply</name>
+                    <name>Power supply</name>
                 </application>
                 <application>
                     <name>Temperature</name>
@@ -46,7 +46,7 @@ F10-S-SERIES-CHASSIS-MIB</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.6027.3.10.1.2.4.1.1]</snmp_oid>
                     <key>fan.discovery</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -78,8 +78,8 @@ F10-S-SERIES-CHASSIS-MIB</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.4.1.2.{#SNMPINDEX}</snmp_oid>
                             <key>sensor.fan.status[chSysFanTrayOperStatus.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
-                            <history>14d</history>
+                            <delay>3m</delay>
+                            <history>2w</history>
                             <trends>0d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -114,8 +114,26 @@ The status of the fan tray {#SNMPVALUE}.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -163,6 +181,23 @@ Please check the fan unit</description>
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
                     <name>CPU and Memory and Flash Discovery</name>
@@ -170,7 +205,7 @@ Please check the fan unit</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.6027.3.10.1.2.9.1.1]</snmp_oid>
                     <key>module.discovery</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -202,7 +237,7 @@ Please check the fan unit</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.9.1.3.{#SNMPINDEX}</snmp_oid>
                             <key>system.cpu.util[chStackUnitCpuUtil1Min.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -236,8 +271,26 @@ CPU utilization in percentage for last 1 minute.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>#{#SNMPINDEX}: Memory utilization</name>
@@ -245,7 +298,7 @@ CPU utilization in percentage for last 1 minute.</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.9.1.5.{#SNMPINDEX}</snmp_oid>
                             <key>vm.memory.pused[chStackUnitMemUsageUtil.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -279,8 +332,26 @@ Total memory usage in percentage.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -385,6 +456,23 @@ Total memory usage in percentage.</description>
                     </graph_prototypes>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
                     <name>PSU Discovery</name>
@@ -392,7 +480,7 @@ Total memory usage in percentage.</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.6027.3.10.1.2.3.1.1]</snmp_oid>
                     <key>psu.discovery</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -424,8 +512,8 @@ Total memory usage in percentage.</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.3.1.2.{#SNMPINDEX}</snmp_oid>
                             <key>sensor.psu.status[chSysPowerSupplyOperStatus.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
-                            <history>14d</history>
+                            <delay>3m</delay>
+                            <history>2w</history>
                             <trends>0d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
@@ -451,7 +539,7 @@ The status of the power supply {#SNMPVALUE}</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Power Supply</name>
+                                    <name>Power supply</name>
                                 </application>
                             </applications>
                             <valuemap>
@@ -460,8 +548,26 @@ The status of the power supply {#SNMPVALUE}</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -509,6 +615,23 @@ Please check the power supply unit for errors</description>
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
                     <name>Stack Unit Discovery</name>
@@ -516,7 +639,7 @@ Please check the power supply unit for errors</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.6027.3.10.1.2.2.1.2]</snmp_oid>
                     <key>stack.discovery</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -548,7 +671,7 @@ Please check the power supply unit for errors</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.2.1.14.{#SNMPINDEX}</snmp_oid>
                             <key>sensor.temp.value[chStackUnitTemp.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -582,8 +705,26 @@ The temperature of the unit.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>#{#SNMPVALUE}: Hardware model name</name>
@@ -591,8 +732,8 @@ The temperature of the unit.</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.2.1.7.{#SNMPINDEX}</snmp_oid>
                             <key>system.hw.model[chStackUnitModelID.{#SNMPINDEX}]</key>
-                            <delay>3600</delay>
-                            <history>14d</history>
+                            <delay>1h</delay>
+                            <history>2w</history>
                             <trends>0</trends>
                             <status>0</status>
                             <value_type>1</value_type>
@@ -625,8 +766,26 @@ The plugged-in model ID for this unit.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>#{#SNMPVALUE}: Hardware serial number</name>
@@ -634,8 +793,8 @@ The plugged-in model ID for this unit.</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.2.1.12.{#SNMPINDEX}</snmp_oid>
                             <key>system.hw.serialnumber[chStackUnitSerialNumber.{#SNMPINDEX}]</key>
-                            <delay>3600</delay>
-                            <history>14d</history>
+                            <delay>1h</delay>
+                            <history>2w</history>
                             <trends>0</trends>
                             <status>0</status>
                             <value_type>1</value_type>
@@ -668,8 +827,26 @@ The unit's serial number.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>#{#SNMPVALUE}: Hardware version(revision)</name>
@@ -677,8 +854,8 @@ The unit's serial number.</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.2.1.21.{#SNMPINDEX}</snmp_oid>
                             <key>system.hw.version[chStackUnitProductRev.{#SNMPINDEX}]</key>
-                            <delay>3600</delay>
-                            <history>14d</history>
+                            <delay>1h</delay>
+                            <history>2w</history>
                             <trends>0</trends>
                             <status>0</status>
                             <value_type>1</value_type>
@@ -711,8 +888,26 @@ The unit manufacturer's product revision</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>#{#SNMPVALUE}: Operating system</name>
@@ -720,8 +915,8 @@ The unit manufacturer's product revision</description>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.6027.3.10.1.2.2.1.10.{#SNMPINDEX}</snmp_oid>
                             <key>system.sw.os[chStackUnitCodeVersion.{#SNMPINDEX}]</key>
-                            <delay>3600</delay>
-                            <history>14d</history>
+                            <delay>1h</delay>
+                            <history>2w</history>
                             <trends>0</trends>
                             <status>0</status>
                             <value_type>1</value_type>
@@ -754,8 +949,26 @@ Current code version of this unit.</description>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -836,6 +1049,23 @@ This trigger uses temperature sensor values as well as temperature sensor status
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
@@ -863,14 +1093,6 @@ This trigger uses temperature sensor values as well as temperature sensor status
                 <macro>
                     <macro>{$PSU_OK_STATUS}</macro>
                     <value>1</value>
-                </macro>
-                <macro>
-                    <macro>{$STORAGE_UTIL_CRIT}</macro>
-                    <value>90</value>
-                </macro>
-                <macro>
-                    <macro>{$STORAGE_UTIL_WARN}</macro>
-                    <value>80</value>
                 </macro>
                 <macro>
                     <macro>{$TEMP_CRIT}</macro>

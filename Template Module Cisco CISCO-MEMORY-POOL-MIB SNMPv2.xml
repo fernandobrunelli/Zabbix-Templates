@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</template>
             <name>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMPv2</name>
-            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.14&#13;
+            <description>Template Cisco CISCO-MEMORY-POOL-MIB version: 0.15&#13;
 MIBs used:&#13;
 CISCO-MEMORY-POOL-MIB</description>
             <groups>
@@ -31,7 +31,7 @@ CISCO-MEMORY-POOL-MIB</description>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.9.9.48.1.1.1.2]</snmp_oid>
                     <key>memory.discovery</key>
-                    <delay>3600</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -64,7 +64,7 @@ http://www.cisco.com/c/en/us/support/docs/ip/simple-network-management-protocol-
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.9.9.48.1.1.1.6.{#SNMPINDEX}</snmp_oid>
                             <key>vm.memory.free[ciscoMemoryPoolFree.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -99,8 +99,26 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>{#SNMPVALUE}: Memory utilization</name>
@@ -108,7 +126,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <snmp_community/>
                             <snmp_oid/>
                             <key>vm.memory.pused[vm.memory.pused.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -141,8 +159,26 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>{#SNMPVALUE}: Used memory</name>
@@ -150,7 +186,7 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                             <snmp_oid>1.3.6.1.4.1.9.9.48.1.1.1.5.{#SNMPINDEX}</snmp_oid>
                             <key>vm.memory.used[ciscoMemoryPoolUsed.{#SNMPINDEX}]</key>
-                            <delay>180</delay>
+                            <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -185,8 +221,26 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -243,10 +297,32 @@ Reference: http://www.cisco.com/c/en/us/support/docs/ip/simple-network-managemen
                     </graph_prototypes>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
-            <macros/>
+            <macros>
+                <macro>
+                    <macro>{$MEMORY_UTIL_MAX}</macro>
+                    <value>90</value>
+                </macro>
+            </macros>
             <templates/>
             <screens/>
         </template>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
+    <version>4.0</version>
     <groups>
         <group>
-            <name>Templates/Network Devices</name>
+            <name>Templates/Network devices</name>
         </group>
     </groups>
     <templates>
         <template>
             <template>Template Net Network Generic Device SNMPv1</template>
             <name>Template Net Network Generic Device SNMPv1</name>
-            <description>Template Net Network Generic Device version: 0.14&#13;
+            <description>Template Net Network Generic Device version: 0.15&#13;
 Overview: Use this template if you can't find the template for specific vendor or device family.</description>
             <groups>
                 <group>
-                    <name>Templates/Network Devices</name>
+                    <name>Templates/Network devices</name>
                 </group>
             </groups>
             <applications/>

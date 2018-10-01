@@ -3,30 +3,36 @@
     <version>4.0</version>
     <groups>
         <group>
-            <name>Templates/Network devices</name>
+            <name>Templates/Server hardware</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>Template Net HP Enterprise Switch SNMPv2</template>
-            <name>Template Net HP Enterprise Switch SNMPv2</name>
-            <description>Template Net HP Enterprise Switch version: 0.15&#13;
+            <template>Template Server IBM IMM SNMPv2</template>
+            <name>Template Server IBM IMM SNMPv2</name>
+            <description>Template Server IBM IMM version: 0.15&#13;
+Overview: for IMM2 and IMM1 IBM serverX hardware&#13;
 MIBs used:&#13;
-SEMI-MIB&#13;
-NETSWITCH-MIB&#13;
-HP-ICF-CHASSIS&#13;
-ENTITY-SENSORS-MIB&#13;
-ENTITY-MIB&#13;
-STATISTICS-MIB</description>
+IMM-MIB&#13;
+Known Issues:&#13;
+description : Some IMMs (IMM1) do not return disks&#13;
+version : IMM1&#13;
+device : IBM x3250M3&#13;
+description : Some IMMs (IMM1) do not return fan status: fanHealthStatus&#13;
+version : IMM1&#13;
+device : IBM x3250M3&#13;
+description : IMM1 servers (M2, M3 generations) sysObjectID is NET-SNMP-MIB::netSnmpAgentOIDs.10&#13;
+version : IMM1&#13;
+device : IMM1 servers (M2,M3 generations)&#13;
+description : IMM1 servers (M2, M3 generations) only Ambient temperature sensor available&#13;
+version : IMM1&#13;
+device : IMM1 servers (M2,M3 generations)</description>
             <groups>
                 <group>
-                    <name>Templates/Network devices</name>
+                    <name>Templates/Server hardware</name>
                 </group>
             </groups>
             <applications>
-                <application>
-                    <name>CPU</name>
-                </application>
                 <application>
                     <name>Fans</name>
                 </application>
@@ -34,7 +40,7 @@ STATISTICS-MIB</description>
                     <name>Inventory</name>
                 </application>
                 <application>
-                    <name>Memory</name>
+                    <name>Physical disks</name>
                 </application>
                 <application>
                     <name>Power supply</name>
@@ -45,72 +51,11 @@ STATISTICS-MIB</description>
             </applications>
             <items>
                 <item>
-                    <name>CPU utilization</name>
+                    <name>Hardware model name</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>1.3.6.1.4.1.11.2.14.11.5.1.9.6.1.0</snmp_oid>
-                    <key>system.cpu.util[hpSwitchCpuStat.0]</key>
-                    <delay>3m</delay>
-                    <history>30d</history>
-                    <trends>365d</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>%</units>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>MIB: STATISTICS-MIB&#13;
-The CPU utilization in percent(%).&#13;
-Reference: http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=emr_na-c02597344&amp;sp4ts.oid=51079</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>CPU</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                    <preprocessing/>
-                    <jmx_endpoint/>
-                    <timeout>3s</timeout>
-                    <url/>
-                    <query_fields/>
-                    <posts/>
-                    <status_codes>200</status_codes>
-                    <follow_redirects>1</follow_redirects>
-                    <post_type>0</post_type>
-                    <http_proxy/>
-                    <headers/>
-                    <retrieve_mode>0</retrieve_mode>
-                    <request_method>0</request_method>
-                    <output_format>0</output_format>
-                    <allow_traps>0</allow_traps>
-                    <ssl_cert_file/>
-                    <ssl_key_file/>
-                    <ssl_key_password/>
-                    <verify_peer>0</verify_peer>
-                    <verify_host>0</verify_host>
-                    <master_item/>
-                </item>
-                <item>
-                    <name>Firmware version</name>
-                    <type>4</type>
-                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>1.3.6.1.4.1.11.2.14.11.5.1.1.3.0</snmp_oid>
-                    <key>system.hw.firmware</key>
+                    <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.5.2.1.5.0</snmp_oid>
+                    <key>system.hw.model</key>
                     <delay>1h</delay>
                     <history>2w</history>
                     <trends>0</trends>
@@ -133,13 +78,8 @@ Reference: http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=emr_na-c0259
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: NETSWITCH-MIB&#13;
-Contains the operating code version number (also known as software or firmware).&#13;
-For example, a software version such as A.08.01 is described as follows:&#13;
-A    the function set available in your router&#13;
-08   the common release number&#13;
-01   updates to the current common release</description>
-                    <inventory_link>0</inventory_link>
+                    <description>MIB: IMM-MIB</description>
+                    <inventory_link>29</inventory_link>
                     <applications>
                         <application>
                             <name>Inventory</name>
@@ -173,7 +113,7 @@ A    the function set available in your router&#13;
                     <name>Hardware serial number</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>1.3.6.1.4.1.11.2.36.1.1.2.9.0</snmp_oid>
+                    <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.5.2.1.3.0</snmp_oid>
                     <key>system.hw.serialnumber</key>
                     <delay>1h</delay>
                     <history>2w</history>
@@ -197,7 +137,8 @@ A    the function set available in your router&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description>MIB: SEMI-MIB</description>
+                    <description>MIB: IMM-MIB&#13;
+Machine serial number VPD information</description>
                     <inventory_link>8</inventory_link>
                     <applications>
                         <application>
@@ -228,17 +169,19 @@ A    the function set available in your router&#13;
                     <verify_host>0</verify_host>
                     <master_item/>
                 </item>
-            </items>
-            <discovery_rules>
-                <discovery_rule>
-                    <name>Entity Discovery</name>
+                <item>
+                    <name>Overall system health status</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#ENT_CLASS},1.3.6.1.2.1.47.1.1.1.1.5,{#ENT_NAME},1.3.6.1.2.1.47.1.1.1.1.7]</snmp_oid>
-                    <key>entity.discovery</key>
-                    <delay>1h</delay>
+                    <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.4.1.0</snmp_oid>
+                    <key>system.status[systemHealthStat.0]</key>
+                    <delay>30s</delay>
+                    <history>2w</history>
+                    <trends>0d</trends>
                     <status>0</status>
+                    <value_type>3</value_type>
                     <allowed_hosts/>
+                    <units/>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -254,145 +197,19 @@ A    the function set available in your router&#13;
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
-                        <conditions>
-                            <condition>
-                                <macro>{#ENT_CLASS}</macro>
-                                <value>3</value>
-                                <operator>8</operator>
-                                <formulaid>A</formulaid>
-                            </condition>
-                        </conditions>
-                    </filter>
-                    <lifetime>30d</lifetime>
-                    <description/>
-                    <item_prototypes>
-                        <item_prototype>
-                            <name>{#ENT_NAME}: Hardware model name</name>
-                            <type>4</type>
-                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.2.1.47.1.1.1.1.2.{#SNMPINDEX}</snmp_oid>
-                            <key>system.hw.model[entPhysicalDescr.{#SNMPINDEX}]</key>
-                            <delay>1h</delay>
-                            <history>2w</history>
-                            <trends>0</trends>
-                            <status>0</status>
-                            <value_type>1</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>MIB: ENTITY-MIB</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Inventory</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
-                            <application_prototypes/>
-                            <master_item/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>{#ENT_NAME}: Hardware version(revision)</name>
-                            <type>4</type>
-                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.2.1.47.1.1.1.1.8.{#SNMPINDEX}</snmp_oid>
-                            <key>system.hw.version[entPhysicalHardwareRev.{#SNMPINDEX}]</key>
-                            <delay>1h</delay>
-                            <history>2w</history>
-                            <trends>0</trends>
-                            <status>0</status>
-                            <value_type>1</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>MIB: ENTITY-MIB</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Inventory</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
-                            <application_prototypes/>
-                            <master_item/>
-                        </item_prototype>
-                    </item_prototypes>
-                    <trigger_prototypes/>
-                    <graph_prototypes/>
-                    <host_prototypes/>
+                    <description>MIB: IMM-MIB&#13;
+Indicates status of system health for the system in which the IMM resides. Value of 'nonRecoverable' indicates a severe error has occurred and the system may not be functioning. A value of 'critical' indicates that a error has occurred but the system is currently functioning properly. A value of 'nonCritical' indicates that a condition has occurred that may change the state of the system in the future but currently the system is working properly. A value of 'normal' indicates that the system is operating normally.</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>IMM-MIB::systemHealthStat</name>
+                    </valuemap>
+                    <logtimefmt/>
+                    <preprocessing/>
                     <jmx_endpoint/>
                     <timeout>3s</timeout>
                     <url/>
@@ -405,191 +222,23 @@ A    the function set available in your router&#13;
                     <headers/>
                     <retrieve_mode>0</retrieve_mode>
                     <request_method>0</request_method>
+                    <output_format>0</output_format>
                     <allow_traps>0</allow_traps>
                     <ssl_cert_file/>
                     <ssl_key_file/>
                     <ssl_key_password/>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
-                </discovery_rule>
+                    <master_item/>
+                </item>
+            </items>
+            <discovery_rules>
                 <discovery_rule>
                     <name>FAN Discovery</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#ENT_CLASS},1.3.6.1.4.1.11.2.14.11.1.2.6.1.2,{#ENT_DESCR},1.3.6.1.4.1.11.2.14.11.1.2.6.1.7,{#ENT_STATUS},1.3.6.1.4.1.11.2.14.11.1.2.6.1.4]</snmp_oid>
+                    <snmp_oid>discovery[{#FAN_DESCR},1.3.6.1.4.1.2.3.51.3.1.3.2.1.2]</snmp_oid>
                     <key>fan.discovery</key>
-                    <delay>1h</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <filter>
-                        <evaltype>1</evaltype>
-                        <formula/>
-                        <conditions>
-                            <condition>
-                                <macro>{#ENT_CLASS}</macro>
-                                <value>.+8.3.2$</value>
-                                <operator>8</operator>
-                                <formulaid>A</formulaid>
-                            </condition>
-                            <condition>
-                                <macro>{#ENT_STATUS}</macro>
-                                <value>(1|2|3|4)</value>
-                                <operator>8</operator>
-                                <formulaid>B</formulaid>
-                            </condition>
-                        </conditions>
-                    </filter>
-                    <lifetime>30d</lifetime>
-                    <description>Discovering all entities of hpicfSensorObjectId that ends with: 11.2.3.7.8.3.2 - fans and are present</description>
-                    <item_prototypes>
-                        <item_prototype>
-                            <name>{#ENT_DESCR}: Fan status</name>
-                            <type>4</type>
-                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.4.1.11.2.14.11.1.2.6.1.4.{#SNMPINDEX}</snmp_oid>
-                            <key>sensor.fan.status[hpicfSensorStatus.{#SNMPINDEX}]</key>
-                            <delay>3m</delay>
-                            <history>2w</history>
-                            <trends>0d</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>MIB: HP-ICF-CHASSIS&#13;
-Actual status indicated by the sensor: {#ENT_DESCR}</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Fans</name>
-                                </application>
-                            </applications>
-                            <valuemap>
-                                <name>HP-ICF-CHASSIS::hpicfSensorStatus</name>
-                            </valuemap>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
-                            <application_prototypes/>
-                            <master_item/>
-                        </item_prototype>
-                    </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.fan.status[hpicfSensorStatus.{#SNMPINDEX}].count(#1,{$FAN_CRIT_STATUS:&quot;bad&quot;},eq)}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>{#ENT_DESCR}: Fan is in critical state</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-Please check the fan unit</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.fan.status[hpicfSensorStatus.{#SNMPINDEX}].count(#1,{$FAN_WARN_STATUS:&quot;warning&quot;},eq)}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>{#ENT_DESCR}: Fan is in warning state</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-Please check the fan unit</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies>
-                                <dependency>
-                                    <name>{#ENT_DESCR}: Fan is in critical state</name>
-                                    <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.fan.status[hpicfSensorStatus.{#SNMPINDEX}].count(#1,{$FAN_CRIT_STATUS:&quot;bad&quot;},eq)}=1</expression>
-                                    <recovery_expression/>
-                                </dependency>
-                            </dependencies>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
-                    <jmx_endpoint/>
-                    <timeout>3s</timeout>
-                    <url/>
-                    <query_fields/>
-                    <posts/>
-                    <status_codes>200</status_codes>
-                    <follow_redirects>1</follow_redirects>
-                    <post_type>0</post_type>
-                    <http_proxy/>
-                    <headers/>
-                    <retrieve_mode>0</retrieve_mode>
-                    <request_method>0</request_method>
-                    <allow_traps>0</allow_traps>
-                    <ssl_cert_file/>
-                    <ssl_key_file/>
-                    <ssl_key_password/>
-                    <verify_peer>0</verify_peer>
-                    <verify_host>0</verify_host>
-                </discovery_rule>
-                <discovery_rule>
-                    <name>Memory Discovery</name>
-                    <type>4</type>
-                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.1]</snmp_oid>
-                    <key>memory.discovery</key>
                     <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
@@ -614,80 +263,19 @@ Please check the fan unit</description>
                         <conditions/>
                     </filter>
                     <lifetime>30d</lifetime>
-                    <description>Discovery of NETSWITCH-MIB::hpLocalMemTable, A table that contains information on all the local memory for each slot.</description>
+                    <description>IMM-MIB::fanDescr</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>#{#SNMPVALUE}: Available memory</name>
+                            <name>{#FAN_DESCR}: Fan speed, %</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.6.{#SNMPINDEX}</snmp_oid>
-                            <key>vm.memory.free[hpLocalMemFreeBytes.{#SNMPINDEX}]</key>
-                            <delay>3m</delay>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.3.2.1.3.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.fan.speed.percentage[fanSpeed.{#SNMPINDEX}]</key>
+                            <delay>5m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units>B</units>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description>MIB: NETSWITCH-MIB&#13;
-The number of available (unallocated) bytes.</description>
-                            <inventory_link>0</inventory_link>
-                            <applications>
-                                <application>
-                                    <name>Memory</name>
-                                </application>
-                            </applications>
-                            <valuemap/>
-                            <logtimefmt/>
-                            <preprocessing/>
-                            <jmx_endpoint/>
-                            <timeout>3s</timeout>
-                            <url/>
-                            <query_fields/>
-                            <posts/>
-                            <status_codes>200</status_codes>
-                            <follow_redirects>1</follow_redirects>
-                            <post_type>0</post_type>
-                            <http_proxy/>
-                            <headers/>
-                            <retrieve_mode>0</retrieve_mode>
-                            <request_method>0</request_method>
-                            <output_format>0</output_format>
-                            <allow_traps>0</allow_traps>
-                            <ssl_cert_file/>
-                            <ssl_key_file/>
-                            <ssl_key_password/>
-                            <verify_peer>0</verify_peer>
-                            <verify_host>0</verify_host>
-                            <application_prototypes/>
-                            <master_item/>
-                        </item_prototype>
-                        <item_prototype>
-                            <name>#{#SNMPVALUE}: Memory utilization</name>
-                            <type>15</type>
-                            <snmp_community/>
-                            <snmp_oid/>
-                            <key>vm.memory.pused[vm.memory.pused.{#SNMPINDEX}]</key>
-                            <delay>3m</delay>
-                            <history>30d</history>
-                            <trends>365d</trends>
-                            <status>0</status>
-                            <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>%</units>
                             <snmpv3_contextname/>
@@ -697,7 +285,7 @@ The number of available (unallocated) bytes.</description>
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <params>(last(vm.memory.used[hpLocalMemAllocBytes.{#SNMPINDEX}])/(last(vm.memory.free[hpLocalMemFreeBytes.{#SNMPINDEX}])+last(vm.memory.used[hpLocalMemAllocBytes.{#SNMPINDEX}])))*100</params>
+                            <params/>
                             <ipmi_sensor/>
                             <authtype>0</authtype>
                             <username/>
@@ -705,16 +293,25 @@ The number of available (unallocated) bytes.</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>Memory utilization in %</description>
+                            <description>MIB: IMM-MIB&#13;
+Fan speed expressed in percent(%) of maximum RPM.&#13;
+An octet string expressed as 'ddd% of maximum' where:d is a decimal digit or blank space for a leading zero.&#13;
+If the fan is determined not to be running or the fan speed cannot be determined, the string will indicate 'Offline'.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Memory</name>
+                                    <name>Fans</name>
                                 </application>
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>5</type>
+                                    <params>(\d{1,3}) *%( of maximum)?
+\1</params>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
                             <timeout>3s</timeout>
                             <url/>
@@ -738,18 +335,18 @@ The number of available (unallocated) bytes.</description>
                             <master_item/>
                         </item_prototype>
                         <item_prototype>
-                            <name>#{#SNMPVALUE}: Used memory</name>
+                            <name>{#FAN_DESCR}: Fan status</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.7.{#SNMPINDEX}</snmp_oid>
-                            <key>vm.memory.used[hpLocalMemAllocBytes.{#SNMPINDEX}]</key>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.3.2.1.10.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.fan.status[fanHealthStatus.{#SNMPINDEX}]</key>
                             <delay>3m</delay>
-                            <history>30d</history>
-                            <trends>365d</trends>
+                            <history>2w</history>
+                            <trends>0</trends>
                             <status>0</status>
-                            <value_type>3</value_type>
+                            <value_type>1</value_type>
                             <allowed_hosts/>
-                            <units>B</units>
+                            <units/>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -765,12 +362,12 @@ The number of available (unallocated) bytes.</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: NETSWITCH-MIB&#13;
-The number of currently allocated bytes.</description>
+                            <description>MIB: IMM-MIB&#13;
+A description of the fan component status.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
-                                    <name>Memory</name>
+                                    <name>Fans</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -801,56 +398,218 @@ The number of currently allocated bytes.</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:vm.memory.pused[vm.memory.pused.{#SNMPINDEX}].avg(5m)}&gt;{$MEMORY_UTIL_MAX}</expression>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.fan.status[fanHealthStatus.{#SNMPINDEX}].count(#1,{$FAN_OK_STATUS},ne)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>#{#SNMPVALUE}: High memory utilization</name>
+                            <name>{#FAN_DESCR}: Fan is not in normal state</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
                             <status>0</status>
-                            <priority>3</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.</description>
+                            <priority>1</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+Please check the fan unit</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
                             <tags/>
                         </trigger_prototype>
                     </trigger_prototypes>
-                    <graph_prototypes>
-                        <graph_prototype>
-                            <name>#{#SNMPVALUE}: Memory utilization</name>
-                            <width>900</width>
-                            <height>200</height>
-                            <yaxismin>0.0000</yaxismin>
-                            <yaxismax>100.0000</yaxismax>
-                            <show_work_period>1</show_work_period>
-                            <show_triggers>1</show_triggers>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Physical Disk Discovery</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2.3.51.3.1.12.2.1.1]</snmp_oid>
+                    <key>physicalDisk.discovery</key>
+                    <delay>1h</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>30d</lifetime>
+                    <description/>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>{#SNMPINDEX}: Physical disk part number</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.12.2.1.2.{#SNMPINDEX}</snmp_oid>
+                            <key>system.hw.physicaldisk.part_number[diskFruName.{#SNMPINDEX}]</key>
+                            <delay>1h</delay>
+                            <history>2w</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>MIB: IMM-MIB&#13;
+disk module FRU name.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Physical disks</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#SNMPINDEX}: Physical disk status</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.12.2.1.3.{#SNMPINDEX}</snmp_oid>
+                            <key>system.hw.physicaldisk.status[diskHealthStatus.{#SNMPINDEX}]</key>
+                            <delay>3m</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>1</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>MIB: IMM-MIB</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Physical disks</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:system.hw.physicaldisk.status[diskHealthStatus.{#SNMPINDEX}].count(#1,{$DISK_OK_STATUS},ne)}=1</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>{#SNMPINDEX}: Physical disk is not in OK state</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+Please check physical disk for warnings or errors</description>
                             <type>0</type>
-                            <show_legend>1</show_legend>
-                            <show_3d>0</show_3d>
-                            <percent_left>0.0000</percent_left>
-                            <percent_right>0.0000</percent_right>
-                            <ymin_type_1>1</ymin_type_1>
-                            <ymax_type_1>1</ymax_type_1>
-                            <ymin_item_1>0</ymin_item_1>
-                            <ymax_item_1>0</ymax_item_1>
-                            <graph_items>
-                                <graph_item>
-                                    <sortorder>0</sortorder>
-                                    <drawtype>5</drawtype>
-                                    <color>1A7C11</color>
-                                    <yaxisside>0</yaxisside>
-                                    <calc_fnc>2</calc_fnc>
-                                    <type>0</type>
-                                    <item>
-                                        <host>Template Net HP Enterprise Switch SNMPv2</host>
-                                        <key>vm.memory.pused[vm.memory.pused.{#SNMPINDEX}]</key>
-                                    </item>
-                                </graph_item>
-                            </graph_items>
-                        </graph_prototype>
-                    </graph_prototypes>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
                     <timeout>3s</timeout>
@@ -875,7 +634,7 @@ The number of currently allocated bytes.</description>
                     <name>PSU Discovery</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#ENT_CLASS},1.3.6.1.4.1.11.2.14.11.1.2.6.1.2,{#ENT_DESCR},1.3.6.1.4.1.11.2.14.11.1.2.6.1.7,{#ENT_STATUS},1.3.6.1.4.1.11.2.14.11.1.2.6.1.4]</snmp_oid>
+                    <snmp_oid>discovery[{#PSU_DESCR},1.3.6.1.4.1.2.3.51.3.1.11.2.1.2]</snmp_oid>
                     <key>psu.discovery</key>
                     <delay>1h</delay>
                     <status>0</status>
@@ -896,37 +655,24 @@ The number of currently allocated bytes.</description>
                     <privatekey/>
                     <port/>
                     <filter>
-                        <evaltype>1</evaltype>
+                        <evaltype>0</evaltype>
                         <formula/>
-                        <conditions>
-                            <condition>
-                                <macro>{#ENT_CLASS}</macro>
-                                <value>.+8.3.1$</value>
-                                <operator>8</operator>
-                                <formulaid>A</formulaid>
-                            </condition>
-                            <condition>
-                                <macro>{#ENT_STATUS}</macro>
-                                <value>(1|2|3|4)</value>
-                                <operator>8</operator>
-                                <formulaid>B</formulaid>
-                            </condition>
-                        </conditions>
+                        <conditions/>
                     </filter>
                     <lifetime>30d</lifetime>
-                    <description>Discovering all entities of hpicfSensorObjectId that ends with: 11.2.3.7.8.3.1 - power supplies and are present</description>
+                    <description>IMM-MIB::powerFruName</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>{#ENT_DESCR}: Power supply status</name>
+                            <name>{#PSU_DESCR}: Power supply status</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.4.1.11.2.14.11.1.2.6.1.4.{#SNMPINDEX}</snmp_oid>
-                            <key>sensor.psu.status[hpicfSensorStatus.{#SNMPINDEX}]</key>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.11.2.1.6.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.psu.status[powerHealthStatus.{#SNMPINDEX}]</key>
                             <delay>3m</delay>
                             <history>2w</history>
-                            <trends>0d</trends>
+                            <trends>0</trends>
                             <status>0</status>
-                            <value_type>3</value_type>
+                            <value_type>1</value_type>
                             <allowed_hosts/>
                             <units/>
                             <snmpv3_contextname/>
@@ -944,17 +690,15 @@ The number of currently allocated bytes.</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: HP-ICF-CHASSIS&#13;
-Actual status indicated by the sensor: {#ENT_DESCR}</description>
+                            <description>MIB: IMM-MIB&#13;
+A description of the power module status.</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>Power supply</name>
                                 </application>
                             </applications>
-                            <valuemap>
-                                <name>HP-ICF-CHASSIS::hpicfSensorStatus</name>
-                            </valuemap>
+                            <valuemap/>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -982,43 +726,20 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.psu.status[hpicfSensorStatus.{#SNMPINDEX}].count(#1,{$PSU_CRIT_STATUS:&quot;bad&quot;},eq)}=1</expression>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.psu.status[powerHealthStatus.{#SNMPINDEX}].count(#1,{$PSU_OK_STATUS},ne)}=1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
-                            <name>{#ENT_DESCR}: Power supply is in critical state</name>
+                            <name>{#PSU_DESCR}: Power supply is not in normal state</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
                             <status>0</status>
-                            <priority>3</priority>
+                            <priority>1</priority>
                             <description>Last value: {ITEM.LASTVALUE1}.&#13;
 Please check the power supply unit for errors</description>
                             <type>0</type>
                             <manual_close>0</manual_close>
                             <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.psu.status[hpicfSensorStatus.{#SNMPINDEX}].count(#1,{$PSU_WARN_STATUS:&quot;warning&quot;},eq)}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>{#ENT_DESCR}: Power supply is in warning state</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-Please check the power supply unit for errors</description>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies>
-                                <dependency>
-                                    <name>{#ENT_DESCR}: Power supply is in critical state</name>
-                                    <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.psu.status[hpicfSensorStatus.{#SNMPINDEX}].count(#1,{$PSU_CRIT_STATUS:&quot;bad&quot;},eq)}=1</expression>
-                                    <recovery_expression/>
-                                </dependency>
-                            </dependencies>
                             <tags/>
                         </trigger_prototype>
                     </trigger_prototypes>
@@ -1047,8 +768,8 @@ Please check the power supply unit for errors</description>
                     <name>Temperature Discovery</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#SENSOR_TYPE},1.3.6.1.2.1.99.1.1.1.1,{#SENSOR_INFO},1.3.6.1.2.1.47.1.1.1.1.2,{#SENSOR_PRECISION},1.3.6.1.2.1.99.1.1.1.3]</snmp_oid>
-                    <key>temp.precision0.discovery</key>
+                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2.3.51.3.1.1.2.1.2]</snmp_oid>
+                    <key>tempDescr.discovery</key>
                     <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
@@ -1068,32 +789,26 @@ Please check the power supply unit for errors</description>
                     <privatekey/>
                     <port/>
                     <filter>
-                        <evaltype>1</evaltype>
+                        <evaltype>0</evaltype>
                         <formula/>
                         <conditions>
                             <condition>
-                                <macro>{#SENSOR_TYPE}</macro>
-                                <value>8</value>
-                                <operator>8</operator>
-                                <formulaid>B</formulaid>
-                            </condition>
-                            <condition>
-                                <macro>{#SENSOR_PRECISION}</macro>
-                                <value>0</value>
+                                <macro>{#SNMPVALUE}</macro>
+                                <value>(DIMM|PSU|PCH|RAID|RR|PCI).*</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>30d</lifetime>
-                    <description>ENTITY-SENSORS-MIB::EntitySensorDataType discovery with celsius filter</description>
+                    <description>Scanning IMM-MIB::tempTable</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>{#SENSOR_INFO}: Temperature</name>
+                            <name>{#SNMPVALUE}: Temperature</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.2.1.99.1.1.1.4.{#SNMPINDEX}</snmp_oid>
-                            <key>sensor.temp.value[entPhySensorValue.{#SNMPINDEX}]</key>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.1.2.1.3.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.temp.value[tempReading.{#SNMPINDEX}]</key>
                             <delay>3m</delay>
                             <history>30d</history>
                             <trends>365d</trends>
@@ -1116,10 +831,8 @@ Please check the power supply unit for errors</description>
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: ENTITY-SENSORS-MIB&#13;
-The most recent measurement obtained by the agent for this sensor.&#13;
-To correctly interpret the value of this object, the associated entPhySensorType,&#13;
-entPhySensorScale, and entPhySensorPrecision objects must also be examined.</description>
+                            <description>MIB: IMM-MIB&#13;
+Temperature readings of testpoint: {#SNMPVALUE}</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
@@ -1154,10 +867,10 @@ entPhySensorScale, and entPhySensorPrecision objects must also be examined.</des
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;&quot;}</expression>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;&quot;}</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;&quot;}-3</recovery_expression>
-                            <name>{#SENSOR_INFO}: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;&quot;}</name>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;&quot;}-3</recovery_expression>
+                            <name>{#SNMPVALUE}: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;&quot;}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -1171,10 +884,10 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_WARN:&quot;&quot;}</expression>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_WARN:&quot;&quot;}</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_WARN:&quot;&quot;}-3</recovery_expression>
-                            <name>{#SENSOR_INFO}: Temperature is above warning threshold: &gt;{$TEMP_WARN:&quot;&quot;}</name>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_WARN:&quot;&quot;}-3</recovery_expression>
+                            <name>{#SNMPVALUE}: Temperature is above warning threshold: &gt;{$TEMP_WARN:&quot;&quot;}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -1186,18 +899,18 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <manual_close>0</manual_close>
                             <dependencies>
                                 <dependency>
-                                    <name>{#SENSOR_INFO}: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;&quot;}</name>
-                                    <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;&quot;}</expression>
-                                    <recovery_expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;&quot;}-3</recovery_expression>
+                                    <name>{#SNMPVALUE}: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;&quot;}</name>
+                                    <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;&quot;}</expression>
+                                    <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;&quot;}-3</recovery_expression>
                                 </dependency>
                             </dependencies>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].avg(5m)}&lt;{$TEMP_CRIT_LOW:&quot;&quot;}</expression>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].avg(5m)}&lt;{$TEMP_CRIT_LOW:&quot;&quot;}</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Net HP Enterprise Switch SNMPv2:sensor.temp.value[entPhySensorValue.{#SNMPINDEX}].min(5m)}&gt;{$TEMP_CRIT_LOW:&quot;&quot;}+3</recovery_expression>
-                            <name>{#SENSOR_INFO}: Temperature is too low: &lt;{$TEMP_CRIT_LOW:&quot;&quot;}</name>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.{#SNMPINDEX}].min(5m)}&gt;{$TEMP_CRIT_LOW:&quot;&quot;}+3</recovery_expression>
+                            <name>{#SNMPVALUE}: Temperature is too low: &lt;{$TEMP_CRIT_LOW:&quot;&quot;}</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
                             <url/>
@@ -1232,11 +945,11 @@ This trigger uses temperature sensor values as well as temperature sensor status
                     <verify_host>0</verify_host>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Temp Status Discovery</name>
+                    <name>Temperature Discovery Ambient</name>
                     <type>4</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                    <snmp_oid>discovery[{#ENT_CLASS},1.3.6.1.4.1.11.2.14.11.1.2.6.1.2,{#ENT_DESCR},1.3.6.1.4.1.11.2.14.11.1.2.6.1.7,{#ENT_STATUS},1.3.6.1.4.1.11.2.14.11.1.2.6.1.4]</snmp_oid>
-                    <key>temp.status.discovery</key>
+                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2.3.51.3.1.1.2.1.2]</snmp_oid>
+                    <key>tempDescr.discovery.ambient</key>
                     <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
@@ -1256,39 +969,33 @@ This trigger uses temperature sensor values as well as temperature sensor status
                     <privatekey/>
                     <port/>
                     <filter>
-                        <evaltype>1</evaltype>
+                        <evaltype>0</evaltype>
                         <formula/>
                         <conditions>
                             <condition>
-                                <macro>{#ENT_CLASS}</macro>
-                                <value>.+8.3.3$</value>
+                                <macro>{#SNMPVALUE}</macro>
+                                <value>Ambient.*</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
-                            </condition>
-                            <condition>
-                                <macro>{#ENT_STATUS}</macro>
-                                <value>(1|2|3|4)</value>
-                                <operator>8</operator>
-                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>
                     <lifetime>30d</lifetime>
-                    <description>Discovering all entities of hpicfSensorObjectId that ends with: 11.2.3.7.8.3.3 - over temp status and are present</description>
+                    <description>Scanning IMM-MIB::tempTable with Ambient filter</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>{#ENT_DESCR}: Temperature status</name>
+                            <name>Ambient: Temperature</name>
                             <type>4</type>
                             <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
-                            <snmp_oid>1.3.6.1.4.1.11.2.14.11.1.2.6.1.4.{#SNMPINDEX}</snmp_oid>
-                            <key>sensor.temp.status[hpicfSensorStatus.{#SNMPINDEX}]</key>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.1.2.1.3.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}]</key>
                             <delay>3m</delay>
-                            <history>2w</history>
-                            <trends>0d</trends>
+                            <history>30d</history>
+                            <trends>365d</trends>
                             <status>0</status>
-                            <value_type>3</value_type>
+                            <value_type>0</value_type>
                             <allowed_hosts/>
-                            <units/>
+                            <units>°C</units>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1304,17 +1011,15 @@ This trigger uses temperature sensor values as well as temperature sensor status
                             <publickey/>
                             <privatekey/>
                             <port/>
-                            <description>MIB: HP-ICF-CHASSIS&#13;
-Actual status indicated by the sensor: {#ENT_DESCR}</description>
+                            <description>MIB: IMM-MIB&#13;
+Temperature readings of testpoint: Ambient</description>
                             <inventory_link>0</inventory_link>
                             <applications>
                                 <application>
                                     <name>Temperature</name>
                                 </application>
                             </applications>
-                            <valuemap>
-                                <name>HP-ICF-CHASSIS::hpicfSensorStatus</name>
-                            </valuemap>
+                            <valuemap/>
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
@@ -1340,7 +1045,244 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
                             <master_item/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes/>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;Ambient&quot;}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;Ambient&quot;}-3</recovery_expression>
+                            <name>Ambient: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;Ambient&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+This trigger uses temperature sensor values as well as temperature sensor status if available</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_WARN:&quot;Ambient&quot;}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_WARN:&quot;Ambient&quot;}-3</recovery_expression>
+                            <name>Ambient: Temperature is above warning threshold: &gt;{$TEMP_WARN:&quot;Ambient&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+This trigger uses temperature sensor values as well as temperature sensor status if available</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Ambient: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;Ambient&quot;}</name>
+                                    <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;Ambient&quot;}</expression>
+                                    <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;Ambient&quot;}-3</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].avg(5m)}&lt;{$TEMP_CRIT_LOW:&quot;Ambient&quot;}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.Ambient.{#SNMPINDEX}].min(5m)}&gt;{$TEMP_CRIT_LOW:&quot;Ambient&quot;}+3</recovery_expression>
+                            <name>Ambient: Temperature is too low: &lt;{$TEMP_CRIT_LOW:&quot;Ambient&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Temperature Discovery CPU</name>
+                    <type>4</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.4.1.2.3.51.3.1.1.2.1.2]</snmp_oid>
+                    <key>tempDescr.discovery.cpu</key>
+                    <delay>1h</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions>
+                            <condition>
+                                <macro>{#SNMPVALUE}</macro>
+                                <value>CPU [0-9]* Temp</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>30d</lifetime>
+                    <description>Scanning IMM-MIB::tempTable with CPU filter</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>CPU: Temperature</name>
+                            <type>4</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>1.3.6.1.4.1.2.3.51.3.1.1.2.1.3.{#SNMPINDEX}</snmp_oid>
+                            <key>sensor.temp.value[tempReading.CPU.{#SNMPINDEX}]</key>
+                            <delay>3m</delay>
+                            <history>30d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>°C</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>MIB: IMM-MIB&#13;
+Temperature readings of testpoint: CPU</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Temperature</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;CPU&quot;}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;CPU&quot;}-3</recovery_expression>
+                            <name>CPU: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;CPU&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+This trigger uses temperature sensor values as well as temperature sensor status if available</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_WARN:&quot;CPU&quot;}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_WARN:&quot;CPU&quot;}-3</recovery_expression>
+                            <name>CPU: Temperature is above warning threshold: &gt;{$TEMP_WARN:&quot;CPU&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+This trigger uses temperature sensor values as well as temperature sensor status if available</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>CPU: Temperature is above critical threshold: &gt;{$TEMP_CRIT:&quot;CPU&quot;}</name>
+                                    <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].avg(5m)}&gt;{$TEMP_CRIT:&quot;CPU&quot;}</expression>
+                                    <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].max(5m)}&lt;{$TEMP_CRIT:&quot;CPU&quot;}-3</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].avg(5m)}&lt;{$TEMP_CRIT_LOW:&quot;CPU&quot;}</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Server IBM IMM SNMPv2:sensor.temp.value[tempReading.CPU.{#SNMPINDEX}].min(5m)}&gt;{$TEMP_CRIT_LOW:&quot;CPU&quot;}+3</recovery_expression>
+                            <name>CPU: Temperature is too low: &lt;{$TEMP_CRIT_LOW:&quot;CPU&quot;}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description>Last value: {ITEM.LASTVALUE1}.</description>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
                     <graph_prototypes/>
                     <host_prototypes/>
                     <jmx_endpoint/>
@@ -1366,59 +1308,53 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
             <httptests/>
             <macros>
                 <macro>
-                    <macro>{$CPU_UTIL_MAX}</macro>
-                    <value>90</value>
+                    <macro>{$DISK_OK_STATUS}</macro>
+                    <value>Normal</value>
                 </macro>
                 <macro>
-                    <macro>{$FAN_CRIT_STATUS:&quot;bad&quot;}</macro>
+                    <macro>{$FAN_OK_STATUS}</macro>
+                    <value>Normal</value>
+                </macro>
+                <macro>
+                    <macro>{$HEALTH_CRIT_STATUS}</macro>
                     <value>2</value>
                 </macro>
                 <macro>
-                    <macro>{$FAN_WARN_STATUS:&quot;warning&quot;}</macro>
-                    <value>3</value>
+                    <macro>{$HEALTH_DISASTER_STATUS}</macro>
+                    <value>0</value>
                 </macro>
                 <macro>
-                    <macro>{$MEMORY_UTIL_MAX}</macro>
-                    <value>90</value>
+                    <macro>{$HEALTH_WARN_STATUS}</macro>
+                    <value>4</value>
                 </macro>
                 <macro>
-                    <macro>{$PSU_CRIT_STATUS:&quot;bad&quot;}</macro>
-                    <value>2</value>
-                </macro>
-                <macro>
-                    <macro>{$PSU_WARN_STATUS:&quot;warning&quot;}</macro>
-                    <value>3</value>
+                    <macro>{$PSU_OK_STATUS}</macro>
+                    <value>Normal</value>
                 </macro>
                 <macro>
                     <macro>{$TEMP_CRIT}</macro>
                     <value>60</value>
                 </macro>
                 <macro>
-                    <macro>{$TEMP_CRIT_LOW}</macro>
-                    <value>5</value>
+                    <macro>{$TEMP_CRIT:&quot;Ambient&quot;}</macro>
+                    <value>35</value>
                 </macro>
                 <macro>
-                    <macro>{$TEMP_CRIT_STATUS}</macro>
-                    <value>2</value>
+                    <macro>{$TEMP_CRIT_LOW}</macro>
+                    <value>5</value>
                 </macro>
                 <macro>
                     <macro>{$TEMP_WARN}</macro>
                     <value>50</value>
                 </macro>
                 <macro>
-                    <macro>{$TEMP_WARN_STATUS}</macro>
-                    <value>3</value>
+                    <macro>{$TEMP_WARN:&quot;Ambient&quot;}</macro>
+                    <value>30</value>
                 </macro>
             </macros>
             <templates>
                 <template>
-                    <name>Template Module EtherLike-MIB SNMPv2</name>
-                </template>
-                <template>
                     <name>Template Module Generic SNMPv2</name>
-                </template>
-                <template>
-                    <name>Template Module Interfaces SNMPv2</name>
                 </template>
             </templates>
             <screens/>
@@ -1426,7 +1362,7 @@ Actual status indicated by the sensor: {#ENT_DESCR}</description>
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template Net HP Enterprise Switch SNMPv2:system.hw.serialnumber.diff()}=1 and {Template Net HP Enterprise Switch SNMPv2:system.hw.serialnumber.strlen()}&gt;0</expression>
+            <expression>{Template Server IBM IMM SNMPv2:system.hw.serialnumber.diff()}=1 and {Template Server IBM IMM SNMPv2:system.hw.serialnumber.strlen()}&gt;0</expression>
             <recovery_mode>2</recovery_mode>
             <recovery_expression/>
             <name>Device has been replaced (new serial number received)</name>
@@ -1443,96 +1379,93 @@ Device serial number has changed. Ack to close</description>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Net HP Enterprise Switch SNMPv2:system.hw.firmware.diff()}=1 and {Template Net HP Enterprise Switch SNMPv2:system.hw.firmware.strlen()}&gt;0</expression>
-            <recovery_mode>2</recovery_mode>
-            <recovery_expression/>
-            <name>Firmware has changed</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>1</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.&#13;
-Firmware version has changed. Ack to close</description>
-            <type>0</type>
-            <manual_close>1</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
-        <trigger>
-            <expression>{Template Net HP Enterprise Switch SNMPv2:system.cpu.util[hpSwitchCpuStat.0].avg(5m)}&gt;{$CPU_UTIL_MAX}</expression>
+            <expression>{Template Server IBM IMM SNMPv2:system.status[systemHealthStat.0].count(#1,{$HEALTH_DISASTER_STATUS},eq)}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>High CPU utilization</name>
+            <name>System is in unrecoverable state!</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
             <status>0</status>
-            <priority>3</priority>
-            <description>Last value: {ITEM.LASTVALUE1}.</description>
+            <priority>4</priority>
+            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+Please check the device for faults</description>
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
-    </triggers>
-    <graphs>
-        <graph>
-            <name>CPU utilization</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
+        <trigger>
+            <expression>{Template Server IBM IMM SNMPv2:system.status[systemHealthStat.0].count(#1,{$HEALTH_CRIT_STATUS},eq)}=1</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>System status is in critical state</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+Please check the device for errors</description>
             <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
-            <ymax_type_1>1</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>5</drawtype>
-                    <color>1A7C11</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template Net HP Enterprise Switch SNMPv2</host>
-                        <key>system.cpu.util[hpSwitchCpuStat.0]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-    </graphs>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>System is in unrecoverable state!</name>
+                    <expression>{Template Server IBM IMM SNMPv2:system.status[systemHealthStat.0].count(#1,{$HEALTH_DISASTER_STATUS},eq)}=1</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template Server IBM IMM SNMPv2:system.status[systemHealthStat.0].count(#1,{$HEALTH_WARN_STATUS},eq)}=1</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>System status is in warning state</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description>Last value: {ITEM.LASTVALUE1}.&#13;
+Please check the device for warnings</description>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>System is in unrecoverable state!</name>
+                    <expression>{Template Server IBM IMM SNMPv2:system.status[systemHealthStat.0].count(#1,{$HEALTH_DISASTER_STATUS},eq)}=1</expression>
+                    <recovery_expression/>
+                </dependency>
+                <dependency>
+                    <name>System status is in critical state</name>
+                    <expression>{Template Server IBM IMM SNMPv2:system.status[systemHealthStat.0].count(#1,{$HEALTH_CRIT_STATUS},eq)}=1</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+    </triggers>
     <value_maps>
         <value_map>
-            <name>HP-ICF-CHASSIS::hpicfSensorStatus</name>
+            <name>IMM-MIB::systemHealthStat</name>
             <mappings>
                 <mapping>
-                    <value>1</value>
-                    <newvalue>unknown</newvalue>
+                    <value>0</value>
+                    <newvalue>nonRecoverable</newvalue>
                 </mapping>
                 <mapping>
                     <value>2</value>
-                    <newvalue>bad</newvalue>
-                </mapping>
-                <mapping>
-                    <value>3</value>
-                    <newvalue>warning</newvalue>
+                    <newvalue>critical</newvalue>
                 </mapping>
                 <mapping>
                     <value>4</value>
-                    <newvalue>good</newvalue>
+                    <newvalue>nonCritical</newvalue>
                 </mapping>
                 <mapping>
-                    <value>5</value>
-                    <newvalue>notPresent</newvalue>
+                    <value>255</value>
+                    <newvalue>normal</newvalue>
                 </mapping>
             </mappings>
         </value_map>
