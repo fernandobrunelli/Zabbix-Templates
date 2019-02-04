@@ -1037,7 +1037,7 @@
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>%</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1273,7 +1273,7 @@
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>%</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1979,7 +1979,7 @@
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Zabbix cache usage, % free</name>
+                                <name>Zabbix cache usage, % used</name>
                                 <host>Template App Zabbix Proxy</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -2362,7 +2362,7 @@
     </triggers>
     <graphs>
         <graph>
-            <name>Zabbix cache usage, % free</name>
+            <name>Zabbix cache usage, % used</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
