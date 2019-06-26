@@ -1748,9 +1748,9 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>vps</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1779,6 +1779,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.vcache.cache.hits</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -1814,9 +1818,9 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>vps</units>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -1845,6 +1849,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.vcache.cache.misses</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -1905,7 +1913,9 @@
                             <name>Zabbix server</name>
                         </application>
                     </applications>
-                    <valuemap/>
+                    <valuemap>
+                        <name>Value cache operating mode</name>
+                    </valuemap>
                     <logtimefmt/>
                     <preprocessing>
                         <step>
@@ -2210,7 +2220,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2241,6 +2251,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values.all</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -2276,7 +2290,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2307,6 +2321,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values.float</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -2342,7 +2360,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2373,6 +2391,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values.log</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -2408,7 +2430,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2439,6 +2461,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values['not supported']</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -2474,7 +2500,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2505,6 +2531,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values.str</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -2540,7 +2570,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2571,6 +2601,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values.text</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -2606,7 +2640,7 @@
                     <history>1w</history>
                     <trends>365d</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <snmpv3_contextname/>
@@ -2637,6 +2671,10 @@
                         <step>
                             <type>12</type>
                             <params>$.data.wcache.values.uint</params>
+                        </step>
+                        <step>
+                            <type>10</type>
+                            <params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -4034,4 +4072,19 @@
             </graph_items>
         </graph>
     </graphs>
+    <value_maps>
+        <value_map>
+            <name>Value cache operating mode</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Normal</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Low memory</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
 </zabbix_export>
