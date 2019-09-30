@@ -925,13 +925,13 @@ This trigger uses temperature sensor values as well as temperature sensor status
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+4$</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+hrStorageFixedDisk</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>

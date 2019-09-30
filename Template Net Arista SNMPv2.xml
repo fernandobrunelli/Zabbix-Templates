@@ -487,13 +487,13 @@ Please check the fan unit</description>
                                 <macro>{#DEVICE_TYPE}</macro>
                                 <value>.+3$</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#DEVICE_TYPE}</macro>
                                 <value>.+hrDeviceProcessor</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>
@@ -1300,13 +1300,13 @@ Please check the power supply unit for errors</description>
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+(4|9)$</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+(hrStorageFixedDisk|hrStorageFlashMemory)</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>

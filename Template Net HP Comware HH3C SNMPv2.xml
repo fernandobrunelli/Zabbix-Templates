@@ -620,13 +620,13 @@ Please check the fan unit</description>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>^(MODULE|Module) (LEVEL|level)1$</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>(Fabric|FABRIC) (.+) (Module|MODULE)</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>
@@ -1056,7 +1056,7 @@ Please check the power supply unit for errors</description>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>^(MODULE|Module) (LEVEL|level)1$</value>
                                 <operator>8</operator>
-                                <formulaid>C</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#SNMPVALUE}</macro>
@@ -1068,7 +1068,7 @@ Please check the power supply unit for errors</description>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>(T|t)emperature.*(s|S)ensor</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>C</formulaid>
                             </condition>
                         </conditions>
                     </filter>

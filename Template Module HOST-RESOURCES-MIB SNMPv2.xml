@@ -233,13 +233,13 @@ Implementations may approximate this one minute smoothing period if necessary.</
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+2$</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+hrStorageRam</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>
@@ -718,13 +718,13 @@ this number will commonly be greater than one. Otherwise this number will typica
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+(4|9)</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#STORAGE_TYPE}</macro>
                                 <value>.+(hrStorageFixedDisk|hrStorageFlashMemory)</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                         </conditions>
                     </filter>
