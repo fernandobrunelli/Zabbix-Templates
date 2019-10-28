@@ -620,13 +620,13 @@ Please check the fan unit</description>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>^(MODULE|Module) (LEVEL|level)1$</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>(Fabric|FABRIC) (.+) (Module|MODULE)</value>
                                 <operator>8</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
@@ -1056,7 +1056,7 @@ Please check the power supply unit for errors</description>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>^(MODULE|Module) (LEVEL|level)1$</value>
                                 <operator>8</operator>
-                                <formulaid>A</formulaid>
+                                <formulaid>C</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#SNMPVALUE}</macro>
@@ -1068,7 +1068,7 @@ Please check the power supply unit for errors</description>
                                 <macro>{#SNMPVALUE}</macro>
                                 <value>(T|t)emperature.*(s|S)ensor</value>
                                 <operator>8</operator>
-                                <formulaid>C</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
@@ -1295,55 +1295,55 @@ This trigger uses temperature sensor values as well as temperature sensor status
                     <newvalue>entityAbsent</newvalue>
                 </mapping>
                 <mapping>
-                    <value>5</value>
+                    <value>11</value>
                     <newvalue>poeError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>6</value>
+                    <value>21</value>
                     <newvalue>stackError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>7</value>
+                    <value>22</value>
                     <newvalue>stackPortBlocked</newvalue>
                 </mapping>
                 <mapping>
-                    <value>8</value>
+                    <value>23</value>
                     <newvalue>stackPortFailed</newvalue>
                 </mapping>
                 <mapping>
-                    <value>9</value>
+                    <value>31</value>
                     <newvalue>sfpRecvError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>10</value>
+                    <value>32</value>
                     <newvalue>sfpSendError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>11</value>
+                    <value>33</value>
                     <newvalue>sfpBothError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>12</value>
+                    <value>41</value>
                     <newvalue>fanError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>13</value>
+                    <value>51</value>
                     <newvalue>psuError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>14</value>
+                    <value>61</value>
                     <newvalue>rpsError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>15</value>
+                    <value>71</value>
                     <newvalue>moduleFaulty</newvalue>
                 </mapping>
                 <mapping>
-                    <value>16</value>
+                    <value>81</value>
                     <newvalue>sensorError</newvalue>
                 </mapping>
                 <mapping>
-                    <value>17</value>
+                    <value>91</value>
                     <newvalue>hardwareFaulty</newvalue>
                 </mapping>
             </mappings>
