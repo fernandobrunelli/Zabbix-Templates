@@ -8,8 +8,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template Module HOST-RESOURCES-MIB CPU SNMPv2</template>
-            <name>Template Module HOST-RESOURCES-MIB CPU SNMPv2</name>
+            <template>Template Module HOST-RESOURCES-MIB CPU SNMPv1</template>
+            <name>Template Module HOST-RESOURCES-MIB CPU SNMPv1</name>
             <description>Requires Zabbix server 4.0.14, 4.2.8, 4.4.0 or newer (JSONPath function avg() used with types autoconversion).&#13;
 &#13;
 MIBs used:&#13;
@@ -29,7 +29,7 @@ Template tooling version used: 0.33</description>
             <items>
                 <item>
                     <name>CPU utilization</name>
-                    <type>4</type>
+                    <type>1</type>
                     <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
                     <snmp_oid>discovery[{#CPU.UTIL},1.3.6.1.2.1.25.3.3.1.2]</snmp_oid>
                     <key>system.cpu.util</key>
@@ -108,7 +108,7 @@ Implementations may approximate this one minute smoothing period if necessary.</
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template Module HOST-RESOURCES-MIB CPU SNMPv2:system.cpu.util.min(5m)}&gt;{$CPU.UTIL.CRIT}</expression>
+            <expression>{Template Module HOST-RESOURCES-MIB CPU SNMPv1:system.cpu.util.min(5m)}&gt;{$CPU.UTIL.CRIT}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>High CPU utilization (over {$CPU.UTIL.CRIT}% for 5m)</name>
@@ -152,7 +152,7 @@ CPU utilization is too high. The system might be slow to respond.</description>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template Module HOST-RESOURCES-MIB CPU SNMPv2</host>
+                        <host>Template Module HOST-RESOURCES-MIB CPU SNMPv1</host>
                         <key>system.cpu.util</key>
                     </item>
                 </graph_item>
