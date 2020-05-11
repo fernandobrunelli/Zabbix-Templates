@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Windows physical disks by Zabbix agent active</template>
+            <name>Template Module Windows physical disks by Zabbix agent active</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Storage</name>
+                </application>
+                <application>
+                    <name>Zabbix raw items</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Physical disks WMI get</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>wmi.getall[root\cimv2,&quot;select * from win32_perfformatteddata_perfdisk_physicaldisk&quot;]</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Raw data of win32_perfformatteddata_perfdisk_physicaldisk.</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Physical disks discovery</name>
+                    <type>DEPENDENT</type>
+                    <key>vfs.dev.discovery</key>
+                    <delay>0</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#DEVNAME}</macro>
+                                <value>{$VFS.DEV.DEVNAME.MATCHES}</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#DEVNAME}</macro>
+                                <value>{$VFS.DEV.DEVNAME.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <description>Discovery of installed physical disks.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk average queue size (avgqu-sz)</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.queue_size[CurrentDiskQueueLength.{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Current average disk queue, the number of requests outstanding on the disk at the time the performance data is collected.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#DEVNAME}&quot;)].CurrentDiskQueueLength.first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_perfformatteddata_perfdisk_physicaldisk&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk read rate</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.read.rate[DiskReadsPersec.{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <units>!r/s</units>
+                            <description>Rate of read operations on the disk.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#DEVNAME}&quot;)].DiskReadsPersec.first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_perfformatteddata_perfdisk_physicaldisk&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk utilization</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.util[PercentDiskTime.{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <description>This item is the percentage of elapsed time that the selected disk drive was busy servicing read or writes requests.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#DEVNAME}&quot;)].PercentDiskTime.first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_perfformatteddata_perfdisk_physicaldisk&quot;]</key>
+                            </master_item>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{min(15m)}&gt;{$VFS.DEV.UTIL.MAX.WARN}</expression>
+                                    <name>{#DEVNAME}: Disk is overloaded (util &gt; {$VFS.DEV.UTIL.MAX.WARN}% for 15m)</name>
+                                    <priority>WARNING</priority>
+                                    <description>The disk appears to be under heavy load</description>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk write rate</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.write.rate[DiskWritesPersec.{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <units>!w/s</units>
+                            <description>Rate of write operations on the disk.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#DEVNAME}&quot;)].DiskWritesPersec.first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_perfformatteddata_perfdisk_physicaldisk&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>{#DEVNAME}: Disk read/write rates</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Template Module Windows physical disks by Zabbix agent active</host>
+                                        <key>vfs.dev.read.rate[DiskReadsPersec.{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Module Windows physical disks by Zabbix agent active</host>
+                                        <key>vfs.dev.write.rate[DiskWritesPersec.{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>{#DEVNAME}: Disk utilization and queue</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <item>
+                                        <host>Template Module Windows physical disks by Zabbix agent active</host>
+                                        <key>vfs.dev.queue_size[CurrentDiskQueueLength.{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Module Windows physical disks by Zabbix agent active</host>
+                                        <key>vfs.dev.util[PercentDiskTime.{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <master_item>
+                        <key>wmi.getall[root\cimv2,&quot;select * from win32_perfformatteddata_perfdisk_physicaldisk&quot;]</key>
+                    </master_item>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>output = JSON.parse(value).map(function(dev){
+    return {
+        &quot;{#DEVNAME}&quot;: dev.Name,
+        &quot;{#DEVQUEUE}&quot;: dev.CurrentDiskQueueLength,
+        &quot;{#DEVREADS}&quot;: dev.DiskReadsPersec,
+        &quot;{#DEVTIME}&quot;: dev.PercentDiskTime,
+        &quot;{#DEVWRITES}&quot;: dev.DiskWritesPersec
+    }})
+return JSON.stringify({&quot;data&quot;: output})</params>
+                        </step>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$VFS.DEV.DEVNAME.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>This macro is used in physical disks discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.DEV.DEVNAME.NOT_MATCHES}</macro>
+                    <value>_Total</value>
+                    <description>This macro is used in physical disks discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.DEV.UTIL.MAX.WARN}</macro>
+                    <value>95</value>
+                    <description>The warning threshold of disk time utilization in percent.</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

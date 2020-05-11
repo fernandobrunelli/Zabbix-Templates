@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Linux block devices by Zabbix agent</template>
+            <name>Template Module Linux block devices by Zabbix agent</name>
+            <description>Known Issues:&#13;
+&#13;
+  Description: If having problems accessing /proc/diskstats on CloudLinux, please read this https://docs.cloudlinux.com/cloudlinux_os_kernel/#virtualized-proc-filesystem.&#13;
+  Device: CloudLinux&#13;
+&#13;
+Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Storage</name>
+                </application>
+                <application>
+                    <name>Zabbix raw items</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Get /proc/diskstats</name>
+                    <key>vfs.file.contents[/proc/diskstats]</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Get contents of /proc/diskstats for discovery and disk stats.</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>var parsed = value.split(&quot;\n&quot;).reduce(function(acc, x, i) {
+  parts = x.trim().split(/ +/)
+  acc[&quot;values&quot;][parts[2]] = parts
+  acc[&quot;lld&quot;].push({&quot;{#DEVNAME}&quot;:parts[2]})
+  return acc;
+}, {&quot;values&quot;:{}, &quot;lld&quot;: []});
+
+return JSON.stringify(parsed);</params>
+                        </step>
+                    </preprocessing>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Block devices discovery</name>
+                    <type>DEPENDENT</type>
+                    <key>vfs.dev.discovery</key>
+                    <delay>0</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#DEVNAME}</macro>
+                                <value>{$VFS.DEV.DEVNAME.MATCHES}</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#DEVNAME}</macro>
+                                <value>{$VFS.DEV.DEVNAME.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk average queue size (avgqu-sz)</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.queue_size[{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Current average disk queue, the number of requests outstanding on the disk at the time the performance data is collected.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.values['{#DEVNAME}'][13]</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.001</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vfs.file.contents[/proc/diskstats]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk read request avg waiting time (r_await)</name>
+                            <type>CALCULATED</type>
+                            <key>vfs.dev.read.await[{#DEVNAME}]</key>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>!ms</units>
+                            <params>(last(&quot;vfs.dev.read.time.rate[{#DEVNAME}]&quot;)/(last(&quot;vfs.dev.read.rate[{#DEVNAME}]&quot;)+(last(&quot;vfs.dev.read.rate[{#DEVNAME}]&quot;)=0)))*1000*(last(&quot;vfs.dev.read.rate[{#DEVNAME}]&quot;) &gt; 0)</params>
+                            <description>This formula contains two boolean expressions that evaluates to 1 or 0 in order to set calculated metric to zero and to avoid division by zero exception.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk read rate</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.read.rate[{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>!r/s</units>
+                            <description>r/s. The number (after merges) of read requests completed per second for the device.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.values['{#DEVNAME}'][3]</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vfs.file.contents[/proc/diskstats]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk read time (rate)</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.read.time.rate[{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of total read time counter. Used in r_await calculation</description>
+                            <applications>
+                                <application>
+                                    <name>Zabbix raw items</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.values['{#DEVNAME}'][6]</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.001</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vfs.file.contents[/proc/diskstats]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk utilization</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.util[{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <description>This item is the percentage of elapsed time that the selected disk drive was busy servicing read or writes requests.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.values['{#DEVNAME}'][12]</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.1</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vfs.file.contents[/proc/diskstats]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk write request avg waiting time (w_await)</name>
+                            <type>CALCULATED</type>
+                            <key>vfs.dev.write.await[{#DEVNAME}]</key>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>!ms</units>
+                            <params>(last(&quot;vfs.dev.write.time.rate[{#DEVNAME}]&quot;)/(last(&quot;vfs.dev.write.rate[{#DEVNAME}]&quot;)+(last(&quot;vfs.dev.write.rate[{#DEVNAME}]&quot;)=0)))*1000*(last(&quot;vfs.dev.write.rate[{#DEVNAME}]&quot;) &gt; 0)</params>
+                            <description>This formula contains two boolean expressions that evaluates to 1 or 0 in order to set calculated metric to zero and to avoid division by zero exception.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk write rate</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.write.rate[{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>!w/s</units>
+                            <description>w/s. The number (after merges) of write requests completed per second for the device.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Disk {#DEVNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.values['{#DEVNAME}'][7]</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vfs.file.contents[/proc/diskstats]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Disk write time (rate)</name>
+                            <type>DEPENDENT</type>
+                            <key>vfs.dev.write.time.rate[{#DEVNAME}]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of total write time counter. Used in w_await calculation</description>
+                            <applications>
+                                <application>
+                                    <name>Zabbix raw items</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$.values['{#DEVNAME}'][10]</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.001</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vfs.file.contents[/proc/diskstats]</key>
+                            </master_item>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template Module Linux block devices by Zabbix agent:vfs.dev.read.await[{#DEVNAME}].min(15m)} &gt; {$VFS.DEV.READ.AWAIT.WARN:&quot;{#DEVNAME}&quot;} or {Template Module Linux block devices by Zabbix agent:vfs.dev.write.await[{#DEVNAME}].min(15m)} &gt; {$VFS.DEV.WRITE.AWAIT.WARN:&quot;{#DEVNAME}&quot;}</expression>
+                            <name>{#DEVNAME}: Disk read/write request responses are too high (read &gt; {$VFS.DEV.READ.AWAIT.WARN:&quot;{#DEVNAME}&quot;} ms for 15m or write &gt; {$VFS.DEV.WRITE.AWAIT.WARN:&quot;{#DEVNAME}&quot;} ms for 15m)</name>
+                            <priority>WARNING</priority>
+                            <description>This trigger might indicate disk {#DEVNAME} saturation.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>{#DEVNAME}: Disk average waiting time</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Template Module Linux block devices by Zabbix agent</host>
+                                        <key>vfs.dev.read.await[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Module Linux block devices by Zabbix agent</host>
+                                        <key>vfs.dev.write.await[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>{#DEVNAME}: Disk read/write rates</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Template Module Linux block devices by Zabbix agent</host>
+                                        <key>vfs.dev.read.rate[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Module Linux block devices by Zabbix agent</host>
+                                        <key>vfs.dev.write.rate[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>{#DEVNAME}: Disk utilization and queue</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <item>
+                                        <host>Template Module Linux block devices by Zabbix agent</host>
+                                        <key>vfs.dev.queue_size[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Module Linux block devices by Zabbix agent</host>
+                                        <key>vfs.dev.util[{#DEVNAME}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <master_item>
+                        <key>vfs.file.contents[/proc/diskstats]</key>
+                    </master_item>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.lld</params>
+                        </step>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$VFS.DEV.DEVNAME.MATCHES}</macro>
+                    <value>.+</value>
+                    <description>This macro is used in block devices discovery. Can be overridden on the host or linked template level</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.DEV.DEVNAME.NOT_MATCHES}</macro>
+                    <value>^(loop[0-9]*|sd[a-z][0-9]+|nbd[0-9]+|sr[0-9]+|fd[0-9]+|dm-[0-9]+|ram[0-9]+|ploop[a-z0-9]+|md[0-9]*|hcp[0-9]*|zram[0-9]*)</value>
+                    <description>This macro is used in block devices discovery. Can be overridden on the host or linked template level</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.DEV.READ.AWAIT.WARN}</macro>
+                    <value>20</value>
+                    <description>Disk read average response time (in ms) before the trigger would fire</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.DEV.WRITE.AWAIT.WARN}</macro>
+                    <value>20</value>
+                    <description>Disk write average response time (in ms) before the trigger would fire</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

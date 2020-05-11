@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Operating systems</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template OS Linux by Zabbix agent</template>
+            <name>Template OS Linux by Zabbix agent</name>
+            <description>Official Linux template. Requires agent of Zabbix 3.0.14, 3.4.5 and 4.0.0 or newer.&#13;
+&#13;
+Known Issues:&#13;
+&#13;
+  Description: Network discovery. Zabbix agent as of 4.2 doesn't support items such as net.if.status, net.if.speed.&#13;
+&#13;
+You can discuss this template or leave feedback on our forum https://www.zabbix.com/forum/zabbix-suggestions-and-feedback/387225-discussion-thread-for-official-zabbix-template-for-linux&#13;
+&#13;
+Template tooling version used: 0.34</description>
+            <templates>
+                <template>
+                    <name>Template Module Linux block devices by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux CPU by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux filesystems by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux generic by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux memory by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Linux network interfaces by Zabbix agent</name>
+                </template>
+                <template>
+                    <name>Template Module Zabbix agent</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Templates/Operating systems</name>
+                </group>
+            </groups>
+            <screens>
+                <screen>
+                    <name>System performance</name>
+                    <hsize>2</hsize>
+                    <vsize>7</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>System load</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>CPU usage</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>Memory usage</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>Swap usage</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#FSNAME}: Disk space usage</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>2</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#DEVNAME}: Disk read/write rates</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>3</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#DEVNAME}: Disk average waiting time</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>4</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#DEVNAME}: Disk utilization and queue</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>5</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>Interface {#IFNAME}: Network traffic</name>
+                                <host>Template OS Linux by Zabbix agent</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>6</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+            </screens>
+        </template>
+    </templates>
+</zabbix_export>

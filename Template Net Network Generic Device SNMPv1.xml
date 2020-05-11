@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.0</version>
+    <version>5.0</version>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -10,18 +10,9 @@
         <template>
             <template>Template Net Network Generic Device SNMPv1</template>
             <name>Template Net Network Generic Device SNMPv1</name>
-            <description>Template Net Network Generic Device version: 0.15&#13;
-Overview: Use this template if you can't find the template for specific vendor or device family.</description>
-            <groups>
-                <group>
-                    <name>Templates/Network devices</name>
-                </group>
-            </groups>
-            <applications/>
-            <items/>
-            <discovery_rules/>
-            <httptests/>
-            <macros/>
+            <description>Template Net Network Generic Device&#13;
+&#13;
+Template tooling version used: 0.34</description>
             <templates>
                 <template>
                     <name>Template Module EtherLike-MIB SNMPv1</name>
@@ -33,7 +24,11 @@ Overview: Use this template if you can't find the template for specific vendor o
                     <name>Template Module Interfaces Simple SNMPv1</name>
                 </template>
             </templates>
-            <screens/>
+            <groups>
+                <group>
+                    <name>Templates/Network devices</name>
+                </group>
+            </groups>
         </template>
     </templates>
 </zabbix_export>

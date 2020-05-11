@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Windows generic by Zabbix agent</template>
+            <name>Template Module Windows generic by Zabbix agent</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>General</name>
+                </application>
+                <application>
+                    <name>Inventory</name>
+                </application>
+                <application>
+                    <name>Status</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Number of threads</name>
+                    <key>perf_counter_en[&quot;\System\Threads&quot;]</key>
+                    <history>7d</history>
+                    <description>The number of threads used by all running processes.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Number of processes</name>
+                    <key>proc.num[]</key>
+                    <history>7d</history>
+                    <description>The number of processes.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>System name</name>
+                    <key>system.hostname</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>System host name.</description>
+                    <inventory_link>NAME</inventory_link>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <name>System name has changed (new name: {ITEM.VALUE})</name>
+                            <priority>INFO</priority>
+                            <description>System name has changed. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>System local time</name>
+                    <key>system.localtime</key>
+                    <history>7d</history>
+                    <units>unixtime</units>
+                    <description>System local time of the host.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{fuzzytime({$SYSTEM.FUZZYTIME.MAX})}=0</expression>
+                            <name>System time is out of sync (diff with Zabbix server &gt; {$SYSTEM.FUZZYTIME.MAX}s)</name>
+                            <priority>WARNING</priority>
+                            <description>The host system time is different from the Zabbix server time.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Operating system architecture</name>
+                    <key>system.sw.arch</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>Operating system architecture of the host.</description>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>System description</name>
+                    <key>system.uname</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>System description of the host.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Uptime</name>
+                    <key>system.uptime</key>
+                    <delay>30s</delay>
+                    <history>2w</history>
+                    <trends>0d</trends>
+                    <units>uptime</units>
+                    <description>System uptime in 'N days, hh:mm:ss' format.</description>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;10m</expression>
+                            <name>Host has been restarted (uptime &lt; 10m)</name>
+                            <priority>WARNING</priority>
+                            <description>The device uptime is less than 10 minutes.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$SYSTEM.FUZZYTIME.MAX}</macro>
+                    <value>60</value>
+                    <description>The threshold for difference of system time in seconds.</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Linux CPU by Zabbix agent</template>
+            <name>Template Module Linux CPU by Zabbix agent</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>CPU</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Interrupts per second</name>
+                    <key>system.cpu.intr</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <params/>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Load average (1m avg)</name>
+                    <key>system.cpu.load[all,avg1]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Load average (5m avg)</name>
+                    <key>system.cpu.load[all,avg5]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Load average (15m avg)</name>
+                    <key>system.cpu.load[all,avg15]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Number of CPUs</name>
+                    <key>system.cpu.num</key>
+                    <history>7d</history>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Context switches per second</name>
+                    <key>system.cpu.switches</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <params/>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>CPU utilization</name>
+                    <type>DEPENDENT</type>
+                    <key>system.cpu.util</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>CPU utilization in %</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>//Calculate utilization
+return (100 - value)</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>system.cpu.util[,idle]</key>
+                    </master_item>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$CPU.UTIL.CRIT}</expression>
+                            <name>High CPU utilization (over {$CPU.UTIL.CRIT}% for 5m)</name>
+                            <opdata>Current utilization: {ITEM.LASTVALUE1}</opdata>
+                            <priority>WARNING</priority>
+                            <description>CPU utilization is too high. The system might be slow to respond.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)</name>
+                                    <expression>{Template Module Linux CPU by Zabbix agent:system.cpu.load[all,avg1].min(5m)}/{Template Module Linux CPU by Zabbix agent:system.cpu.num.last()}&gt;{$LOAD_AVG_PER_CPU.MAX.WARN}&#13;
+and {Template Module Linux CPU by Zabbix agent:system.cpu.load[all,avg5].last()}&gt;0&#13;
+and {Template Module Linux CPU by Zabbix agent:system.cpu.load[all,avg15].last()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>CPU guest time</name>
+                    <key>system.cpu.util[,guest]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Guest  time (time  spent  running  a  virtual  CPU  for  a  guest  operating  system)</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU guest nice time</name>
+                    <key>system.cpu.util[,guest_nice]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Time spent running a niced guest (virtual CPU for guest operating systems under the control of the Linux kernel)</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU idle time</name>
+                    <key>system.cpu.util[,idle]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The time the CPU has spent doing nothing.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU interrupt time</name>
+                    <key>system.cpu.util[,interrupt]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The amount of time the CPU has been servicing hardware interrupts.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU iowait time</name>
+                    <key>system.cpu.util[,iowait]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Amount of time the CPU has been waiting for I/O to complete.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU nice time</name>
+                    <key>system.cpu.util[,nice]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The time the CPU has spent running users' processes that have been niced.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU softirq time</name>
+                    <key>system.cpu.util[,softirq]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The amount of time the CPU has been servicing software interrupts.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU steal time</name>
+                    <key>system.cpu.util[,steal]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The amount of CPU 'stolen' from this virtual machine by the hypervisor for other tasks (such as running another virtual machine).</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU system time</name>
+                    <key>system.cpu.util[,system]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The time the CPU has spent running the kernel and its processes.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>CPU user time</name>
+                    <key>system.cpu.util[,user]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The time the CPU has spent running users' processes that are not niced.</description>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$CPU.UTIL.CRIT}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$LOAD_AVG_PER_CPU.MAX.WARN}</macro>
+                    <value>1.5</value>
+                    <description>Load per CPU considered sustainable. Tune if needed.</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template Module Linux CPU by Zabbix agent:system.cpu.load[all,avg1].min(5m)}/{Template Module Linux CPU by Zabbix agent:system.cpu.num.last()}&gt;{$LOAD_AVG_PER_CPU.MAX.WARN}&#13;
+and {Template Module Linux CPU by Zabbix agent:system.cpu.load[all,avg5].last()}&gt;0&#13;
+and {Template Module Linux CPU by Zabbix agent:system.cpu.load[all,avg15].last()}&gt;0</expression>
+            <name>Load average is too high (per CPU load over {$LOAD_AVG_PER_CPU.MAX.WARN} for 5m)</name>
+            <opdata>Load averages(1m 5m 15m): ({ITEM.LASTVALUE1} {ITEM.LASTVALUE3} {ITEM.LASTVALUE4}), # of CPUs: {ITEM.LASTVALUE2}</opdata>
+            <priority>AVERAGE</priority>
+            <description>Per CPU load average is too high. Your system may be slow to respond.</description>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>CPU jumps</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.switches</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.intr</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>CPU usage</name>
+            <type>STACKED</type>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,system]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,user]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,nice]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>A54F10</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,iowait]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>FC6EA3</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,steal]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>6C59DC</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,interrupt]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>AC8C14</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,softirq]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>611F27</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,guest]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>8</sortorder>
+                    <color>F230E0</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util[,guest_nice]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>CPU utilization</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.util</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>System load</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.load[all,avg1]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.load[all,avg5]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.load[all,avg15]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>A54F10</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>Template Module Linux CPU by Zabbix agent</host>
+                        <key>system.cpu.num</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Linux memory SNMPv2</template>
+            <name>Template Module Linux memory SNMPv2</name>
+            <description>MIBs used:&#13;
+UCD-SNMP-MIB&#13;
+&#13;
+Known Issues:&#13;
+&#13;
+  Description: Please note that memory utilization is a rough estimate, since memory available is calculated as free+buffers+cached, which is not 100% accurate, but the best we can get using SNMP.&#13;
+&#13;
+Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Memory</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Free swap space</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2021.4.4.0</snmp_oid>
+                    <key>system.swap.free[memAvailSwap.0]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>MIB: UCD-SNMP-MIB&#13;
+The amount of swap space currently unused or available.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1024</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Free swap space in %</name>
+                    <type>CALCULATED</type>
+                    <key>system.swap.pfree[snmp]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>last(&quot;system.swap.free[memAvailSwap.0]&quot;)/last(&quot;system.swap.total[memTotalSwap.0]&quot;)*100</params>
+                    <description>The free space of swap volume/file in percent.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Total swap space</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2021.4.3.0</snmp_oid>
+                    <key>system.swap.total[memTotalSwap.0]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>MIB: UCD-SNMP-MIB&#13;
+The total amount of swap space configured for this host.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1024</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Available memory</name>
+                    <type>CALCULATED</type>
+                    <key>vm.memory.available[snmp]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <params>last(&quot;vm.memory.free[memAvailReal.0]&quot;)+last(&quot;vm.memory.buffers[memBuffer.0]&quot;)+last(&quot;vm.memory.cached[memCached.0]&quot;)</params>
+                    <description>Please note that memory utilization is a rough estimate, since memory available is calculated as free+buffers+cached, which is not 100% accurate, but the best we can get using SNMP.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory (buffers)</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2021.4.14.0</snmp_oid>
+                    <key>vm.memory.buffers[memBuffer.0]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>MIB: UCD-SNMP-MIB&#13;
+Memory used by kernel buffers (Buffers in /proc/meminfo)</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1024</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Memory (cached)</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2021.4.15.0</snmp_oid>
+                    <key>vm.memory.cached[memCached.0]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>MIB: UCD-SNMP-MIB&#13;
+Memory used by the page cache and slabs (Cached and Slab in /proc/meminfo)</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1024</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Free memory</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2021.4.6.0</snmp_oid>
+                    <key>vm.memory.free[memAvailReal.0]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>MIB: UCD-SNMP-MIB</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1024</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Total memory</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2021.4.5.0</snmp_oid>
+                    <key>vm.memory.total[memTotalReal.0]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>MIB: UCD-SNMP-MIB&#13;
+Total memory in Bytes</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>1024</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Memory utilization</name>
+                    <type>CALCULATED</type>
+                    <key>vm.memory.util[snmp]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>(last(&quot;vm.memory.total[memTotalReal.0]&quot;)-(last(&quot;vm.memory.free[memAvailReal.0]&quot;)+last(&quot;vm.memory.buffers[memBuffer.0]&quot;)+last(&quot;vm.memory.cached[memCached.0]&quot;)))/last(&quot;vm.memory.total[memTotalReal.0]&quot;)*100</params>
+                    <description>Please note that memory utilization is a rough estimate, since memory available is calculated as free+buffers+cached, which is not 100% accurate, but the best we can get using SNMP.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                            <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                            <priority>AVERAGE</priority>
+                            <description>The system is running out of free memory.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+                                    <expression>{Template Module Linux memory SNMPv2:vm.memory.available[snmp].min(5m)}&lt;{$MEMORY.AVAILABLE.MIN} and {Template Module Linux memory SNMPv2:vm.memory.total[memTotalReal.0].last()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$MEMORY.AVAILABLE.MIN}</macro>
+                    <value>20M</value>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY.UTIL.MAX}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$SWAP.PFREE.MIN.WARN}</macro>
+                    <value>50</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template Module Linux memory SNMPv2:system.swap.pfree[snmp].min(5m)}&lt;{$SWAP.PFREE.MIN.WARN} and {Template Module Linux memory SNMPv2:system.swap.total[memTotalSwap.0].last()}&gt;0</expression>
+            <name>High swap space usage ( less than {$SWAP.PFREE.MIN.WARN}% free)</name>
+            <opdata>Free: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
+            <priority>WARNING</priority>
+            <description>This trigger is ignored, if there is no swap configured</description>
+            <dependencies>
+                <dependency>
+                    <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                    <expression>{Template Module Linux memory SNMPv2:vm.memory.util[snmp].min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                </dependency>
+                <dependency>
+                    <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+                    <expression>{Template Module Linux memory SNMPv2:vm.memory.available[snmp].min(5m)}&lt;{$MEMORY.AVAILABLE.MIN} and {Template Module Linux memory SNMPv2:vm.memory.total[memTotalReal.0].last()}&gt;0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template Module Linux memory SNMPv2:vm.memory.available[snmp].min(5m)}&lt;{$MEMORY.AVAILABLE.MIN} and {Template Module Linux memory SNMPv2:vm.memory.total[memTotalReal.0].last()}&gt;0</expression>
+            <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+            <opdata>Available: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
+            <priority>AVERAGE</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Memory usage</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux memory SNMPv2</host>
+                        <key>vm.memory.total[memTotalReal.0]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux memory SNMPv2</host>
+                        <key>vm.memory.available[snmp]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Memory utilization</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux memory SNMPv2</host>
+                        <key>vm.memory.util[snmp]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Swap usage</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux memory SNMPv2</host>
+                        <key>system.swap.free[memAvailSwap.0]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux memory SNMPv2</host>
+                        <key>system.swap.total[memTotalSwap.0]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

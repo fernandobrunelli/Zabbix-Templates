@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Windows memory by Zabbix agent active</template>
+            <name>Template Module Windows memory by Zabbix agent active</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Memory</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Cache bytes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>perf_counter_en[&quot;\Memory\Cache Bytes&quot;]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Cache Bytes is the sum of the Memory\\System Cache Resident Bytes, Memory\\System Driver Resident Bytes, &#13;
+Memory\\System Code Resident Bytes, and Memory\\Pool Paged Resident Bytes counters. This counter displays &#13;
+the last observed value only; it is not an average.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Free system page table entries</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>perf_counter_en[&quot;\Memory\Free System Page Table Entries&quot;]</key>
+                    <history>7d</history>
+                    <description>This indicates the number of page table entries not currently in use by the system. If the number is less &#13;
+than 5,000, there may well be a memory leak or you running out of memory.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{max(5m)}&lt;{$MEM.PAGE_TABLE_CRIT.MIN}</expression>
+                            <name>Number of free system page table entries is too low (less {$MEM.PAGE_TABLE_CRIT.MIN} for 5m)</name>
+                            <priority>WARNING</priority>
+                            <description>The Memory Free System Page Table Entries is less than {$MEM.PAGE_TABLE_CRIT.MIN} for 5 minutes. If the number is less than 5,000, there may well be a memory leak.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                                    <expression>{Template Module Windows memory by Zabbix agent active:vm.memory.util.min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Memory page faults per second</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>perf_counter_en[&quot;\Memory\Page Faults/sec&quot;]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Page Faults/sec is the average number of pages faulted per second. It is measured in number of pages &#13;
+faulted per second because only one page is faulted in each fault operation, hence this is also equal &#13;
+to the number of page fault operations. This counter includes both hard faults (those that require &#13;
+disk access) and soft faults (where the faulted page is found elsewhere in physical memory.) Most &#13;
+processors can handle large numbers of soft faults without significant consequence. However, hard faults, &#13;
+which require disk access, can cause significant delays.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory pages per second</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>perf_counter_en[&quot;\Memory\Pages/sec&quot;]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>This measures the rate at which pages are read from or written to disk to resolve hard page faults. &#13;
+If the value is greater than 1,000, as a result of excessive paging, there may be a memory leak.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MEM.PAGE_SEC.CRIT.MAX}</expression>
+                            <name>The Memory Pages/sec is too high (over {$MEM.PAGE_SEC.CRIT.MAX} for 5m)</name>
+                            <priority>WARNING</priority>
+                            <description>The Memory Pages/sec in the last 5 minutes exceeds {$MEM.PAGE_SEC.CRIT.MAX}. If the value is greater than 1,000, as a result of excessive paging, there may be a memory leak.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                                    <expression>{Template Module Windows memory by Zabbix agent active:vm.memory.util.min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Memory pool non-paged</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>perf_counter_en[&quot;\Memory\Pool Nonpaged Bytes&quot;]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>This measures the size, in bytes, of the non-paged pool. This is an area of system memory for objects &#13;
+that cannot be written to disk but instead must remain in physical memory as long as they are allocated. &#13;
+There is a possible memory leak if the value is greater than 175MB (or 100MB with the /3GB switch). &#13;
+A typical Event ID 2019 is recorded in the system event log.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Free swap space</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.swap.size[,free]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>The free space of swap volume/file in bytes.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Free swap space in %</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.swap.size[,pfree]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The free space of swap volume/file in percent.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Total swap space</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.swap.size[,total]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>The total space of swap volume/file in bytes.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Total memory</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[total]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Total memory in Bytes</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Used memory</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vm.memory.size[used]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Used memory in Bytes</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory utilization</name>
+                    <type>CALCULATED</type>
+                    <key>vm.memory.util</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <params>last(&quot;vm.memory.size[used]&quot;) / last(&quot;vm.memory.size[total]&quot;) * 100</params>
+                    <description>Memory utilization in %</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                            <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                            <priority>AVERAGE</priority>
+                            <description>The system is running out of free memory.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$MEM.PAGE_SEC.CRIT.MAX}</macro>
+                    <value>1000</value>
+                    <description>The warning threshold of the Memory Pages/sec counter.</description>
+                </macro>
+                <macro>
+                    <macro>{$MEM.PAGE_TABLE_CRIT.MIN}</macro>
+                    <value>5000</value>
+                    <description>The warning threshold of the Free System Page Table Entries counter.</description>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY.UTIL.MAX}</macro>
+                    <value>90</value>
+                    <description>The warning threshold of the Memory util item.</description>
+                </macro>
+                <macro>
+                    <macro>{$SWAP.PFREE.MIN.WARN}</macro>
+                    <value>20</value>
+                    <description>The warning threshold of the minimum free swap.</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template Module Windows memory by Zabbix agent active:system.swap.size[,pfree].min(5m)}&lt;{$SWAP.PFREE.MIN.WARN} and {Template Module Windows memory by Zabbix agent active:system.swap.size[,total].last()}&gt;0</expression>
+            <name>High swap space usage ( less than {$SWAP.PFREE.MIN.WARN}% free)</name>
+            <opdata>Free: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
+            <priority>WARNING</priority>
+            <description>This trigger is ignored, if there is no swap configured</description>
+            <dependencies>
+                <dependency>
+                    <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                    <expression>{Template Module Windows memory by Zabbix agent active:vm.memory.util.min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Memory utilization</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Windows memory by Zabbix agent active</host>
+                        <key>vm.memory.util</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Swap usage</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Windows memory by Zabbix agent active</host>
+                        <key>system.swap.size[,free]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Windows memory by Zabbix agent active</host>
+                        <key>system.swap.size[,total]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

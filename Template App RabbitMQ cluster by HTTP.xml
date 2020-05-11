@@ -1,0 +1,1440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Applications</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template App RabbitMQ cluster by HTTP</template>
+            <name>Template App RabbitMQ cluster by HTTP</name>
+            <description>Get cluster metrics from RabbitMQ management plugin provided an HTTP-based API using HTTP agent.&#13;
+&#13;
+You can discuss this template or leave feedback on our forum https://www.zabbix.com/forum/zabbix-suggestions-and-feedback/387226-discussion-thread-for-official-zabbix-template-rabbitmq&#13;
+&#13;
+Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>RabbitMQ</name>
+                </application>
+                <application>
+                    <name>Zabbix raw items</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>RabbitMQ: Get exchanges</name>
+                    <type>HTTP_AGENT</type>
+                    <key>rabbitmq.get_exchanges</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <authtype>BASIC</authtype>
+                    <username>{$RABBITMQ.API.USER}</username>
+                    <password>{$RABBITMQ.API.PASSWORD}</password>
+                    <description>The HTTP API endpoint that returns exchanges metrics</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                    <url>{$RABBITMQ.API.SCHEME}://{HOST.CONN}:{$RABBITMQ.API.PORT}/api/exchanges</url>
+                </item>
+                <item>
+                    <name>RabbitMQ: Get overview</name>
+                    <type>HTTP_AGENT</type>
+                    <key>rabbitmq.get_overview</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <authtype>BASIC</authtype>
+                    <username>{$RABBITMQ.API.USER}</username>
+                    <password>{$RABBITMQ.API.PASSWORD}</password>
+                    <description>The HTTP API endpoint that returns cluster-wide metrics</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                    <url>{$RABBITMQ.API.SCHEME}://{HOST.CONN}:{$RABBITMQ.API.PORT}/api/overview</url>
+                    <triggers>
+                        <trigger>
+                            <expression>{nodata(30m)}=1</expression>
+                            <name>RabbitMQ: Failed to fetch overview data (or no data for 30m)</name>
+                            <priority>WARNING</priority>
+                            <description>Zabbix has not received data for items for the last 30 minutes</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages acknowledged</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.ack</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Number of messages delivered to clients and acknowledged</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.ack</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages acknowledged per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.ack.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of messages delivered to clients and acknowledged per second</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.ack_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages confirmed</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.confirm</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Count of messages confirmed</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.confirm</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages confirmed per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.confirm.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of messages confirmed per second</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.confirm_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages delivered</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.deliver_get</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.deliver_get</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages delivered per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.deliver_get.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate per second of the sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.deliver_get_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages published</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.publish</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Count of messages published</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.publish</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages published per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.publish.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of messages published per second</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.publish_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages publish_in</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.publish_in</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Count of messages published from channels into this overview</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.publish_in</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages publish_in per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.publish_in.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of messages published from channels into this overview per sec</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.publish_in_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages publish_out</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.publish_out</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Count of messages published from this overview into queues</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.publish_out</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages publish_out per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.publish_out.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of messages published from this overview into queues per second,0,rabbitmq,total msgs pub out rate</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.publish_out_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages returned redeliver</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.redeliver</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Count of subset of messages in deliver_get which had the redelivered flag set</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.redeliver</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages returned redeliver per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.redeliver.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of subset of messages in deliver_get which had the redelivered flag set per second</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.redeliver_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages returned unroutable</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.return_unroutable</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Count of messages returned to publisher as unroutable</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.return_unroutable</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages returned unroutable per second</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.messages.return_unroutable.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Rate of messages returned to publisher as unroutable per second</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.message_stats.return_unroutable_details.rate</params>
+                            <error_handler>CUSTOM_VALUE</error_handler>
+                            <error_handler_params>0</error_handler_params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Channels total</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.object_totals.channels</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of channels</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.object_totals.channels</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Connections total</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.object_totals.connections</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of connections</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.object_totals.connections</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Consumers total</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.object_totals.consumers</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of consumers</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.object_totals.consumers</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Exchanges total</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.object_totals.exchanges</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of exchanges</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.object_totals.exchanges</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Queues total</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.object_totals.queues</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of queues</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.object_totals.queues</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages total</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.queue_totals.messages</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of messages (ready plus unacknowledged)</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.queue_totals.messages</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages ready for delivery</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.queue_totals.messages.ready</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Number of messages ready for deliver</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.queue_totals.messages_ready</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>RabbitMQ: Messages unacknowledged</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.overview.queue_totals.messages.unacknowledged</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Number of unacknowledged messages</description>
+                    <applications>
+                        <application>
+                            <name>RabbitMQ</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.queue_totals.messages_unacknowledged</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>rabbitmq.get_overview</key>
+                    </master_item>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Exchanges discovery</name>
+                    <type>DEPENDENT</type>
+                    <key>rabbitmq.exchanges.discovery</key>
+                    <delay>0</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#EXCHANGE}</macro>
+                                <value>{$RABBITMQ.LLD.FILTER.EXCHANGE.MATCHES}</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#EXCHANGE}</macro>
+                                <value>{$RABBITMQ.LLD.FILTER.EXCHANGE.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <description>Individual exchange metrics</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages acknowledged per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.ack.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of messages delivered to clients and acknowledged per second</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.ack_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages acknowledged</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.ack[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Number of messages delivered to clients and acknowledged</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.ack.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages confirmed per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.confirm.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of messages confirmed per second</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.confirm_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages confirmed</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.confirm[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Count of messages confirmed</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.confirm.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages delivered per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.deliver_get.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate per second of the sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.deliver_get_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages delivered</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.deliver_get[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.deliver_get.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages published per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.publish.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of messages published per second</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.publish_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages published</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.publish[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Count of messages published</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.publish.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages publish_in per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.publish_in.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of messages published from channels into this overview per sec</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.publish_in_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages publish_in</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.publish_in[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Count of messages published from channels into this overview</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.publish_in.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages publish_out per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.publish_out.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of messages published from this overview into queues per second,0,rabbitmq,total msgs pub out rate</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.publish_out_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages publish_out</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.publish_out[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Count of messages published from this overview into queues</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.publish_out.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages redelivered per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.redeliver.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of subset of messages in deliver_get which had the redelivered flag set per second</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.redeliver_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages redelivered</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.redeliver[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Count of subset of messages in deliver_get which had the redelivered flag set</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.redeliver.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages returned unroutable per second</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.return_unroutable.rate[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Rate of messages returned to publisher as unroutable per second</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.return_unroutable_details.rate.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>RabbitMQ: Exchange {#VHOST}/{#EXCHANGE}/{#TYPE}: Messages returned unroutable</name>
+                            <type>DEPENDENT</type>
+                            <key>rabbitmq.exchange.messages.return_unroutable[&quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Count of messages returned to publisher as unroutable</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>RabbitMQ: Exchange &quot;{#VHOST}/{#EXCHANGE}/{#TYPE}&quot;</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.name == &quot;{#EXCHANGE}&quot; &amp;&amp; @.vhost == &quot;{#VHOST}&quot; &amp;&amp; @.type ==&quot;{#TYPE}&quot;)].message_stats.return_unroutable.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>rabbitmq.get_exchanges</key>
+                            </master_item>
+                        </item_prototype>
+                    </item_prototypes>
+                    <master_item>
+                        <key>rabbitmq.get_exchanges</key>
+                    </master_item>
+                    <lld_macro_paths>
+                        <lld_macro_path>
+                            <lld_macro>{#EXCHANGE}</lld_macro>
+                            <path>$.name</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#TYPE}</lld_macro>
+                            <path>$.type</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#VHOST}</lld_macro>
+                            <path>$.vhost</path>
+                        </lld_macro_path>
+                    </lld_macro_paths>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$RABBITMQ.API.PASSWORD}</macro>
+                    <value>zabbix</value>
+                </macro>
+                <macro>
+                    <macro>{$RABBITMQ.API.PORT}</macro>
+                    <value>15672</value>
+                    <description>The port of RabbitMQ API endpoint</description>
+                </macro>
+                <macro>
+                    <macro>{$RABBITMQ.API.SCHEME}</macro>
+                    <value>http</value>
+                    <description>Request scheme which may be http or https</description>
+                </macro>
+                <macro>
+                    <macro>{$RABBITMQ.API.USER}</macro>
+                    <value>zbx_monitor</value>
+                </macro>
+                <macro>
+                    <macro>{$RABBITMQ.LLD.FILTER.EXCHANGE.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>Filter of discoverable exchanges</description>
+                </macro>
+                <macro>
+                    <macro>{$RABBITMQ.LLD.FILTER.EXCHANGE.NOT_MATCHES}</macro>
+                    <value>CHANGE_IF_NEEDED</value>
+                    <description>Filter to exclude discovered exchanges</description>
+                </macro>
+            </macros>
+            <screens>
+                <screen>
+                    <name>RabbitMQ overview</name>
+                    <hsize>2</hsize>
+                    <vsize>3</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>RabbitMQ: Messages</name>
+                                <host>Template App RabbitMQ cluster by HTTP</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>RabbitMQ: Connections</name>
+                                <host>Template App RabbitMQ cluster by HTTP</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>RabbitMQ: Messages status</name>
+                                <host>Template App RabbitMQ cluster by HTTP</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>RabbitMQ: Queues</name>
+                                <host>Template App RabbitMQ cluster by HTTP</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>RabbitMQ: Messages per second</name>
+                                <host>Template App RabbitMQ cluster by HTTP</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>2</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+            </screens>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>RabbitMQ: Connections</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.object_totals.connections</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.object_totals.channels</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.object_totals.consumers</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>RabbitMQ: Messages</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.queue_totals.messages</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.queue_totals.messages.ready</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.queue_totals.messages.unacknowledged</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>RabbitMQ: Messages per second</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.publish.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.ack.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.confirm.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>A54F10</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.deliver_get.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>FC6EA3</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.publish_in.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>6C59DC</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.publish_out.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>AC8C14</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.redeliver.rate</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>611F27</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.return_unroutable.rate</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>RabbitMQ: Messages status</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.publish</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.ack</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.confirm</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>A54F10</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.deliver_get</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>4</sortorder>
+                    <color>FC6EA3</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.publish_in</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>5</sortorder>
+                    <color>6C59DC</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.publish_out</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>6</sortorder>
+                    <color>AC8C14</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.redeliver</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>7</sortorder>
+                    <color>611F27</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.messages.return_unroutable</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>RabbitMQ: Queues</name>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template App RabbitMQ cluster by HTTP</host>
+                        <key>rabbitmq.overview.object_totals.queues</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

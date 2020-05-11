@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.0</version>
+    <version>5.0</version>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -10,17 +10,9 @@
         <template>
             <template>Template Net Cisco IOS versions 12.0_3_T-12.2_3.5 SNMPv2</template>
             <name>Template Net Cisco IOS versions 12.0_3_T-12.2_3.5 SNMPv2</name>
-            <description>Cisco IOS Software releases later to 12.0(3)T and prior to 12.2(3.5) version: 0.15</description>
-            <groups>
-                <group>
-                    <name>Templates/Network devices</name>
-                </group>
-            </groups>
-            <applications/>
-            <items/>
-            <discovery_rules/>
-            <httptests/>
-            <macros/>
+            <description>Cisco IOS Software releases later to 12.0(3)T and prior to 12.2(3.5)&#13;
+&#13;
+Template tooling version used: 0.34</description>
             <templates>
                 <template>
                     <name>Template Module Cisco CISCO-ENVMON-MIB SNMPv2</name>
@@ -41,7 +33,11 @@
                     <name>Template Module Interfaces SNMPv2</name>
                 </template>
             </templates>
-            <screens/>
+            <groups>
+                <group>
+                    <name>Templates/Network devices</name>
+                </group>
+            </groups>
         </template>
     </templates>
 </zabbix_export>

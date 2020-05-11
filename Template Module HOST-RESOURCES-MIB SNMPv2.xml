@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.0</version>
+    <version>5.0</version>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -12,17 +12,7 @@
             <name>Template Module HOST-RESOURCES-MIB SNMPv2</name>
             <description>HOST-RESOURCES-MIB: CPU, memory and storage(vfs.fs.file) linked together.&#13;
 &#13;
-Template tooling version used: 0.33</description>
-            <groups>
-                <group>
-                    <name>Templates/Modules</name>
-                </group>
-            </groups>
-            <applications/>
-            <items/>
-            <discovery_rules/>
-            <httptests/>
-            <macros/>
+Template tooling version used: 0.34</description>
             <templates>
                 <template>
                     <name>Template Module HOST-RESOURCES-MIB CPU SNMPv2</name>
@@ -34,6 +24,11 @@ Template tooling version used: 0.33</description>
                     <name>Template Module HOST-RESOURCES-MIB storage SNMPv2</name>
                 </template>
             </templates>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
             <screens>
                 <screen>
                     <name>System performance</name>
@@ -42,6 +37,11 @@ Template tooling version used: 0.33</description>
                     <screen_items>
                         <screen_item>
                             <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>CPU utilization</name>
+                                <host>Template Module HOST-RESOURCES-MIB SNMPv2</host>
+                            </resource>
                             <width>750</width>
                             <height>100</height>
                             <x>0</x>
@@ -51,19 +51,19 @@ Template tooling version used: 0.33</description>
                             <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
-                            <style>0</style>
-                            <url/>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>CPU utilization</name>
-                                <host>Template Module HOST-RESOURCES-MIB SNMPv2</host>
-                            </resource>
-                            <max_columns>3</max_columns>
+                            <url/>
                             <application/>
+                            <max_columns>3</max_columns>
                         </screen_item>
                         <screen_item>
                             <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#MEMNAME}: Memory utilization</name>
+                                <host>Template Module HOST-RESOURCES-MIB SNMPv2</host>
+                            </resource>
                             <width>750</width>
                             <height>100</height>
                             <x>0</x>
@@ -73,19 +73,19 @@ Template tooling version used: 0.33</description>
                             <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
-                            <style>0</style>
-                            <url/>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>{#MEMNAME}: Memory utilization</name>
-                                <host>Template Module HOST-RESOURCES-MIB SNMPv2</host>
-                            </resource>
-                            <max_columns>3</max_columns>
+                            <url/>
                             <application/>
+                            <max_columns>3</max_columns>
                         </screen_item>
                         <screen_item>
                             <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#FSNAME}: Disk space usage</name>
+                                <host>Template Module HOST-RESOURCES-MIB SNMPv2</host>
+                            </resource>
                             <width>750</width>
                             <height>100</height>
                             <x>0</x>
@@ -95,16 +95,11 @@ Template tooling version used: 0.33</description>
                             <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
-                            <style>0</style>
-                            <url/>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
-                            <resource>
-                                <name>{#FSNAME}: Disk space usage</name>
-                                <host>Template Module HOST-RESOURCES-MIB SNMPv2</host>
-                            </resource>
-                            <max_columns>3</max_columns>
+                            <url/>
                             <application/>
+                            <max_columns>3</max_columns>
                         </screen_item>
                     </screen_items>
                 </screen>

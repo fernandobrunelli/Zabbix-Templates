@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Windows filesystems by Zabbix agent active</template>
+            <name>Template Module Windows filesystems by Zabbix agent active</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Filesystems</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Mounted filesystem discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.fs.discovery</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#FSTYPE}</macro>
+                                <value>{$VFS.FS.FSTYPE.MATCHES}</value>
+                                <formulaid>E</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#FSTYPE}</macro>
+                                <value>{$VFS.FS.FSTYPE.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>F</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#FSNAME}</macro>
+                                <value>{$VFS.FS.FSNAME.MATCHES}</value>
+                                <formulaid>C</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#FSNAME}</macro>
+                                <value>{$VFS.FS.FSNAME.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>D</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#FSDRIVETYPE}</macro>
+                                <value>{$VFS.FS.FSDRIVETYPE.MATCHES}</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#FSDRIVETYPE}</macro>
+                                <value>{$VFS.FS.FSDRIVETYPE.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <description>Discovery of file systems of different types.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>{#FSNAME}: Space utilization</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},pused]</key>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <description>Space utilization in % for {#FSNAME}</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Filesystem {#FSNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#FSNAME}: Total space</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},total]</key>
+                            <history>7d</history>
+                            <units>B</units>
+                            <description>Total space in Bytes</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Filesystem {#FSNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#FSNAME}: Used space</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>vfs.fs.size[{#FSNAME},used]</key>
+                            <history>7d</history>
+                            <units>B</units>
+                            <description>Used storage in Bytes</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Filesystem {#FSNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},pused].last()}&gt;{$VFS.FS.PUSED.MAX.CRIT:&quot;{#FSNAME}&quot;} and&#13;
+(({Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},total].last()}-{Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},used].last()})&lt;5G or {Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},pused].timeleft(1h,,100)}&lt;1d)</expression>
+                            <name>{#FSNAME}: Disk space is critically low (used &gt; {$VFS.FS.PUSED.MAX.CRIT:&quot;{#FSNAME}&quot;}%)</name>
+                            <opdata>Space used: {ITEM.LASTVALUE3} of {ITEM.LASTVALUE2} ({ITEM.LASTVALUE1})</opdata>
+                            <priority>AVERAGE</priority>
+                            <description>Two conditions should match: First, space utilization should be above {$VFS.FS.PUSED.MAX.CRIT:&quot;{#FSNAME}&quot;}.&#13;
+ Second condition should be one of the following:&#13;
+ - The disk free space is less than 5G.&#13;
+ - The disk will be full in less than 24 hours.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},pused].last()}&gt;{$VFS.FS.PUSED.MAX.WARN:&quot;{#FSNAME}&quot;} and&#13;
+(({Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},total].last()}-{Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},used].last()})&lt;10G or {Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},pused].timeleft(1h,,100)}&lt;1d)</expression>
+                            <name>{#FSNAME}: Disk space is low (used &gt; {$VFS.FS.PUSED.MAX.WARN:&quot;{#FSNAME}&quot;}%)</name>
+                            <opdata>Space used: {ITEM.LASTVALUE3} of {ITEM.LASTVALUE2} ({ITEM.LASTVALUE1})</opdata>
+                            <priority>WARNING</priority>
+                            <description>Two conditions should match: First, space utilization should be above {$VFS.FS.PUSED.MAX.WARN:&quot;{#FSNAME}&quot;}.&#13;
+ Second condition should be one of the following:&#13;
+ - The disk free space is less than 10G.&#13;
+ - The disk will be full in less than 24 hours.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>{#FSNAME}: Disk space is critically low (used &gt; {$VFS.FS.PUSED.MAX.CRIT:&quot;{#FSNAME}&quot;}%)</name>
+                                    <expression>{Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},pused].last()}&gt;{$VFS.FS.PUSED.MAX.CRIT:&quot;{#FSNAME}&quot;} and&#13;
+(({Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},total].last()}-{Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},used].last()})&lt;5G or {Template Module Windows filesystems by Zabbix agent active:vfs.fs.size[{#FSNAME},pused].timeleft(1h,,100)}&lt;1d)</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>{#FSNAME}: Disk space usage</name>
+                            <width>600</width>
+                            <height>340</height>
+                            <type>PIE</type>
+                            <show_3d>YES</show_3d>
+                            <graph_items>
+                                <graph_item>
+                                    <color>969696</color>
+                                    <calc_fnc>LAST</calc_fnc>
+                                    <type>GRAPH_SUM</type>
+                                    <item>
+                                        <host>Template Module Windows filesystems by Zabbix agent active</host>
+                                        <key>vfs.fs.size[{#FSNAME},total]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>C80000</color>
+                                    <calc_fnc>LAST</calc_fnc>
+                                    <item>
+                                        <host>Template Module Windows filesystems by Zabbix agent active</host>
+                                        <key>vfs.fs.size[{#FSNAME},used]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$VFS.FS.FSDRIVETYPE.MATCHES}</macro>
+                    <value>fixed</value>
+                    <description>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.FSDRIVETYPE.NOT_MATCHES}</macro>
+                    <value>^\s$</value>
+                    <description>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.FSNAME.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.FSNAME.NOT_MATCHES}</macro>
+                    <value>^(/dev|/sys|/run|/proc|.+/shm$)</value>
+                    <description>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.FSTYPE.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.FSTYPE.NOT_MATCHES}</macro>
+                    <value>^\s$</value>
+                    <description>This macro is used in filesystems discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.PUSED.MAX.CRIT}</macro>
+                    <value>90</value>
+                    <description>The critical threshold of the filesystem utilization in percent.</description>
+                </macro>
+                <macro>
+                    <macro>{$VFS.FS.PUSED.MAX.WARN}</macro>
+                    <value>80</value>
+                    <description>The warning threshold of the filesystem utilization in percent.</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Linux memory by Zabbix agent</template>
+            <name>Template Module Linux memory by Zabbix agent</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Memory</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Free swap space</name>
+                    <key>system.swap.size[,free]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>The free space of swap volume/file in bytes.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Free swap space in %</name>
+                    <key>system.swap.size[,pfree]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The free space of swap volume/file in percent.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Total swap space</name>
+                    <key>system.swap.size[,total]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>The total space of swap volume/file in bytes.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Available memory</name>
+                    <key>vm.memory.size[available]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Available memory, in Linux, available = free + buffers + cache. On other platforms calculation may vary. See also: https://www.zabbix.com/documentation/current/manual/appendix/items/vm.memory.size_params</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Memory utilization</name>
+                    <key>vm.memory.size[pavailable]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Memory used percentage is calculated as (100-pavailable)</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>return (100-value);</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                            <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                            <priority>AVERAGE</priority>
+                            <description>The system is running out of free memory.</description>
+                            <dependencies>
+                                <dependency>
+                                    <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+                                    <expression>{Template Module Linux memory by Zabbix agent:vm.memory.size[available].min(5m)}&lt;{$MEMORY.AVAILABLE.MIN} and {Template Module Linux memory by Zabbix agent:vm.memory.size[total].last()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Total memory</name>
+                    <key>vm.memory.size[total]</key>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>Total memory in Bytes</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$MEMORY.AVAILABLE.MIN}</macro>
+                    <value>20M</value>
+                    <description>This macro is used as a threshold in memory available trigger.</description>
+                </macro>
+                <macro>
+                    <macro>{$MEMORY.UTIL.MAX}</macro>
+                    <value>90</value>
+                    <description>This macro is used as a threshold in memory utilization trigger.</description>
+                </macro>
+                <macro>
+                    <macro>{$SWAP.PFREE.MIN.WARN}</macro>
+                    <value>50</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template Module Linux memory by Zabbix agent:system.swap.size[,pfree].min(5m)}&lt;{$SWAP.PFREE.MIN.WARN} and {Template Module Linux memory by Zabbix agent:system.swap.size[,total].last()}&gt;0</expression>
+            <name>High swap space usage ( less than {$SWAP.PFREE.MIN.WARN}% free)</name>
+            <opdata>Free: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
+            <priority>WARNING</priority>
+            <description>This trigger is ignored, if there is no swap configured</description>
+            <dependencies>
+                <dependency>
+                    <name>High memory utilization ( &gt;{$MEMORY.UTIL.MAX}% for 5m)</name>
+                    <expression>{Template Module Linux memory by Zabbix agent:vm.memory.size[pavailable].min(5m)}&gt;{$MEMORY.UTIL.MAX}</expression>
+                </dependency>
+                <dependency>
+                    <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+                    <expression>{Template Module Linux memory by Zabbix agent:vm.memory.size[available].min(5m)}&lt;{$MEMORY.AVAILABLE.MIN} and {Template Module Linux memory by Zabbix agent:vm.memory.size[total].last()}&gt;0</expression>
+                </dependency>
+            </dependencies>
+        </trigger>
+        <trigger>
+            <expression>{Template Module Linux memory by Zabbix agent:vm.memory.size[available].min(5m)}&lt;{$MEMORY.AVAILABLE.MIN} and {Template Module Linux memory by Zabbix agent:vm.memory.size[total].last()}&gt;0</expression>
+            <name>Lack of available memory ( &lt; {$MEMORY.AVAILABLE.MIN} of {ITEM.VALUE2})</name>
+            <opdata>Available: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
+            <priority>AVERAGE</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Memory usage</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux memory by Zabbix agent</host>
+                        <key>vm.memory.size[total]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux memory by Zabbix agent</host>
+                        <key>vm.memory.size[available]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Memory utilization</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux memory by Zabbix agent</host>
+                        <key>vm.memory.size[pavailable]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Swap usage</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux memory by Zabbix agent</host>
+                        <key>system.swap.size[,free]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux memory by Zabbix agent</host>
+                        <key>system.swap.size[,total]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>

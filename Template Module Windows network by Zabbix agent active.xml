@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Windows network by Zabbix agent active</template>
+            <name>Template Module Windows network by Zabbix agent active</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Network interfaces</name>
+                </application>
+                <application>
+                    <name>Zabbix raw items</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Network interfaces WMI get</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>wmi.getall[root\cimv2,&quot;select * from win32_networkadapter where PhysicalAdapter=True&quot;]</key>
+                    <history>1h</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Raw data of win32_networkadapter.</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Network interfaces discovery</name>
+                    <type>DEPENDENT</type>
+                    <key>net.if.discovery</key>
+                    <delay>0</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#IFPHYSICALADAPTER}</macro>
+                                <value>{$NET.IF.PHYSICALADAPTER.MATCHES}</value>
+                                <formulaid>I</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFPHYSICALADAPTER}</macro>
+                                <value>{$NET.IF.PHYSICALADAPTER.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>J</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFNAME}</macro>
+                                <value>{$NET.IF.IFNAME.MATCHES}</value>
+                                <formulaid>E</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFNAME}</macro>
+                                <value>{$NET.IF.IFNAME.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>F</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFDESCR}</macro>
+                                <value>{$NET.IF.IFDESCR.MATCHES}</value>
+                                <formulaid>C</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFDESCR}</macro>
+                                <value>{$NET.IF.IFDESCR.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>D</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFALIAS}</macro>
+                                <value>{$NET.IF.IFALIAS.MATCHES}</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFALIAS}</macro>
+                                <value>{$NET.IF.IFALIAS.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFNETENABLED}</macro>
+                                <value>{$NET.IF.IFNETENABLED.MATCHES}</value>
+                                <formulaid>G</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFNETENABLED}</macro>
+                                <value>{$NET.IF.IFNETENABLED.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>H</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <description>Discovery of installed network interfaces.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Inbound packets discarded</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.in[&quot;{#IFNAME}&quot;,dropped]</key>
+                            <delay>3m</delay>
+                            <history>7d</history>
+                            <description>The number of incoming packets dropped on the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Inbound packets with errors</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.in[&quot;{#IFNAME}&quot;,errors]</key>
+                            <delay>3m</delay>
+                            <history>7d</history>
+                            <description>The number of incoming packets with errors on the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Bits received</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.in[&quot;{#IFNAME}&quot;]</key>
+                            <delay>3m</delay>
+                            <history>7d</history>
+                            <units>bps</units>
+                            <description>Incoming traffic on the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>8</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Outbound packets discarded</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.out[&quot;{#IFNAME}&quot;,dropped]</key>
+                            <delay>3m</delay>
+                            <history>7d</history>
+                            <description>The number of outgoing packets dropped on the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Outbound packets with errors</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.out[&quot;{#IFNAME}&quot;,errors]</key>
+                            <delay>3m</delay>
+                            <history>7d</history>
+                            <description>The number of outgoing packets with errors on the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Bits sent</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>net.if.out[&quot;{#IFNAME}&quot;]</key>
+                            <delay>3m</delay>
+                            <history>7d</history>
+                            <units>bps</units>
+                            <description>Outgoing traffic on the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>8</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Speed</name>
+                            <type>DEPENDENT</type>
+                            <key>net.if.speed[&quot;{#IFNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <trends>0d</trends>
+                            <units>bps</units>
+                            <description>Estimated bandwidth of the network interface if any.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#IFNAME}&quot;)].Speed.first()</params>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>0</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_networkadapter where PhysicalAdapter=True&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Operational status</name>
+                            <type>DEPENDENT</type>
+                            <key>net.if.status[&quot;{#IFNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <description>The operational status of the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <valuemap>
+                                <name>Win32_NetworkAdapter::NetConnectionStatus</name>
+                            </valuemap>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#IFNAME}&quot;)].NetConnectionStatus.first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_networkadapter where PhysicalAdapter=True&quot;]</key>
+                            </master_item>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({last()}=2 and {diff()}=1)</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>{last()}&lt;&gt;2</recovery_expression>
+                                    <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
+                                    <opdata>Current state: {ITEM.LASTVALUE1}</opdata>
+                                    <priority>AVERAGE</priority>
+                                    <description>This trigger expression works as follows:&#13;
+1. Can be triggered if operations status is down.&#13;
+2. {$IFCONTROL:&quot;{#IFNAME}&quot;}=1 - user can redefine Context macro to value - 0. That marks this interface as not important. No new trigger will be fired if this interface is down.&#13;
+3. {TEMPLATE_NAME:METRIC.diff()}=1) - trigger fires only if operational status was up(1) sometime before. (So, do not fire 'ethernal off' interfaces.)&#13;
+&#13;
+WARNING: if closed manually - won't fire again on next poll, because of .diff.</description>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Interface type</name>
+                            <type>DEPENDENT</type>
+                            <key>net.if.type[&quot;{#IFNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <trends>0d</trends>
+                            <description>The type of the network interface.</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Interface {#IFNAME}({#IFALIAS})</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <valuemap>
+                                <name>Win32_NetworkAdapter::AdapterTypeId</name>
+                            </valuemap>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$[?(@.Name == &quot;{#IFNAME}&quot;)].AdapterTypeId.first()</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wmi.getall[root\cimv2,&quot;select * from win32_networkadapter where PhysicalAdapter=True&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].change()}&lt;0 and {Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].last()}&gt;0&#13;
+and (&#13;
+{Template Module Windows network by Zabbix agent active:net.if.type[&quot;{#IFNAME}&quot;].last()}=6 or&#13;
+{Template Module Windows network by Zabbix agent active:net.if.type[&quot;{#IFNAME}&quot;].last()}=7 or&#13;
+{Template Module Windows network by Zabbix agent active:net.if.type[&quot;{#IFNAME}&quot;].last()}=11 or&#13;
+{Template Module Windows network by Zabbix agent active:net.if.type[&quot;{#IFNAME}&quot;].last()}=62 or&#13;
+{Template Module Windows network by Zabbix agent active:net.if.type[&quot;{#IFNAME}&quot;].last()}=69 or&#13;
+{Template Module Windows network by Zabbix agent active:net.if.type[&quot;{#IFNAME}&quot;].last()}=117&#13;
+)&#13;
+and&#13;
+({Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2)</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>({Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].change()}&gt;0 and {Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].prev()}&gt;0) or&#13;
+({Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}=2)</recovery_expression>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Ethernet has changed to lower speed than it was before</name>
+                            <opdata>Current reported speed: {ITEM.LASTVALUE1}</opdata>
+                            <priority>INFO</priority>
+                            <description>This Ethernet connection has transitioned down from its known maximum speed. This might be a sign of autonegotiation issues. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
+                                    <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}=2 and {Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].diff()}=1)</expression>
+                                    <recovery_expression>{Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>({Template Module Windows network by Zabbix agent active:net.if.in[&quot;{#IFNAME}&quot;].avg(15m)}&gt;({$IF.UTIL.MAX:&quot;{#IFNAME}&quot;}/100)*{Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].last()} or&#13;
+{Template Module Windows network by Zabbix agent active:net.if.out[&quot;{#IFNAME}&quot;].avg(15m)}&gt;({$IF.UTIL.MAX:&quot;{#IFNAME}&quot;}/100)*{Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].last()}) and&#13;
+{Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].last()}&gt;0</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{Template Module Windows network by Zabbix agent active:net.if.in[&quot;{#IFNAME}&quot;].avg(15m)}&lt;(({$IF.UTIL.MAX:&quot;{#IFNAME}&quot;}-3)/100)*{Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].last()} and&#13;
+{Template Module Windows network by Zabbix agent active:net.if.out[&quot;{#IFNAME}&quot;].avg(15m)}&lt;(({$IF.UTIL.MAX:&quot;{#IFNAME}&quot;}-3)/100)*{Template Module Windows network by Zabbix agent active:net.if.speed[&quot;{#IFNAME}&quot;].last()}</recovery_expression>
+                            <name>Interface {#IFNAME}({#IFALIAS}): High bandwidth usage ( &gt; {$IF.UTIL.MAX:&quot;{#IFNAME}&quot;}% )</name>
+                            <opdata>In: {ITEM.LASTVALUE1}, out: {ITEM.LASTVALUE3}, speed: {ITEM.LASTVALUE2}</opdata>
+                            <priority>WARNING</priority>
+                            <description>The network interface utilization is close to its estimated maximum bandwidth.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
+                                    <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}=2 and {Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].diff()}=1)</expression>
+                                    <recovery_expression>{Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template Module Windows network by Zabbix agent active:net.if.in[&quot;{#IFNAME}&quot;,errors].min(5m)}&gt;{$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;}&#13;
+or {Template Module Windows network by Zabbix agent active:net.if.out[&quot;{#IFNAME}&quot;,errors].min(5m)}&gt;{$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{Template Module Windows network by Zabbix agent active:net.if.in[&quot;{#IFNAME}&quot;,errors].max(5m)}&lt;{$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;}*0.8&#13;
+and {Template Module Windows network by Zabbix agent active:net.if.out[&quot;{#IFNAME}&quot;,errors].max(5m)}&lt;{$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;}*0.8</recovery_expression>
+                            <name>Interface {#IFNAME}({#IFALIAS}): High error rate ( &gt; {$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;} for 5m)</name>
+                            <opdata>errors in: {ITEM.LASTVALUE1}, errors out: {ITEM.LASTVALUE2}</opdata>
+                            <priority>WARNING</priority>
+                            <description>Recovers when below 80% of {$IF.ERRORS.WARN:&quot;{#IFNAME}&quot;} threshold</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
+                                    <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}=2 and {Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].diff()}=1)</expression>
+                                    <recovery_expression>{Template Module Windows network by Zabbix agent active:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>Interface {#IFNAME}({#IFALIAS}): Network traffic</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Template Module Windows network by Zabbix agent active</host>
+                                        <key>net.if.in[&quot;{#IFNAME}&quot;]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Module Windows network by Zabbix agent active</host>
+                                        <key>net.if.out[&quot;{#IFNAME}&quot;]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <color>F63100</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <item>
+                                        <host>Template Module Windows network by Zabbix agent active</host>
+                                        <key>net.if.out[&quot;{#IFNAME}&quot;,errors]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <color>A54F10</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <item>
+                                        <host>Template Module Windows network by Zabbix agent active</host>
+                                        <key>net.if.in[&quot;{#IFNAME}&quot;,errors]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>4</sortorder>
+                                    <color>FC6EA3</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <item>
+                                        <host>Template Module Windows network by Zabbix agent active</host>
+                                        <key>net.if.out[&quot;{#IFNAME}&quot;,dropped]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>5</sortorder>
+                                    <color>6C59DC</color>
+                                    <yaxisside>RIGHT</yaxisside>
+                                    <item>
+                                        <host>Template Module Windows network by Zabbix agent active</host>
+                                        <key>net.if.in[&quot;{#IFNAME}&quot;,dropped]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <master_item>
+                        <key>wmi.getall[root\cimv2,&quot;select * from win32_networkadapter where PhysicalAdapter=True&quot;]</key>
+                    </master_item>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>output = JSON.parse(value).map(function(net){
+    return {
+        &quot;{#IFNAME}&quot;: net.Name,
+        &quot;{#IFDESCR}&quot;: net.Description,
+        &quot;{#IFPHYSICALADAPTER}&quot;: net.PhysicalAdapter,
+        &quot;{#IFALIAS}&quot; : net.NetConnectionID,
+        &quot;{#IFNETENABLED}&quot;: net.NetEnabled,
+        &quot;{#IFNETSTATUS}&quot;: net.NetConnectionStatus,
+        &quot;{#IFSPEED}&quot;: net.Speed
+    }})
+return JSON.stringify({&quot;data&quot;: output})</params>
+                        </step>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$IF.ERRORS.WARN}</macro>
+                    <value>2</value>
+                </macro>
+                <macro>
+                    <macro>{$IF.UTIL.MAX}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$IFCONTROL}</macro>
+                    <value>1</value>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFALIAS.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFALIAS.NOT_MATCHES}</macro>
+                    <value>CHANGE_THIS</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFDESCR.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFDESCR.NOT_MATCHES}</macro>
+                    <value>CHANGE_THIS</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFNAME.MATCHES}</macro>
+                    <value>.*</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFNAME.NOT_MATCHES}</macro>
+                    <value>Miniport|Virtual|Teredo|Kernel|Loopback|Bluetooth|HTTPS|6to4|QoS|Layer</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFNETENABLED.MATCHES}</macro>
+                    <value>True</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.IFNETENABLED.NOT_MATCHES}</macro>
+                    <value>CHANGE_THIS</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.PHYSICALADAPTER.MATCHES}</macro>
+                    <value>True</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+                <macro>
+                    <macro>{$NET.IF.PHYSICALADAPTER.NOT_MATCHES}</macro>
+                    <value>CHANGE_THIS</value>
+                    <description>This macro is used in Network interface discovery. Can be overridden on the host or linked template level.</description>
+                </macro>
+            </macros>
+            <screens>
+                <screen>
+                    <name>Netowrk interfaces</name>
+                    <hsize>1</hsize>
+                    <vsize>1</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>Interface {#IFNAME}({#IFALIAS}): Network traffic</name>
+                                <host>Template Module Windows network by Zabbix agent active</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+            </screens>
+        </template>
+    </templates>
+    <value_maps>
+        <value_map>
+            <name>Win32_NetworkAdapter::AdapterTypeId</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Ethernet 802.3</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Token Ring 802.5</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Fiber Distributed Data Interface (FDDI)</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Wide Area Network (WAN)</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>LocalTalk</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Ethernet using DIX header format</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>ARCNET</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>ARCNET (878.2)</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>ATM</newvalue>
+                </mapping>
+                <mapping>
+                    <value>9</value>
+                    <newvalue>Wireless</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>Infrared Wireless</newvalue>
+                </mapping>
+                <mapping>
+                    <value>11</value>
+                    <newvalue>Bpc</newvalue>
+                </mapping>
+                <mapping>
+                    <value>12</value>
+                    <newvalue>CoWan</newvalue>
+                </mapping>
+                <mapping>
+                    <value>13</value>
+                    <newvalue>1394</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Win32_NetworkAdapter::NetConnectionStatus</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Disconnected</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Connecting</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Connected</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Disconnecting</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Hardware Not Present</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>Hardware Disabled</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>Hardware Malfunction</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>Media Disconnected</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>Authenticating</newvalue>
+                </mapping>
+                <mapping>
+                    <value>9</value>
+                    <newvalue>Authentication Succeeded</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>Authentication Failed</newvalue>
+                </mapping>
+                <mapping>
+                    <value>11</value>
+                    <newvalue>Invalid Address</newvalue>
+                </mapping>
+                <mapping>
+                    <value>12</value>
+                    <newvalue>Credentials Required</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>

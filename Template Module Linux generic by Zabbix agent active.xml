@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Linux generic by Zabbix agent active</template>
+            <name>Template Module Linux generic by Zabbix agent active</name>
+            <description>Template tooling version used: 0.34</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>General</name>
+                </application>
+                <application>
+                    <name>Inventory</name>
+                </application>
+                <application>
+                    <name>Security</name>
+                </application>
+                <application>
+                    <name>Status</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Maximum number of open file descriptors</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>kernel.maxfiles</key>
+                    <delay>1h</delay>
+                    <history>7d</history>
+                    <description>It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;{$KERNEL.MAXFILES.MIN}</expression>
+                            <name>Configured max number of open filedescriptors is too low (&lt; {$KERNEL.MAXFILES.MIN})</name>
+                            <priority>INFO</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Maximum number of processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>kernel.maxproc</key>
+                    <delay>1h</delay>
+                    <history>7d</history>
+                    <description>It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;{$KERNEL.MAXPROC.MIN}</expression>
+                            <name>Configured max number of processes is too low (&lt; {$KERNEL.MAXPROC.MIN})</name>
+                            <priority>INFO</priority>
+                            <dependencies>
+                                <dependency>
+                                    <name>Getting closer to process limit (over 80% used)</name>
+                                    <expression>{Template Module Linux generic by Zabbix agent active:proc.num.last()}/{Template Module Linux generic by Zabbix agent active:kernel.maxproc.last()}*100&gt;80</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Number of processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num</key>
+                    <history>7d</history>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Number of running processes</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[,,run]</key>
+                    <history>7d</history>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>System boot time</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.boottime</key>
+                    <delay>15m</delay>
+                    <history>7d</history>
+                    <units>unixtime</units>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>System name</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.hostname</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>System host name.</description>
+                    <inventory_link>NAME</inventory_link>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <name>System name has changed (new name: {ITEM.VALUE})</name>
+                            <priority>INFO</priority>
+                            <description>System name has changed. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>System local time</name>
+                    <key>system.localtime</key>
+                    <history>7d</history>
+                    <status>DISABLED</status>
+                    <units>unixtime</units>
+                    <description>System local time of the host.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{fuzzytime({$SYSTEM.FUZZYTIME.MAX})}=0</expression>
+                            <name>System time is out of sync (diff with Zabbix server &gt; {$SYSTEM.FUZZYTIME.MAX}s)</name>
+                            <priority>WARNING</priority>
+                            <description>The host system time is different from the Zabbix server time.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Operating system architecture</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.sw.arch</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>Operating system architecture of the host.</description>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Operating system</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.sw.os</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <inventory_link>OS</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <recovery_mode>NONE</recovery_mode>
+                            <name>Operating system description has changed</name>
+                            <priority>INFO</priority>
+                            <description>Operating system description has changed. Possible reasons that system has been updated or replaced. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>System name has changed (new name: {ITEM.VALUE})</name>
+                                    <expression>{Template Module Linux generic by Zabbix agent active:system.hostname.diff()}=1 and {Template Module Linux generic by Zabbix agent active:system.hostname.strlen()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Software installed</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.sw.packages</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>System description</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.uname</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The information as normally returned by 'uname -a'.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>System uptime</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.uptime</key>
+                    <delay>30s</delay>
+                    <history>2w</history>
+                    <trends>0d</trends>
+                    <units>uptime</units>
+                    <description>System uptime in 'N days, hh:mm:ss' format.</description>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;10m</expression>
+                            <name>{HOST.NAME} has been restarted (uptime &lt; 10m)</name>
+                            <priority>WARNING</priority>
+                            <description>The host uptime is less than 10 minutes</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Number of logged in users</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>system.users.num</key>
+                    <history>7d</history>
+                    <description>Number of users who are currently logged in.</description>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Checksum of /etc/passwd</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>vfs.file.cksum[/etc/passwd]</key>
+                    <delay>15m</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <applications>
+                        <application>
+                            <name>Security</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1h</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}&gt;0</expression>
+                            <name>/etc/passwd has been changed</name>
+                            <priority>INFO</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Operating system description has changed</name>
+                                    <expression>{Template Module Linux generic by Zabbix agent active:system.sw.os.diff()}=1 and {Template Module Linux generic by Zabbix agent active:system.sw.os.strlen()}&gt;0</expression>
+                                </dependency>
+                                <dependency>
+                                    <name>System name has changed (new name: {ITEM.VALUE})</name>
+                                    <expression>{Template Module Linux generic by Zabbix agent active:system.hostname.diff()}=1 and {Template Module Linux generic by Zabbix agent active:system.hostname.strlen()}&gt;0</expression>
+                                </dependency>
+                            </dependencies>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$KERNEL.MAXFILES.MIN}</macro>
+                    <value>256</value>
+                </macro>
+                <macro>
+                    <macro>{$KERNEL.MAXPROC.MIN}</macro>
+                    <value>1024</value>
+                </macro>
+                <macro>
+                    <macro>{$SYSTEM.FUZZYTIME.MAX}</macro>
+                    <value>60</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template Module Linux generic by Zabbix agent active:proc.num.last()}/{Template Module Linux generic by Zabbix agent active:kernel.maxproc.last()}*100&gt;80</expression>
+            <name>Getting closer to process limit (over 80% used)</name>
+            <opdata>{ITEM.LASTVALUE1} active, {ITEM.LASTVALUE2} limit.</opdata>
+            <priority>WARNING</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Processes</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template Module Linux generic by Zabbix agent active</host>
+                        <key>proc.num</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>2774A4</color>
+                    <item>
+                        <host>Template Module Linux generic by Zabbix agent active</host>
+                        <key>proc.num[,,run]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>Template Module Linux generic by Zabbix agent active</host>
+                        <key>kernel.maxproc</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
