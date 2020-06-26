@@ -1046,6 +1046,43 @@
                     </triggers>
                 </item>
                 <item>
+                    <name>Version</name>
+                    <type>DEPENDENT</type>
+                    <key>version</key>
+                    <delay>0</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>Version of Zabbix server.</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix server</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.data.version</params>
+                        </step>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>zabbix[stats,{$ADDRESS},{$PORT}]</key>
+                    </master_item>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <name>Zabbix version has changed (new version: {ITEM.VALUE})</name>
+                            <priority>INFO</priority>
+                            <description>Zabbix server version has changed. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
                     <name>VMware cache, % used</name>
                     <type>DEPENDENT</type>
                     <key>vmware.buffer.pused</key>
