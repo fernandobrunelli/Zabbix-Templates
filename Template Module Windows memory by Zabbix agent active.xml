@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Windows memory by Zabbix agent active</template>
             <name>Template Module Windows memory by Zabbix agent active</name>
-            <description>Template tooling version used: 0.34</description>
+            <description>Template tooling version used: 0.37</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -127,11 +127,26 @@ A typical Event ID 2019 is recorded in the system event log.</description>
                     </applications>
                 </item>
                 <item>
-                    <name>Free swap space</name>
+                    <name>Used swap space in %</name>
                     <type>ZABBIX_ACTIVE</type>
-                    <key>system.swap.size[,free]</key>
+                    <key>perf_counter_en[&quot;\Paging file(_Total)\% Usage&quot;]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>The used space of swap volume/file in percent.</description>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Free swap space</name>
+                    <type>CALCULATED</type>
+                    <key>system.swap.free</key>
                     <history>7d</history>
                     <units>B</units>
+                    <params>last(&quot;system.swap.size[,total]&quot;) - last(&quot;system.swap.size[,total]&quot;) / 100 * last(&quot;perf_counter_en[\&quot;\Paging file(_Total)\% Usage\&quot;]&quot;)</params>
                     <description>The free space of swap volume/file in bytes.</description>
                     <applications>
                         <application>
@@ -141,8 +156,9 @@ A typical Event ID 2019 is recorded in the system event log.</description>
                 </item>
                 <item>
                     <name>Free swap space in %</name>
-                    <type>ZABBIX_ACTIVE</type>
-                    <key>system.swap.size[,pfree]</key>
+                    <type>DEPENDENT</type>
+                    <key>system.swap.pfree</key>
+                    <delay>0</delay>
                     <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <units>%</units>
@@ -152,6 +168,15 @@ A typical Event ID 2019 is recorded in the system event log.</description>
                             <name>Memory</name>
                         </application>
                     </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JAVASCRIPT</type>
+                            <params>return (100 - value)</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>perf_counter_en[&quot;\Paging file(_Total)\% Usage&quot;]</key>
+                    </master_item>
                 </item>
                 <item>
                     <name>Total swap space</name>
@@ -242,7 +267,7 @@ A typical Event ID 2019 is recorded in the system event log.</description>
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template Module Windows memory by Zabbix agent active:system.swap.size[,pfree].min(5m)}&lt;{$SWAP.PFREE.MIN.WARN} and {Template Module Windows memory by Zabbix agent active:system.swap.size[,total].last()}&gt;0</expression>
+            <expression>{Template Module Windows memory by Zabbix agent active:system.swap.pfree.min(5m)}&lt;{$SWAP.PFREE.MIN.WARN} and {Template Module Windows memory by Zabbix agent active:system.swap.size[,total].last()}&gt;0</expression>
             <name>High swap space usage ( less than {$SWAP.PFREE.MIN.WARN}% free)</name>
             <opdata>Free: {ITEM.LASTVALUE1}, total: {ITEM.LASTVALUE2}</opdata>
             <priority>WARNING</priority>
@@ -278,7 +303,7 @@ A typical Event ID 2019 is recorded in the system event log.</description>
                     <color>1A7C11</color>
                     <item>
                         <host>Template Module Windows memory by Zabbix agent active</host>
-                        <key>system.swap.size[,free]</key>
+                        <key>system.swap.free</key>
                     </item>
                 </graph_item>
                 <graph_item>

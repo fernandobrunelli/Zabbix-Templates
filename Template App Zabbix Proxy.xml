@@ -761,7 +761,7 @@
                                 <name>Zabbix proxy performance</name>
                                 <host>Template App Zabbix Proxy</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>212</height>
                             <x>0</x>
                             <y>0</y>
@@ -783,7 +783,7 @@
                                 <name>Zabbix data gathering process busy %</name>
                                 <host>Template App Zabbix Proxy</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -805,7 +805,7 @@
                                 <name>Zabbix internal process busy %</name>
                                 <host>Template App Zabbix Proxy</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -827,7 +827,7 @@
                                 <name>Zabbix cache usage, % used</name>
                                 <host>Template App Zabbix Proxy</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>128</height>
                             <x>1</x>
                             <y>1</y>

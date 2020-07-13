@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Windows network by Zabbix agent</template>
             <name>Template Module Windows network by Zabbix agent</name>
-            <description>Template tooling version used: 0.34</description>
+            <description>Template tooling version used: 0.37</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -280,7 +280,7 @@
                                 <trigger_prototype>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({last()}=2 and {diff()}=1)</expression>
                                     <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                                    <recovery_expression>{last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                     <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
                                     <opdata>Current state: {ITEM.LASTVALUE1}</opdata>
                                     <priority>AVERAGE</priority>
@@ -346,7 +346,7 @@ and&#13;
                                 <dependency>
                                     <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}=2 and {Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].diff()}=1)</expression>
-                                    <recovery_expression>{Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                 </dependency>
                             </dependencies>
                         </trigger_prototype>
@@ -366,7 +366,7 @@ and&#13;
                                 <dependency>
                                     <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}=2 and {Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].diff()}=1)</expression>
-                                    <recovery_expression>{Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                 </dependency>
                             </dependencies>
                         </trigger_prototype>
@@ -385,7 +385,7 @@ and {Template Module Windows network by Zabbix agent:net.if.out[&quot;{#IFNAME}&
                                 <dependency>
                                     <name>Interface {#IFNAME}({#IFALIAS}): Link down</name>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}=2 and {Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].diff()}=1)</expression>
-                                    <recovery_expression>{Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{Template Module Windows network by Zabbix agent:net.if.status[&quot;{#IFNAME}&quot;].last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                 </dependency>
                             </dependencies>
                         </trigger_prototype>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module Cisco Inventory SNMP</template>
+            <name>Template Module Cisco Inventory SNMP</name>
+            <description>Template Cisco Inventory&#13;
+&#13;
+MIBs used:&#13;
+ENTITY-MIB&#13;
+SNMPv2-MIB&#13;
+&#13;
+Template tooling version used: 0.36</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Inventory</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Hardware model name</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.2.1.47.1.1.1.1.13.1</snmp_oid>
+                    <key>system.hw.model</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>MIB: ENTITY-MIB</description>
+                    <inventory_link>MODEL</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                </item>
+                <item>
+                    <name>Hardware serial number</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.2.1.47.1.1.1.1.11.1</snmp_oid>
+                    <key>system.hw.serialnumber</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>MIB: ENTITY-MIB</description>
+                    <inventory_link>SERIALNO_A</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <name>Device has been replaced (new serial number received)</name>
+                            <priority>INFO</priority>
+                            <description>Device serial number has changed. Ack to close</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Operating system</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.2.1.1.1.0</snmp_oid>
+                    <key>system.sw.os[sysDescr.0]</key>
+                    <delay>1h</delay>
+                    <history>2w</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>MIB: SNMPv2-MIB</description>
+                    <inventory_link>OS</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Inventory</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>REGEX</type>
+                            <params>Version (.+), RELEASE
+\1</params>
+                        </step>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <params>1d</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                            <recovery_mode>NONE</recovery_mode>
+                            <name>Operating system description has changed</name>
+                            <priority>INFO</priority>
+                            <description>Operating system description has changed. Possible reasons that system has been updated or replaced. Ack to close.</description>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Entity Serial Numbers Discovery</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#ENT_CLASS},1.3.6.1.2.1.47.1.1.1.1.5,{#ENT_NAME},1.3.6.1.2.1.47.1.1.1.1.7,{#ENT_SN},1.3.6.1.2.1.47.1.1.1.1.11]</snmp_oid>
+                    <key>entity_sn.discovery</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#ENT_SN}</macro>
+                                <value>.+</value>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#ENT_CLASS}</macro>
+                                <value>[^3]</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>{#ENT_NAME}: Hardware serial number</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.2.1.47.1.1.1.1.11.{#SNMPINDEX}</snmp_oid>
+                            <key>system.hw.serialnumber[entPhysicalSerialNum.{#SNMPINDEX}]</key>
+                            <delay>1h</delay>
+                            <history>2w</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <description>MIB: ENTITY-MIB</description>
+                            <applications>
+                                <application>
+                                    <name>Inventory</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                                    <params>1d</params>
+                                </step>
+                            </preprocessing>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{diff()}=1 and {strlen()}&gt;0</expression>
+                                    <name>{#ENT_NAME}: Device has been replaced (new serial number received)</name>
+                                    <priority>INFO</priority>
+                                    <description>Device serial number has changed. Ack to close</description>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>

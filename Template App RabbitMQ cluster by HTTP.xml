@@ -1122,7 +1122,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Messages</name>
                                 <host>Template App RabbitMQ cluster by HTTP</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>
@@ -1144,7 +1144,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Connections</name>
                                 <host>Template App RabbitMQ cluster by HTTP</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -1166,7 +1166,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Messages status</name>
                                 <host>Template App RabbitMQ cluster by HTTP</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -1188,7 +1188,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Queues</name>
                                 <host>Template App RabbitMQ cluster by HTTP</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>1</y>
@@ -1210,7 +1210,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Messages per second</name>
                                 <host>Template App RabbitMQ cluster by HTTP</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>2</y>

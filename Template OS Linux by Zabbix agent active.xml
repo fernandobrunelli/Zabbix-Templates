@@ -18,7 +18,7 @@ Known Issues:&#13;
 &#13;
 You can discuss this template or leave feedback on our forum https://www.zabbix.com/forum/zabbix-suggestions-and-feedback/387225-discussion-thread-for-official-zabbix-template-for-linux&#13;
 &#13;
-Template tooling version used: 0.34</description>
+Template tooling version used: 0.36</description>
             <templates>
                 <template>
                     <name>Template Module Linux block devices by Zabbix agent active</name>
@@ -60,7 +60,7 @@ Template tooling version used: 0.34</description>
                                 <name>System load</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>
@@ -82,7 +82,7 @@ Template tooling version used: 0.34</description>
                                 <name>CPU usage</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -104,7 +104,7 @@ Template tooling version used: 0.34</description>
                                 <name>Memory usage</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -126,7 +126,7 @@ Template tooling version used: 0.34</description>
                                 <name>Swap usage</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>1</y>
@@ -148,7 +148,7 @@ Template tooling version used: 0.34</description>
                                 <name>{#FSNAME}: Disk space usage</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>2</y>
@@ -170,7 +170,7 @@ Template tooling version used: 0.34</description>
                                 <name>{#DEVNAME}: Disk read/write rates</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>3</y>
@@ -192,7 +192,7 @@ Template tooling version used: 0.34</description>
                                 <name>{#DEVNAME}: Disk average waiting time</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>4</y>
@@ -214,7 +214,7 @@ Template tooling version used: 0.34</description>
                                 <name>{#DEVNAME}: Disk utilization and queue</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>5</y>
@@ -236,7 +236,7 @@ Template tooling version used: 0.34</description>
                                 <name>Interface {#IFNAME}: Network traffic</name>
                                 <host>Template OS Linux by Zabbix agent active</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>6</y>

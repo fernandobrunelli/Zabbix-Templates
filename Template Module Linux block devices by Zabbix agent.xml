@@ -10,12 +10,7 @@
         <template>
             <template>Template Module Linux block devices by Zabbix agent</template>
             <name>Template Module Linux block devices by Zabbix agent</name>
-            <description>Known Issues:&#13;
-&#13;
-  Description: If having problems accessing /proc/diskstats on CloudLinux, please read this https://docs.cloudlinux.com/cloudlinux_os_kernel/#virtualized-proc-filesystem.&#13;
-  Device: CloudLinux&#13;
-&#13;
-Template tooling version used: 0.34</description>
+            <description>Template tooling version used: 0.36</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -29,53 +24,29 @@ Template tooling version used: 0.34</description>
                     <name>Zabbix raw items</name>
                 </application>
             </applications>
-            <items>
-                <item>
-                    <name>Get /proc/diskstats</name>
-                    <key>vfs.file.contents[/proc/diskstats]</key>
-                    <history>1h</history>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <description>Get contents of /proc/diskstats for discovery and disk stats.</description>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                    <preprocessing>
-                        <step>
-                            <type>JAVASCRIPT</type>
-                            <params>var parsed = value.split(&quot;\n&quot;).reduce(function(acc, x, i) {
-  parts = x.trim().split(/ +/)
-  acc[&quot;values&quot;][parts[2]] = parts
-  acc[&quot;lld&quot;].push({&quot;{#DEVNAME}&quot;:parts[2]})
-  return acc;
-}, {&quot;values&quot;:{}, &quot;lld&quot;: []});
-
-return JSON.stringify(parsed);</params>
-                        </step>
-                    </preprocessing>
-                </item>
-            </items>
             <discovery_rules>
                 <discovery_rule>
                     <name>Block devices discovery</name>
-                    <type>DEPENDENT</type>
                     <key>vfs.dev.discovery</key>
-                    <delay>0</delay>
+                    <delay>1h</delay>
                     <filter>
                         <evaltype>AND</evaltype>
                         <conditions>
                             <condition>
+                                <macro>{#DEVTYPE}</macro>
+                                <value>disk</value>
+                                <formulaid>C</formulaid>
+                            </condition>
+                            <condition>
                                 <macro>{#DEVNAME}</macro>
                                 <value>{$VFS.DEV.DEVNAME.MATCHES}</value>
-                                <formulaid>A</formulaid>
+                                <formulaid>B</formulaid>
                             </condition>
                             <condition>
                                 <macro>{#DEVNAME}</macro>
                                 <value>{$VFS.DEV.DEVNAME.NOT_MATCHES}</value>
                                 <operator>NOT_MATCHES_REGEX</operator>
-                                <formulaid>B</formulaid>
+                                <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
@@ -96,7 +67,7 @@ return JSON.stringify(parsed);</params>
                             <preprocessing>
                                 <step>
                                     <type>JSONPATH</type>
-                                    <params>$.values['{#DEVNAME}'][13]</params>
+                                    <params>$[10]</params>
                                 </step>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
@@ -108,7 +79,7 @@ return JSON.stringify(parsed);</params>
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>vfs.file.contents[/proc/diskstats]</key>
+                                <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -143,7 +114,7 @@ return JSON.stringify(parsed);</params>
                             <preprocessing>
                                 <step>
                                     <type>JSONPATH</type>
-                                    <params>$.values['{#DEVNAME}'][3]</params>
+                                    <params>$[0]</params>
                                 </step>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
@@ -151,7 +122,7 @@ return JSON.stringify(parsed);</params>
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>vfs.file.contents[/proc/diskstats]</key>
+                                <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -170,7 +141,7 @@ return JSON.stringify(parsed);</params>
                             <preprocessing>
                                 <step>
                                     <type>JSONPATH</type>
-                                    <params>$.values['{#DEVNAME}'][6]</params>
+                                    <params>$[3]</params>
                                 </step>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
@@ -182,7 +153,7 @@ return JSON.stringify(parsed);</params>
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>vfs.file.contents[/proc/diskstats]</key>
+                                <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -202,7 +173,7 @@ return JSON.stringify(parsed);</params>
                             <preprocessing>
                                 <step>
                                     <type>JSONPATH</type>
-                                    <params>$.values['{#DEVNAME}'][12]</params>
+                                    <params>$[9]</params>
                                 </step>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
@@ -214,7 +185,7 @@ return JSON.stringify(parsed);</params>
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>vfs.file.contents[/proc/diskstats]</key>
+                                <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -249,7 +220,7 @@ return JSON.stringify(parsed);</params>
                             <preprocessing>
                                 <step>
                                     <type>JSONPATH</type>
-                                    <params>$.values['{#DEVNAME}'][7]</params>
+                                    <params>$[4]</params>
                                 </step>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
@@ -257,7 +228,7 @@ return JSON.stringify(parsed);</params>
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>vfs.file.contents[/proc/diskstats]</key>
+                                <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -276,7 +247,7 @@ return JSON.stringify(parsed);</params>
                             <preprocessing>
                                 <step>
                                     <type>JSONPATH</type>
-                                    <params>$.values['{#DEVNAME}'][10]</params>
+                                    <params>$[7]</params>
                                 </step>
                                 <step>
                                     <type>CHANGE_PER_SECOND</type>
@@ -288,8 +259,27 @@ return JSON.stringify(parsed);</params>
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>vfs.file.contents[/proc/diskstats]</key>
+                                <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
                             </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#DEVNAME}: Get stats</name>
+                            <key>vfs.file.contents[/sys/block/{#DEVNAME}/stat]</key>
+                            <history>0</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <description>Get contents of /sys/block/{#DEVNAME}/stat for disk stats.</description>
+                            <applications>
+                                <application>
+                                    <name>Zabbix raw items</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return JSON.stringify(value.trim().split(/ +/));</params>
+                                </step>
+                            </preprocessing>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -367,14 +357,7 @@ return JSON.stringify(parsed);</params>
                             </graph_items>
                         </graph_prototype>
                     </graph_prototypes>
-                    <master_item>
-                        <key>vfs.file.contents[/proc/diskstats]</key>
-                    </master_item>
                     <preprocessing>
-                        <step>
-                            <type>JSONPATH</type>
-                            <params>$.lld</params>
-                        </step>
                         <step>
                             <type>DISCARD_UNCHANGED_HEARTBEAT</type>
                             <params>1h</params>

@@ -10,6 +10,7 @@
         <template>
             <template>Template DB PostgreSQL Agent 2</template>
             <name>Template DB PostgreSQL Agent 2</name>
+            <description>Template tooling version used: 0.37</description>
             <groups>
                 <group>
                     <name>Templates/Databases</name>
@@ -25,8 +26,102 @@
             </applications>
             <items>
                 <item>
-                    <name>PostgreSQL: Archive</name>
-                    <key>pgsql.archive</key>
+                    <name>Archive: Count of archive files</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.archive.count_archived_files</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Collect all metrics from pg_stat_activity&#13;
+https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ARCHIVER-VIEW</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.archived_count</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.archive[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Archive: Count of files in archive_status need to archive</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.archive.count_files_to_archive</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.count_files</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.archive[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Archive: Count of attempts to archive files</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.archive.failed_trying_to_archive</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Collect all metrics from pg_stat_activity&#13;
+https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ARCHIVER-VIEW</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.failed_count</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.archive[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Archive: Count of files need to archive</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.archive.size_files_to_archive</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <description>Size of files to archive</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.size_files</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.archive[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>PostgreSQL: Get archive</name>
+                    <key>pgsql.archive[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>0</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
                     <description>Collect archive status metrics</description>
@@ -37,125 +132,23 @@
                     </applications>
                 </item>
                 <item>
-                    <name>PostgreSQL: Get count of archive files</name>
-                    <type>DEPENDENT</type>
-                    <key>pgsql.archive.count_archived_files</key>
-                    <delay>0</delay>
-                    <history>1h</history>
+                    <name>Autovacuum: Count of autovacuum workers</name>
+                    <key>pgsql.autovacuum.count[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
-                    <description>Collect all metrics from pg_stat_activity&#13;
-https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-VIEW</description>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                    <preprocessing>
-                        <step>
-                            <type>JSONPATH</type>
-                            <params>$.archived_count</params>
-                        </step>
-                    </preprocessing>
-                    <master_item>
-                        <key>pgsql.archive</key>
-                    </master_item>
-                </item>
-                <item>
-                    <name>PostgreSQL: Get count of files in archive_status need to archive</name>
-                    <type>DEPENDENT</type>
-                    <key>pgsql.archive.count_files_to_archive</key>
-                    <delay>0</delay>
-                    <value_type>FLOAT</value_type>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                    <preprocessing>
-                        <step>
-                            <type>JSONPATH</type>
-                            <params>$.count_files</params>
-                        </step>
-                    </preprocessing>
-                    <master_item>
-                        <key>pgsql.archive</key>
-                    </master_item>
-                </item>
-                <item>
-                    <name>PostgreSQL: Get count of attempts to archive files</name>
-                    <type>DEPENDENT</type>
-                    <key>pgsql.archive.failed_trying_to_archive</key>
-                    <delay>0</delay>
-                    <value_type>FLOAT</value_type>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                    <preprocessing>
-                        <step>
-                            <type>JSONPATH</type>
-                            <params>$.failed_count</params>
-                        </step>
-                    </preprocessing>
-                    <master_item>
-                        <key>pgsql.archive</key>
-                    </master_item>
-                </item>
-                <item>
-                    <name>PostgreSQL: Get count of files need to archive</name>
-                    <type>DEPENDENT</type>
-                    <key>pgsql.archive.size_files_to_archive</key>
-                    <delay>0</delay>
-                    <history>1h</history>
-                    <value_type>FLOAT</value_type>
-                    <description>Collect all metrics from pg_stat_activity&#13;
-https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-VIEW</description>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                    <preprocessing>
-                        <step>
-                            <type>JSONPATH</type>
-                            <params>$.size_files</params>
-                        </step>
-                    </preprocessing>
-                    <master_item>
-                        <key>pgsql.archive</key>
-                    </master_item>
-                </item>
-                <item>
-                    <name>PostgreSQL: Autovacuum: count of autovacuum workers</name>
-                    <key>pgsql.autovacuum.count</key>
                     <description>Number of autovacuum workers.</description>
                     <applications>
                         <application>
                             <name>PostgreSQL</name>
-                        </application>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>PostgreSQL: Bgwriter</name>
-                    <key>pgsql.bgwriter</key>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <description>https://www.postgresql.org/docs/12/monitoring-stats.html#PG-STAT-BGWRITER-VIEW</description>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
                         </application>
                     </applications>
                 </item>
                 <item>
                     <name>Bgwriter: Buffers allocated</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.buffers_alloc</key>
+                    <key>pgsql.bgwriter.buffers_alloc.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of buffers allocated</description>
                     <applications>
@@ -169,19 +162,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.buffers_alloc</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
                     <name>Bgwriter: Buffers written directly by a backend</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.buffers_backend</key>
+                    <key>pgsql.bgwriter.buffers_backend.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of buffers written directly by a backend</description>
                     <applications>
@@ -195,19 +189,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.buffers_backend</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
                     <name>Bgwriter: Times a backend execute its own fsync</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.buffers_backend_fsync</key>
+                    <key>pgsql.bgwriter.buffers_backend_fsync.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of times a backend had to execute its own fsync call (normally the background writer handles those even when the backend does its own write)</description>
                     <applications>
@@ -221,19 +216,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.buffers_backend_fsync</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
                     <name>Checkpoint: Buffers checkpoints written</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.buffers_checkpoint</key>
+                    <key>pgsql.bgwriter.buffers_checkpoint.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of buffers written during checkpoints</description>
                     <applications>
@@ -247,19 +243,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.buffers_checkpoint</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>Checkpoint: buffers background written</name>
+                    <name>Checkpoint: Buffers background written</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.buffers_clean</key>
+                    <key>pgsql.bgwriter.buffers_clean.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of buffers written by the background writer</description>
                     <applications>
@@ -273,19 +270,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.buffers_clean</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
                     <name>Checkpoint: Requested</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.checkpoints_req</key>
+                    <key>pgsql.bgwriter.checkpoints_req.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of requested checkpoints that have been performed</description>
                     <applications>
@@ -299,19 +297,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.checkpoints_req</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
                     <name>Checkpoint: By timeout</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.checkpoints_timed</key>
+                    <key>pgsql.bgwriter.checkpoints_timed.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of scheduled checkpoints that have been performed</description>
                     <applications>
@@ -325,19 +324,52 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.checkpoints_timed</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Checkpoint: Checkpoint write time</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.bgwriter.checkpoint_write_time.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>s</units>
+                    <description>Total amount of time that has been spent in the portion of checkpoint processing where files are written to disk, in milliseconds</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.checkpoint_write_time</params>
+                        </step>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>0.001</params>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <params/>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
                     <name>Bgwriter: Number of bgwriter stopped</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.bgwriter.maxwritten_clean</key>
+                    <key>pgsql.bgwriter.maxwritten_clean.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of times the background writer stopped a cleaning scan because it had written too many buffers</description>
                     <applications>
@@ -351,36 +383,68 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                             <params>$.maxwritten_clean</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.bgwriter</key>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL: Cache hit</name>
-                    <key>pgsql.cache.hit</key>
+                    <name>Checkpoint: Checkpoint sync time</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.bgwriter.sync_time.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
-                    <units>percent</units>
+                    <units>s</units>
+                    <description>Total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk</description>
                     <applications>
                         <application>
                             <name>PostgreSQL</name>
                         </application>
                     </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.sync_time</params>
+                        </step>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>0.001</params>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <params/>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL: Get connections sum</name>
-                    <key>pgsql.connections</key>
-                    <history>1h</history>
+                    <name>PostgreSQL: Get bgwriter</name>
+                    <key>pgsql.bgwriter[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>0</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
-                    <description>Collect all metrics from pg_stat_activity&#13;
-https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-VIEW</description>
+                    <description>https://www.postgresql.org/docs/12/monitoring-stats.html#PG-STAT-BGWRITER-VIEW</description>
                     <applications>
                         <application>
                             <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>PostgreSQL: Cache hit</name>
+                    <key>pgsql.cache.hit[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
                         </application>
                     </applications>
                 </item>
@@ -403,16 +467,38 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>Connections sum: fastpath function call</name>
+                    <name>Connections sum: Disabled</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.connections.disabled</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Total number of disabled connections</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.disabled</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Connections sum: Fastpath function call</name>
                     <type>DEPENDENT</type>
                     <key>pgsql.connections.fastpath_function_call</key>
                     <delay>0</delay>
                     <history>7d</history>
-                    <description>Total number of connections in a transaction state, but not executing a query</description>
+                    <description>Total number of connections executing a fast-path function</description>
                     <applications>
                         <application>
                             <name>PostgreSQL</name>
@@ -425,7 +511,7 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
@@ -447,7 +533,7 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
@@ -469,17 +555,15 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL: Get connections  idle in transaction (aborted)</name>
+                    <name>Connections sum: Idle in transaction (aborted)</name>
                     <type>DEPENDENT</type>
                     <key>pgsql.connections.idle_in_transaction_aborted</key>
                     <delay>0</delay>
-                    <history>1h</history>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
+                    <history>7d</history>
                     <description>Total number of connections in a transaction state, but not executing a query and one of the statements in the transaction caused an error.</description>
                     <applications>
                         <application>
@@ -493,7 +577,7 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-V
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
@@ -516,7 +600,7 @@ https://www.postgresql.org/docs/current/sql-prepare-transaction.html</descriptio
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
@@ -538,7 +622,7 @@ https://www.postgresql.org/docs/current/sql-prepare-transaction.html</descriptio
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
@@ -561,12 +645,12 @@ https://www.postgresql.org/docs/current/sql-prepare-transaction.html</descriptio
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                     <triggers>
                         <trigger>
                             <expression>{min(5m)} &gt; {$PG.CONN_TOTAL_PCT.MAX.WARN}</expression>
-                            <name>PostgreSQL: Total number of connections is too high (over {$PG.CONN_TOTAL_PCT.MAX.WARN} in 5m)</name>
+                            <name>Connections sum: Total number of connections is too high (over {$PG.CONN_TOTAL_PCT.MAX.WARN} in 5m)</name>
                             <priority>AVERAGE</priority>
                         </trigger>
                     </triggers>
@@ -591,17 +675,17 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#WAIT-EVENT-TABLE</
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.connections</key>
+                        <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL: Get dbstat</name>
-                    <key>pgsql.dbstat</key>
-                    <history>1h</history>
+                    <name>PostgreSQL: Get connections</name>
+                    <key>pgsql.connections[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>0</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
-                    <description>Collect all metrics from pg_stat_database per database&#13;
-https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-VIEW</description>
+                    <description>Collect all metrics from pg_stat_activity&#13;
+https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-ACTIVITY-VIEW</description>
                     <applications>
                         <application>
                             <name>Zabbix raw items</name>
@@ -609,25 +693,11 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </applications>
                 </item>
                 <item>
-                    <name>PostgreSQL: Database statistic sum</name>
-                    <key>pgsql.dbstat.sum</key>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <description>https://www.postgresql.org/docs/12/monitoring-stats.html#PG-STAT-DATABASE-VIEW</description>
-                    <applications>
-                        <application>
-                            <name>PostgreSQL</name>
-                        </application>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>PostgreSQL statistic: Hit blocks read</name>
+                    <name>Dbstat: Hit blocks read</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.blks_hit</key>
+                    <key>pgsql.dbstat.sum.blks_hit.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of times disk blocks were found already in the buffer cache</description>
                     <applications>
@@ -641,19 +711,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.blks_hit</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Disk blocks read</name>
+                    <name>Dbstat: Disk blocks read</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.blks_read</key>
+                    <key>pgsql.dbstat.sum.blks_read.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of disk blocks read</description>
                     <applications>
@@ -667,20 +738,22 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.blks_read</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Blocks read time</name>
+                    <name>Dbstat: Blocks read time</name>
                     <type>DEPENDENT</type>
                     <key>pgsql.dbstat.sum.blk_read_time</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
+                    <units>s</units>
                     <description>Time spent reading data file blocks by backends, in milliseconds</description>
                     <applications>
                         <application>
@@ -693,20 +766,22 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.blk_read_time</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
-                            <params/>
+                            <type>MULTIPLIER</type>
+                            <params>0.001</params>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Blocks write time</name>
+                    <name>Dbstat: Blocks write time</name>
                     <type>DEPENDENT</type>
                     <key>pgsql.dbstat.sum.blk_write_time</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
+                    <units>s</units>
                     <description>Time spent writing data file blocks by backends, in milliseconds</description>
                     <applications>
                         <application>
@@ -716,22 +791,23 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     <preprocessing>
                         <step>
                             <type>JSONPATH</type>
-                            <params>$.blk_write_time</params>
+                            <params>$.blk_read_time</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
-                            <params/>
+                            <type>MULTIPLIER</type>
+                            <params>0.001</params>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Checksum failures</name>
+                    <name>Dbstat: Checksum failures</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.checksum_failures</key>
+                    <key>pgsql.dbstat.sum.checksum_failures.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of data page checksum failures detected (or on a shared object), or NULL if data checksums are not enabled. This metric included in PostgreSQL 12</description>
                     <applications>
@@ -749,21 +825,22 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>^\d*$</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                             <error_handler>CUSTOM_VALUE</error_handler>
-                            <error_handler_params>-1</error_handler_params>
+                            <error_handler_params>ZBX_NOTSUPPORTED: Checksum failures metric is supported only in PostgreSQL 12 or higher.</error_handler_params>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: conflicts</name>
+                    <name>Dbstat: Conflicts</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.conflicts</key>
+                    <key>pgsql.dbstat.sum.conflicts.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of queries canceled due to conflicts with recovery.  (Conflicts occur only on standby servers; see pg_stat_database_conflicts for details.)</description>
                     <applications>
@@ -777,19 +854,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.conflicts</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Deadlocks</name>
+                    <name>Dbstat: Deadlocks</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.deadlocks</key>
+                    <key>pgsql.dbstat.sum.deadlocks.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of deadlocks detected</description>
                     <applications>
@@ -803,19 +881,37 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.deadlocks</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Number temp bytes</name>
+                    <name>Dbstat: Backends connected</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.temp_bytes</key>
+                    <key>pgsql.dbstat.sum.numbackends</key>
                     <delay>0</delay>
+                    <history>7d</history>
+                    <description>Number of connected backends</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.numbackends</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Dbstat: Number temp bytes</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.dbstat.sum.temp_bytes.rate</key>
+                    <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <units>b</units>
                     <description>Total amount of data written to temporary files by queries</description>
@@ -830,19 +926,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.temp_bytes</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Number temp files</name>
+                    <name>Dbstat: Number temp bytes</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.temp_files</key>
+                    <key>pgsql.dbstat.sum.temp_files.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of temporary files created by queries</description>
                     <applications>
@@ -856,19 +953,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.temp_files</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Rows deleted</name>
+                    <name>Dbstat: Rows deleted</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.tup_deleted</key>
+                    <key>pgsql.dbstat.sum.tup_deleted.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of rows deleted by queries</description>
                     <applications>
@@ -882,19 +980,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.tup_deleted</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Rows fetched</name>
+                    <name>Dbstat: Rows fetched</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.tup_fetched</key>
+                    <key>pgsql.dbstat.sum.tup_fetched.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of rows fetched by queries</description>
                     <applications>
@@ -908,19 +1007,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.tup_fetched</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Rows inserted</name>
+                    <name>Dbstat: Rows inserted</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.tup_inserted</key>
+                    <key>pgsql.dbstat.sum.tup_inserted.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of rows inserted by queries</description>
                     <applications>
@@ -934,19 +1034,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.tup_inserted</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Rows returned</name>
+                    <name>Dbstat: Rows returned</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.tup_returned</key>
+                    <key>pgsql.dbstat.sum.tup_returned.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of rows returned by queries</description>
                     <applications>
@@ -960,19 +1061,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.tup_returned</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Rows updated</name>
+                    <name>Dbstat: Rows updated</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.tup_updated</key>
+                    <key>pgsql.dbstat.sum.tup_updated.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of rows updated by queries</description>
                     <applications>
@@ -986,19 +1088,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.tup_updated</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Committed transactions</name>
+                    <name>Dbstat: Committed transactions</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.xact_commit</key>
+                    <key>pgsql.dbstat.sum.xact_commit.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of transactions that have been committed</description>
                     <applications>
@@ -1012,19 +1115,20 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.xact_commit</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL statistic: Roll backed transactions</name>
+                    <name>Dbstat: Roll backed transactions</name>
                     <type>DEPENDENT</type>
-                    <key>pgsql.dbstat.sum.xact_rollback</key>
+                    <key>pgsql.dbstat.sum.xact_rollback.rate</key>
                     <delay>0</delay>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Number of transactions that have been rolled back</description>
                     <applications>
@@ -1038,21 +1142,50 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                             <params>$.xact_rollback</params>
                         </step>
                         <step>
-                            <type>SIMPLE_CHANGE</type>
+                            <type>CHANGE_PER_SECOND</type>
                             <params/>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>pgsql.dbstat.sum</key>
+                        <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     </master_item>
                 </item>
                 <item>
-                    <name>PostgreSQL: Locks</name>
-                    <key>pgsql.locks</key>
+                    <name>PostgreSQL: Get dbstat sum</name>
+                    <key>pgsql.dbstat.sum[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>0</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Collect all metrics from pg_stat_database per database&#13;
+https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-VIEW</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>PostgreSQL: Get dbstat</name>
+                    <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>0</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Collect all metrics from pg_stat_database per database&#13;
+https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-VIEW</description>
+                    <applications>
+                        <application>
+                            <name>Zabbix raw items</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>PostgreSQL: Get locks</name>
+                    <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>0</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
                     <description>Collect all metrics from pg_locks per database&#13;
-                        https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-TABLES</description>
+https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-TABLES</description>
                     <applications>
                         <application>
                             <name>Zabbix raw items</name>
@@ -1061,7 +1194,8 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                 </item>
                 <item>
                     <name>PostgreSQL: Age of oldest xid</name>
-                    <key>pgsql.oldest.xid</key>
+                    <key>pgsql.oldest.xid[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <description>Age of oldest xid.</description>
                     <applications>
@@ -1071,15 +1205,15 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </applications>
                     <triggers>
                         <trigger>
-                            <expression>{last()}&gt;18000000</expression>
-                            <name>PostgreSQL oldest xid is too big</name>
+                            <expression>{last()} &gt; 18000000</expression>
+                            <name>PostgreSQL: Oldest xid is too big</name>
                             <priority>AVERAGE</priority>
                         </trigger>
                     </triggers>
                 </item>
                 <item>
-                    <name>Status: Ping</name>
-                    <key>pgsql.ping</key>
+                    <name>PostgreSQL: Ping</name>
+                    <key>pgsql.ping[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     <history>7d</history>
                     <applications>
                         <application>
@@ -1094,15 +1228,16 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </preprocessing>
                     <triggers>
                         <trigger>
-                            <expression>{last()} = 0</expression>
+                            <expression>{last()}=0</expression>
                             <name>PostgreSQL: Service is down</name>
                             <priority>HIGH</priority>
                         </trigger>
                     </triggers>
                 </item>
                 <item>
-                    <name>Replication: standby count</name>
-                    <key>pgsql.replication.count</key>
+                    <name>Replication: Standby count</name>
+                    <key>pgsql.replication.count[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <description>Number of standby servers</description>
                     <applications>
                         <application>
@@ -1111,9 +1246,10 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </applications>
                 </item>
                 <item>
-                    <name>Replication: Lag in byte</name>
-                    <key>pgsql.replication.lag.b</key>
-                    <units>b</units>
+                    <name>Replication: Lag in bytes</name>
+                    <key>pgsql.replication.lag.b[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
+                    <units>B</units>
                     <description>Replication lag with Master in byte.</description>
                     <applications>
                         <application>
@@ -1122,8 +1258,9 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </applications>
                 </item>
                 <item>
-                    <name>Replication: lag in seconds</name>
-                    <key>pgsql.replication.lag.sec</key>
+                    <name>Replication: Lag in seconds</name>
+                    <key>pgsql.replication.lag.sec[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <units>s</units>
                     <description>Replication lag with Master in seconds.</description>
                     <applications>
@@ -1133,8 +1270,9 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </applications>
                 </item>
                 <item>
-                    <name>Replication: recovery role</name>
-                    <key>pgsql.replication.recovery_role</key>
+                    <name>Replication: Recovery role</name>
+                    <key>pgsql.replication.recovery_role[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <description>Replication role: 1 — recovery is still in progress (standby mode), 0 — master mode.</description>
                     <applications>
                         <application>
@@ -1146,8 +1284,9 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </valuemap>
                 </item>
                 <item>
-                    <name>Replication: status</name>
-                    <key>pgsql.replication.status</key>
+                    <name>Replication: Status</name>
+                    <key>pgsql.replication.status[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <description>Replication status: 0 — streaming is down, 1 — streaming is up, 2 — master mode</description>
                     <applications>
                         <application>
@@ -1159,23 +1298,11 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </valuemap>
                 </item>
                 <item>
-                    <name>PostgreSQL: Get transactions</name>
-                    <key>pgsql.transactions</key>
-                    <history>1h</history>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <description>Collect metrics by transaction execution time</description>
-                    <applications>
-                        <application>
-                            <name>Zabbix raw items</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
                     <name>PostgreSQL: Uptime</name>
-                    <key>pgsql.uptime</key>
+                    <key>pgsql.uptime[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
-                    <units>ms</units>
+                    <units>s</units>
                     <applications>
                         <application>
                             <name>PostgreSQL</name>
@@ -1183,17 +1310,39 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     </applications>
                     <triggers>
                         <trigger>
-                            <expression>{last()}&lt;600</expression>
-                            <name>PostgreSQL service was restarted (uptime={ITEM.LASTVALUE})</name>
+                            <expression>{last()} &lt; 600</expression>
+                            <name>PostgreSQL: Service has been restarted (uptime={ITEM.LASTVALUE})</name>
                             <priority>AVERAGE</priority>
                         </trigger>
                     </triggers>
                 </item>
                 <item>
+                    <name>WAL: Segments count</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.wal.count</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <description>Number of WAL segments</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.write</params>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.wal.stat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
+                <item>
                     <name>PostgreSQL: Get WAL</name>
-                    <key>pgsql.wal.stat</key>
+                    <key>pgsql.wal.stat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                     <delay>5m</delay>
-                    <history>1h</history>
+                    <history>0</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
                     <description>Collect WAL metrics</description>
@@ -1203,13 +1352,41 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                         </application>
                     </applications>
                 </item>
+                <item>
+                    <name>WAL: Bytes written</name>
+                    <type>DEPENDENT</type>
+                    <key>pgsql.wal.write</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <units>B</units>
+                    <description>WAL write in bytes</description>
+                    <applications>
+                        <application>
+                            <name>PostgreSQL</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$.write</params>
+                        </step>
+                        <step>
+                            <type>CHANGE_PER_SECOND</type>
+                            <params/>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>pgsql.wal.stat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    </master_item>
+                </item>
             </items>
             <discovery_rules>
                 <discovery_rule>
                     <name>Database discovery</name>
-                    <key>pgsql.db.discovery</key>
-                    <delay>30s</delay>
+                    <key>pgsql.db.discovery[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                    <delay>1h</delay>
                     <filter>
+                        <evaltype>AND</evaltype>
                         <conditions>
                             <condition>
                                 <macro>{#DBNAME}</macro>
@@ -1221,9 +1398,10 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                     <item_prototypes>
                         <item_prototype>
                             <name>DB {#DBNAME}: Database age</name>
-                            <key>pgsql.db.age[{$PG.URI},{$PG.USER},{$PG.PASSWORD},&quot;{#DBNAME}&quot;]</key>
+                            <key>pgsql.db.age[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;,&quot;{#DBNAME}&quot;]</key>
                             <delay>15m</delay>
-                            <description>Database size</description>
+                            <history>7d</history>
+                            <description>Database age</description>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PostgreSQL: DB {#DBNAME}</name>
@@ -1232,9 +1410,9 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                         </item_prototype>
                         <item_prototype>
                             <name>DB {#DBNAME}: Get bloating tables</name>
-                            <key>pgsql.db.bloating_tables[{$PG.URI},{$PG.USER},{$PG.PASSWORD},&quot;{#DBNAME}&quot;]</key>
-                            <delay>30s</delay>
-                            <description>Number of scans done for table/index in the database</description>
+                            <key>pgsql.db.bloating_tables[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;,&quot;{#DBNAME}&quot;]</key>
+                            <history>7d</history>
+                            <description>Number оf bloating tables</description>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PostgreSQL: DB {#DBNAME}</name>
@@ -1243,7 +1421,7 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                         </item_prototype>
                         <item_prototype>
                             <name>DB {#DBNAME}: Database size</name>
-                            <key>pgsql.db.size[{$PG.URI},{$PG.USER},{$PG.PASSWORD},&quot;{#DBNAME}&quot;]</key>
+                            <key>pgsql.db.size[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;,&quot;{#DBNAME}&quot;]</key>
                             <delay>5m</delay>
                             <history>7d</history>
                             <units>B</units>
@@ -1278,7 +1456,7 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1305,7 +1483,104 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>DB {#DBNAME}: Disk blocks read per second</name>
+                            <type>DEPENDENT</type>
+                            <key>pgsql.dbstat.blk_read_time.rate[&quot;{#DBNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>s</units>
+                            <description>Time spent reading data file blocks by backends, in milliseconds</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>PostgreSQL: DB {#DBNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$['{#DBNAME}'].blk_read_time</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.001</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>DB {#DBNAME}: Disk blocks read per second</name>
+                            <type>DEPENDENT</type>
+                            <key>pgsql.dbstat.blk_write_time.rate[&quot;{#DBNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <units>s</units>
+                            <description>Time spent writing data file blocks by backends, in milliseconds</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>PostgreSQL: DB {#DBNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$['{#DBNAME}'].blk_write_time</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.001</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                            </master_item>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>DB {#DBNAME}: Checksum failures</name>
+                            <type>DEPENDENT</type>
+                            <key>pgsql.dbstat.checksum_failures.rate[&quot;{#DBNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <value_type>FLOAT</value_type>
+                            <description>Number of data page checksum failures detected in this database</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>PostgreSQL: DB {#DBNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$['{#DBNAME}'].checksum_failures</params>
+                                </step>
+                                <step>
+                                    <type>MATCHES_REGEX</type>
+                                    <params>^\d*$</params>
+                                </step>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                    <error_handler>CUSTOM_VALUE</error_handler>
+                                    <error_handler_params>ZBX_NOTSUPPORTED: Checksum failures metric is supported only in PostgreSQL 12 or higher.</error_handler_params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1332,12 +1607,12 @@ https://www.postgresql.org/docs/current/monitoring-stats.html#PG-STAT-DATABASE-V
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                             <trigger_prototypes>
                                 <trigger_prototype>
                                     <expression>{min(5m)} &gt; {$PG.CONFLICTS.MAX.WARN:&quot;{#DBNAME}&quot;}</expression>
-                                    <name>Database {#DBNAME}: Too many recovery conflicts (over {$PG.CONFLICTS.MAX.WARN:&quot;{#DBNAME}&quot;} in 5m)</name>
+                                    <name>DB {#DBNAME}: Too many recovery conflicts (over {$PG.CONFLICTS.MAX.WARN:&quot;{#DBNAME}&quot;} in 5m)</name>
                                     <priority>AVERAGE</priority>
                                     <description>The primary and standby servers are in many ways loosely connected. Actions on the primary will have an effect on the standby. As a result, there is potential for negative interactions or conflicts between them.&#13;
 https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</description>
@@ -1368,15 +1643,37 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                             <trigger_prototypes>
                                 <trigger_prototype>
                                     <expression>{min(5m)} &gt; {$PG.DEADLOCKS.MAX.WARN:&quot;{#DBNAME}&quot;}</expression>
-                                    <name>Database {#DBNAME}: Deadlock occurred (over {$PG.DEADLOCKS.MAX.WARN:&quot;{#DBNAME}&quot;} in 5m)</name>
+                                    <name>DB {#DBNAME}: Deadlock occurred (over {$PG.DEADLOCKS.MAX.WARN:&quot;{#DBNAME}&quot;} in 5m)</name>
                                     <priority>HIGH</priority>
                                 </trigger_prototype>
                             </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>DB {#DBNAME}: Backends connected</name>
+                            <type>DEPENDENT</type>
+                            <key>pgsql.dbstat.numbackends[&quot;{#DBNAME}&quot;]</key>
+                            <delay>0</delay>
+                            <history>7d</history>
+                            <description>Number of backends currently connected to this database</description>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>PostgreSQL: DB {#DBNAME}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <params>$['{#DBNAME}'].numbackends</params>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>DB {#DBNAME}: Temp_bytes written per second</name>
@@ -1402,7 +1699,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1428,7 +1725,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1455,7 +1752,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1482,7 +1779,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1509,7 +1806,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1519,7 +1816,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <delay>0</delay>
                             <history>7d</history>
                             <value_type>FLOAT</value_type>
-                            <description>Total number of rows updated by queries in this database</description>
+                            <description>Number of rows returned by queries in this database</description>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>PostgreSQL: DB {#DBNAME}</name>
@@ -1536,7 +1833,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1563,7 +1860,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1590,7 +1887,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1617,7 +1914,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.dbstat</key>
+                                <key>pgsql.dbstat[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1625,6 +1922,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.accessexclusive[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of accessexclusive locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1636,13 +1934,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].accessexclusive</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1650,6 +1944,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.accessshare[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of accessshare locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1661,13 +1956,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].accessshare</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1675,6 +1966,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.exclusive[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of exclusive locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1686,13 +1978,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].exclusive</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1700,6 +1988,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.rowexclusive[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of rowexclusive locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1711,13 +2000,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].rowexclusive</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1725,6 +2010,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.rowshare[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of rowshare locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1736,13 +2022,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].rowshare</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1750,6 +2032,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.sharerowexclusive[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of total sharerowexclusive for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1761,13 +2044,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].sharerowexclusive</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1775,6 +2054,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.shareupdateexclusive[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of shareupdateexclusive locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1786,13 +2066,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].shareupdateexclusive</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1800,6 +2076,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.share[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of share locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1811,13 +2088,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].share</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1825,6 +2098,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <type>DEPENDENT</type>
                             <key>pgsql.locks.total[&quot;{#DBNAME}&quot;]</key>
                             <delay>0</delay>
+                            <history>7d</history>
                             <description>Number of total locks for each database</description>
                             <application_prototypes>
                                 <application_prototype>
@@ -1836,13 +2110,9 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <type>JSONPATH</type>
                                     <params>$['{#DBNAME}'].total</params>
                                 </step>
-                                <step>
-                                    <type>CHANGE_PER_SECOND</type>
-                                    <params/>
-                                </step>
                             </preprocessing>
                             <master_item>
-                                <key>pgsql.locks</key>
+                                <key>pgsql.locks[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;]</key>
                             </master_item>
                         </item_prototype>
                     </item_prototypes>
@@ -1851,14 +2121,23 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <name>DB {#DBNAME}: Locks</name>
                             <graph_items>
                                 <graph_item>
-                                    <color>199C0D</color>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Template DB PostgreSQL Agent 2</host>
+                                        <key>pgsql.locks.total[&quot;{#DBNAME}&quot;]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <color>2774A4</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.locks.accessexclusive[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
-                                    <sortorder>1</sortorder>
+                                    <sortorder>2</sortorder>
                                     <color>F63100</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
@@ -1866,19 +2145,11 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     </item>
                                 </graph_item>
                                 <graph_item>
-                                    <sortorder>2</sortorder>
-                                    <color>2774A4</color>
+                                    <sortorder>3</sortorder>
+                                    <color>A54F10</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.locks.exclusive[&quot;{#DBNAME}&quot;]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>3</sortorder>
-                                    <color>F7941D</color>
-                                    <item>
-                                        <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.locks.rowexclusive[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -1886,7 +2157,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <color>FC6EA3</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.locks.rowshare[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.locks.rowexclusive[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -1894,12 +2165,12 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <color>6C59DC</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.locks.share[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.locks.rowshare[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>6</sortorder>
-                                    <color>C7A72D</color>
+                                    <color>AC8C14</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.locks.sharerowexclusive[&quot;{#DBNAME}&quot;]</key>
@@ -1907,7 +2178,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>7</sortorder>
-                                    <color>BA2A5D</color>
+                                    <color>611F27</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.locks.shareupdateexclusive[&quot;{#DBNAME}&quot;]</key>
@@ -1918,7 +2189,15 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <color>F230E0</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.locks.total[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.locks.share[&quot;{#DBNAME}&quot;]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>9</sortorder>
+                                    <color>FFAD40</color>
+                                    <item>
+                                        <host>Template DB PostgreSQL Agent 2</host>
+                                        <key>pgsql.locks.share[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -1927,10 +2206,11 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <name>DB {#DBNAME}: Number of bloating tables</name>
                             <graph_items>
                                 <graph_item>
-                                    <color>199C0D</color>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>1A7C11</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.db.bloating_tables[{$PG.URI},{$PG.USER},{$PG.PASSWORD},&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.db.bloating_tables[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;,&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -1939,7 +2219,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <name>DB {#DBNAME}: pg_stat_database metrics</name>
                             <graph_items>
                                 <graph_item>
-                                    <color>199C0D</color>
+                                    <color>1A7C11</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.dbstat.blks_hit.rate[&quot;{#DBNAME}&quot;]</key>
@@ -1947,15 +2227,15 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>1</sortorder>
-                                    <color>F63100</color>
+                                    <color>2774A4</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.xact_commit.rate[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.dbstat.blks_read.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>2</sortorder>
-                                    <color>2774A4</color>
+                                    <color>F63100</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.dbstat.conflicts.rate[&quot;{#DBNAME}&quot;]</key>
@@ -1963,7 +2243,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>3</sortorder>
-                                    <color>F7941D</color>
+                                    <color>A54F10</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.dbstat.deadlocks.rate[&quot;{#DBNAME}&quot;]</key>
@@ -1974,7 +2254,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <color>FC6EA3</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.blks_read.rate[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.dbstat.temp_bytes.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -1982,23 +2262,23 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <color>6C59DC</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.xact_rollback.rate[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.dbstat.temp_files.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>6</sortorder>
-                                    <color>C7A72D</color>
+                                    <color>AC8C14</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.temp_bytes.rate[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.dbstat.tup_deleted.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>7</sortorder>
-                                    <color>BA2A5D</color>
+                                    <color>611F27</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.temp_files.rate[&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.dbstat.tup_fetched.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
@@ -2006,39 +2286,39 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                                     <color>F230E0</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.tup_deleted.rate[&quot;{#DBNAME}&quot;]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>9</sortorder>
-                                    <color>5CCD18</color>
-                                    <item>
-                                        <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.dbstat.tup_fetched.rate[&quot;{#DBNAME}&quot;]</key>
-                                    </item>
-                                </graph_item>
-                                <graph_item>
-                                    <sortorder>10</sortorder>
-                                    <color>BB2A02</color>
-                                    <item>
-                                        <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.dbstat.tup_inserted.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
-                                    <sortorder>11</sortorder>
-                                    <color>AC41A5</color>
+                                    <sortorder>9</sortorder>
+                                    <color>FFAD40</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.dbstat.tup_returned.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
-                                    <sortorder>12</sortorder>
-                                    <color>89ABF8</color>
+                                    <sortorder>10</sortorder>
+                                    <color>40CDFF</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
                                         <key>pgsql.dbstat.tup_updated.rate[&quot;{#DBNAME}&quot;]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>11</sortorder>
+                                    <color>40FFA0</color>
+                                    <item>
+                                        <host>Template DB PostgreSQL Agent 2</host>
+                                        <key>pgsql.dbstat.xact_commit.rate[&quot;{#DBNAME}&quot;]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>12</sortorder>
+                                    <color>AE4500</color>
+                                    <item>
+                                        <host>Template DB PostgreSQL Agent 2</host>
+                                        <key>pgsql.dbstat.xact_rollback.rate[&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -2047,10 +2327,11 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <name>DB {#DBNAME}: Size</name>
                             <graph_items>
                                 <graph_item>
-                                    <color>199C0D</color>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>1A7C11</color>
                                     <item>
                                         <host>Template DB PostgreSQL Agent 2</host>
-                                        <key>pgsql.db.size[{$PG.URI},{$PG.USER},{$PG.PASSWORD},&quot;{#DBNAME}&quot;]</key>
+                                        <key>pgsql.db.size[&quot;{$PG.URI}&quot;,&quot;{$PG.USER}&quot;,&quot;{$PG.PASSWORD}&quot;,&quot;{#DBNAME}&quot;]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -2060,92 +2341,28 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
             </discovery_rules>
             <macros>
                 <macro>
-                    <macro>{$PG.CACHE_HITRATIO.MIN.WARN}</macro>
-                    <value>90</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.CHECKPOINTS_REQ.MAX.WARN}</macro>
-                    <value>5</value>
-                </macro>
-                <macro>
                     <macro>{$PG.CONFLICTS.MAX.WARN}</macro>
                     <value>0</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.CONN_IDLE_IN_TRANS.MAX.WARN}</macro>
-                    <value>5</value>
                 </macro>
                 <macro>
                     <macro>{$PG.CONN_TOTAL_PCT.MAX.WARN}</macro>
                     <value>90</value>
                 </macro>
                 <macro>
-                    <macro>{$PG.CONN_WAIT.MAX.WARN}</macro>
-                    <value>0</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.DB}</macro>
-                    <value>postgres</value>
-                </macro>
-                <macro>
                     <macro>{$PG.DEADLOCKS.MAX.WARN}</macro>
                     <value>0</value>
                 </macro>
                 <macro>
-                    <macro>{$PG.FROZENXID_PCT_STOP.MIN.HIGH}</macro>
-                    <value>75</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.HOST}</macro>
-                    <value>127.0.0.1</value>
-                </macro>
-                <macro>
                     <macro>{$PG.LLD.FILTER.DBNAME}</macro>
-                    <value>(.*)</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.LOCKS.MAX.WARN}</macro>
-                    <value>100</value>
+                    <value>(.+)</value>
                 </macro>
                 <macro>
                     <macro>{$PG.PASSWORD}</macro>
                     <value>postgres</value>
                 </macro>
                 <macro>
-                    <macro>{$PG.PING_TIME.MAX.WARN}</macro>
-                    <value>1s</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.PORT}</macro>
-                    <value>5432</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.QUERY_ETIME.MAX.WARN}</macro>
-                    <value>30</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.REPL_LAG.MAX.WARN}</macro>
-                    <value>10m</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.SLOW_QUERIES.MAX.WARN}</macro>
-                    <value>5</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.TRANS_ACTIVE.MAX.WARN}</macro>
-                    <value>30s</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.TRANS_IDLE.MAX.WARN}</macro>
-                    <value>30s</value>
-                </macro>
-                <macro>
-                    <macro>{$PG.TRANS_WAIT.MAX.WARN}</macro>
-                    <value>30s</value>
-                </macro>
-                <macro>
                     <macro>{$PG.URI}</macro>
-                    <value>postgresql://localhost:5432</value>
+                    <value>tcp://localhost:5432</value>
                 </macro>
                 <macro>
                     <macro>{$PG.USER}</macro>
@@ -2171,7 +2388,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
-                            <elements>0</elements>
+                            <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
                             <dynamic>0</dynamic>
@@ -2193,7 +2410,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <y>0</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
-                            <elements>0</elements>
+                            <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
                             <dynamic>0</dynamic>
@@ -2215,7 +2432,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <y>1</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
-                            <elements>0</elements>
+                            <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
                             <dynamic>0</dynamic>
@@ -2237,7 +2454,7 @@ https://www.postgresql.org/docs/current/hot-standby.html#HOT-STANDBY-CONFLICT</d
                             <y>1</y>
                             <colspan>1</colspan>
                             <rowspan>1</rowspan>
-                            <elements>0</elements>
+                            <elements>25</elements>
                             <valign>0</valign>
                             <halign>0</halign>
                             <dynamic>0</dynamic>

@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Linux CPU by Zabbix agent active</template>
             <name>Template Module Linux CPU by Zabbix agent active</name>
-            <description>Template tooling version used: 0.34</description>
+            <description>Template tooling version used: 0.36</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>

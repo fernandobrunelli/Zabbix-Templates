@@ -2630,7 +2630,7 @@ catch (error) {
                                 <name>HAProxy: Frontend {#PXNAME} Requests and sessions per second</name>
                                 <host>Template App HAProxy by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>
@@ -2652,7 +2652,7 @@ catch (error) {
                                 <name>HAProxy: Frontend {#PXNAME} Errors and denials per second</name>
                                 <host>Template App HAProxy by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -2674,7 +2674,7 @@ catch (error) {
                                 <name>HAProxy: Frontend {#PXNAME} Responses by HTTP code</name>
                                 <host>Template App HAProxy by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -2696,7 +2696,7 @@ catch (error) {
                                 <name>HAProxy: Frontend {#PXNAME} In/Out traffic</name>
                                 <host>Template App HAProxy by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>1</y>

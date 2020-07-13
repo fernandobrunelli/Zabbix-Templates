@@ -511,7 +511,7 @@
                                 <name>CPU load</name>
                                 <host>Template OS HP-UX</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>114</height>
                             <x>0</x>
                             <y>0</y>
@@ -533,7 +533,7 @@
                                 <name>CPU utilization</name>
                                 <host>Template OS HP-UX</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -555,7 +555,7 @@
                                 <name>Memory usage</name>
                                 <host>Template OS HP-UX</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>

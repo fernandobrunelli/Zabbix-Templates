@@ -3360,7 +3360,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Clients</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>
@@ -3382,7 +3382,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Keyspace</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -3404,7 +3404,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Commands</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -3426,7 +3426,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Expired keys</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>1</y>
@@ -3448,7 +3448,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Persistence</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>2</y>
@@ -3470,7 +3470,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Slaves</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>2</y>
@@ -3492,7 +3492,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Slowlog</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>3</y>
@@ -3514,7 +3514,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Uptime</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>3</y>
@@ -3536,7 +3536,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Replication lag time{#SINGLETON}</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>4</y>
@@ -3565,7 +3565,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: CPU</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>
@@ -3587,7 +3587,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Network</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -3609,7 +3609,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Memory</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -3631,7 +3631,7 @@ return JSON.stringify(Object.keys(repl)
                                 <name>Redis: Memory fragmentation</name>
                                 <host>Template DB Redis</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>1</y>

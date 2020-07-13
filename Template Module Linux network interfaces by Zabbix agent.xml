@@ -14,7 +14,7 @@
 &#13;
   Description: High interface utilization trigger is removed since currently it is not possible to retrieve interface speed to determine the max bandwidth.&#13;
 &#13;
-Template tooling version used: 0.34</description>
+Template tooling version used: 0.36</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -209,7 +209,7 @@ return newvalue;</params>
                                 <trigger_prototype>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({last()}=2 and {diff()}=1)</expression>
                                     <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                                    <recovery_expression>{last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                     <name>Interface {#IFNAME}: Link down</name>
                                     <opdata>Current state: {ITEM.LASTVALUE1}</opdata>
                                     <priority>AVERAGE</priority>
@@ -268,7 +268,7 @@ and&#13;
                                 <dependency>
                                     <name>Interface {#IFNAME}: Link down</name>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].last()}=2 and {Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].diff()}=1)</expression>
-                                    <recovery_expression>{Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                 </dependency>
                             </dependencies>
                         </trigger_prototype>
@@ -287,7 +287,7 @@ and {Template Module Linux network interfaces by Zabbix agent:net.if.out[&quot;{
                                 <dependency>
                                     <name>Interface {#IFNAME}: Link down</name>
                                     <expression>{$IFCONTROL:&quot;{#IFNAME}&quot;}=1 and ({Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].last()}=2 and {Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].diff()}=1)</expression>
-                                    <recovery_expression>{Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].last()}&lt;&gt;2</recovery_expression>
+                                    <recovery_expression>{Template Module Linux network interfaces by Zabbix agent:vfs.file.contents[&quot;/sys/class/net/{#IFNAME}/operstate&quot;].last()}&lt;&gt;2 or {$IFCONTROL:&quot;{#IFNAME}&quot;}=0</recovery_expression>
                                 </dependency>
                             </dependencies>
                         </trigger_prototype>
@@ -386,7 +386,7 @@ and {Template Module Linux network interfaces by Zabbix agent:net.if.out[&quot;{
                                 <name>Interface {#IFNAME}: Network traffic</name>
                                 <host>Template Module Linux network interfaces by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>

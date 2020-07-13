@@ -721,7 +721,7 @@
                                 <name>CPU load</name>
                                 <host>Template OS FreeBSD</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>120</height>
                             <x>0</x>
                             <y>0</y>
@@ -743,7 +743,7 @@
                                 <name>CPU utilization</name>
                                 <host>Template OS FreeBSD</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>106</height>
                             <x>1</x>
                             <y>0</y>
@@ -765,7 +765,7 @@
                                 <name>Memory usage</name>
                                 <host>Template OS FreeBSD</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -787,7 +787,7 @@
                                 <name>Swap usage</name>
                                 <host>Template OS FreeBSD</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>300</height>
                             <x>1</x>
                             <y>1</y>

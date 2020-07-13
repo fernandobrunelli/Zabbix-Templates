@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Network devices</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Net Cisco IOS versions 12.0_3_T-12.2_3.5 SNMP</template>
+            <name>Template Net Cisco IOS versions 12.0_3_T-12.2_3.5 SNMP</name>
+            <description>Cisco IOS Software releases later to 12.0(3)T and prior to 12.2(3.5)&#13;
+&#13;
+Template tooling version used: 0.36</description>
+            <templates>
+                <template>
+                    <name>Template Module Cisco CISCO-ENVMON-MIB SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module Cisco CISCO-MEMORY-POOL-MIB SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module Cisco CISCO-PROCESS-MIB IOS versions 12.0_3_T-12.2_3.5 SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module Cisco Inventory SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module Generic SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module Interfaces SNMP</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Templates/Network devices</name>
+                </group>
+            </groups>
+        </template>
+    </templates>
+</zabbix_export>

@@ -1390,7 +1390,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Node status</name>
                                 <host>Template App RabbitMQ node by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>0</y>
@@ -1412,7 +1412,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Uptime</name>
                                 <host>Template App RabbitMQ node by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>0</y>
@@ -1434,7 +1434,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Disk free</name>
                                 <host>Template App RabbitMQ node by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>1</y>
@@ -1456,7 +1456,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Memory used</name>
                                 <host>Template App RabbitMQ node by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>1</y>
@@ -1478,7 +1478,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: File descriptors</name>
                                 <host>Template App RabbitMQ node by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>0</x>
                             <y>2</y>
@@ -1500,7 +1500,7 @@ Template tooling version used: 0.34</description>
                                 <name>RabbitMQ: Sockets</name>
                                 <host>Template App RabbitMQ node by Zabbix agent</host>
                             </resource>
-                            <width>750</width>
+                            <width>500</width>
                             <height>100</height>
                             <x>1</x>
                             <y>2</y>

@@ -10,7 +10,7 @@
         <template>
             <template>Template Module Windows filesystems by Zabbix agent active</template>
             <name>Template Module Windows filesystems by Zabbix agent active</name>
-            <description>Template tooling version used: 0.34</description>
+            <description>Template tooling version used: 0.37</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>

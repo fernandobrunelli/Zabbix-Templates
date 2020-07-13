@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Module HOST-RESOURCES-MIB SNMP</template>
+            <name>Template Module HOST-RESOURCES-MIB SNMP</name>
+            <description>HOST-RESOURCES-MIB: CPU, memory and storage(vfs.fs.file) linked together.&#13;
+&#13;
+Template tooling version used: 0.36</description>
+            <templates>
+                <template>
+                    <name>Template Module HOST-RESOURCES-MIB CPU SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module HOST-RESOURCES-MIB memory SNMP</name>
+                </template>
+                <template>
+                    <name>Template Module HOST-RESOURCES-MIB storage SNMP</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <screens>
+                <screen>
+                    <name>System performance</name>
+                    <hsize>2</hsize>
+                    <vsize>3</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>0</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>CPU utilization</name>
+                                <host>Template Module HOST-RESOURCES-MIB SNMP</host>
+                            </resource>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#MEMNAME}: Memory utilization</name>
+                                <host>Template Module HOST-RESOURCES-MIB SNMP</host>
+                            </resource>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>{#FSNAME}: Disk space usage</name>
+                                <host>Template Module HOST-RESOURCES-MIB SNMP</host>
+                            </resource>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>2</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>25</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+            </screens>
+        </template>
+    </templates>
+</zabbix_export>

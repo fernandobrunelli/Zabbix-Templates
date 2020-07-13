@@ -12,7 +12,7 @@
             <name>Template Module Windows services by Zabbix agent</name>
             <description>Template Services OS Windows&#13;
 &#13;
-Template tooling version used: 0.34</description>
+Template tooling version used: 0.37</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
