@@ -1313,16 +1313,16 @@ Template tooling version used: 0.34</description>
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#NODE}</lld_macro>
-                            <path>$.node</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#QUEUE}</lld_macro>
                             <path>$.name</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#VHOST}</lld_macro>
                             <path>$.vhost</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#NODE}</lld_macro>
+                            <path>$.node</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>

@@ -1656,16 +1656,16 @@ and {Template OS Linux by Prom:net.if.out.errors[node_exporter&quot;{#IFNAME}&qu
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
+                            <lld_macro>{#IFNAME}</lld_macro>
+                            <path>$.labels.device</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
                             <lld_macro>{#HELP}</lld_macro>
                             <path>$.help</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#IFALIAS}</lld_macro>
                             <path>$.labels.ifalias</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#IFNAME}</lld_macro>
-                            <path>$.labels.device</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#IFOPERSTATUS}</lld_macro>
@@ -2255,16 +2255,16 @@ As symptoms, 'No space left on device' or 'Disk is full' errors may be seen even
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#FSDEVICE}</lld_macro>
-                            <path>$.labels.device</path>
+                            <lld_macro>{#FSTYPE}</lld_macro>
+                            <path>$.labels.fstype</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#FSNAME}</lld_macro>
                             <path>$.labels.mountpoint</path>
                         </lld_macro_path>
                         <lld_macro_path>
-                            <lld_macro>{#FSTYPE}</lld_macro>
-                            <path>$.labels.fstype</path>
+                            <lld_macro>{#FSDEVICE}</lld_macro>
+                            <path>$.labels.device</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#HELP}</lld_macro>

@@ -537,16 +537,16 @@ catch (error) {
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#MODE}</lld_macro>
-                            <path>$.mode</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#PXNAME}</lld_macro>
                             <path>$.pxname</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SVNAME}</lld_macro>
                             <path>$.svname</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
@@ -880,16 +880,16 @@ catch (error) {
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#MODE}</lld_macro>
-                            <path>$.mode</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#PXNAME}</lld_macro>
                             <path>$.pxname</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SVNAME}</lld_macro>
                             <path>$.svname</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
@@ -1406,16 +1406,16 @@ catch (error) {
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#MODE}</lld_macro>
-                            <path>$.mode</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#PXNAME}</lld_macro>
                             <path>$.pxname</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SVNAME}</lld_macro>
                             <path>$.svname</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
@@ -1757,16 +1757,16 @@ catch (error) {
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#MODE}</lld_macro>
-                            <path>$.mode</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#PXNAME}</lld_macro>
                             <path>$.pxname</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SVNAME}</lld_macro>
                             <path>$.svname</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
@@ -2153,16 +2153,16 @@ catch (error) {
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#MODE}</lld_macro>
-                            <path>$.mode</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#PXNAME}</lld_macro>
                             <path>$.pxname</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SVNAME}</lld_macro>
                             <path>$.svname</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
@@ -2497,16 +2497,16 @@ catch (error) {
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#MODE}</lld_macro>
-                            <path>$.mode</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#PXNAME}</lld_macro>
                             <path>$.pxname</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SVNAME}</lld_macro>
                             <path>$.svname</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>

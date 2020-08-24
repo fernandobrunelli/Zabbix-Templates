@@ -286,32 +286,8 @@ Template tooling version used: 0.35</description>
                     </master_item>
                     <lld_macro_paths>
                         <lld_macro_path>
-                            <lld_macro>{#SENSOR_HI_CRIT}</lld_macro>
-                            <path>$.threshold.upper.crit</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#SENSOR_HI_DISAST}</lld_macro>
-                            <path>$.threshold.upper.non_recover</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#SENSOR_HI_WARN}</lld_macro>
-                            <path>$.threshold.upper.non_crit</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
                             <lld_macro>{#SENSOR_ID}</lld_macro>
                             <path>$.id</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#SENSOR_LO_CRIT}</lld_macro>
-                            <path>$.threshold.lower.crit</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#SENSOR_LO_DISAST}</lld_macro>
-                            <path>$.threshold.lower.non_recover</path>
-                        </lld_macro_path>
-                        <lld_macro_path>
-                            <lld_macro>{#SENSOR_LO_WARN}</lld_macro>
-                            <path>$.threshold.lower.non_crit</path>
                         </lld_macro_path>
                         <lld_macro_path>
                             <lld_macro>{#SENSOR_READING_TYPE}</lld_macro>
@@ -324,6 +300,30 @@ Template tooling version used: 0.35</description>
                         <lld_macro_path>
                             <lld_macro>{#SENSOR_UNIT}</lld_macro>
                             <path>$.units</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#SENSOR_LO_WARN}</lld_macro>
+                            <path>$.threshold.lower.non_crit</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#SENSOR_LO_CRIT}</lld_macro>
+                            <path>$.threshold.lower.crit</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#SENSOR_LO_DISAST}</lld_macro>
+                            <path>$.threshold.lower.non_recover</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#SENSOR_HI_WARN}</lld_macro>
+                            <path>$.threshold.upper.non_crit</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#SENSOR_HI_CRIT}</lld_macro>
+                            <path>$.threshold.upper.crit</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#SENSOR_HI_DISAST}</lld_macro>
+                            <path>$.threshold.upper.non_recover</path>
                         </lld_macro_path>
                     </lld_macro_paths>
                 </discovery_rule>
